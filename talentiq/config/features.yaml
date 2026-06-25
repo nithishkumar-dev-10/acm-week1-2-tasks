@@ -1,0 +1,57 @@
+
+
+# Raw features from the dataset
+numerical:
+  - CGPA
+  - YearsExperience
+  - Internships
+  - Projects
+  - Certifications
+  - SkillsScore
+  - SoftSkillsScore
+  - Hackathons
+  - ResearchPapers
+  - ResumeLength
+
+categorical:
+  ordinal:
+    - EducationLevel       # encoded as integer (0,1,2,3)
+    - UniversityTier       # encoded as integer (1,2,3)
+  nominal:
+    - CompanyType          # one-hot
+    - ProgrammingLanguages # one-hot
+
+# Engineered Features 
+engineered:
+  - name: EmployabilityScore
+    formula: "0.3*CGPA + 0.4*SkillsScore + 0.3*SoftSkillsScore"
+
+  - name: PortfolioStrength
+    formula: "Projects*0.5 + Hackathons*0.3 + ResearchPapers*0.2"
+
+  - name: TechnicalReadiness
+    formula: "ProgrammingLanguages_count*0.4 + Certifications*0.3 + SkillsScore*0.3"
+
+  - name: ExperienceQuality
+    formula: "YearsExperience*0.6 + Internships*0.4  (normalized)"
+
+  - name: LearningIndex
+    formula: "Certifications + ResearchPapers + Hackathons"
+
+  - name: ProfileCompleteness
+    formula: "% of non-null/non-zero fields"
+
+  - name: SkillExperienceGap
+    formula: "abs(SkillsScore - YearsExperience*10)"
+
+# Ordinal Encoding Maps
+ordinal_maps:
+  EducationLevel:
+    "High School": 0
+    "Bachelor's":  1
+    "Master's":    2
+    "PhD":         3
+  UniversityTier:
+    "Tier 3": 1
+    "Tier 2": 2
+    "Tier 1": 3

@@ -1,0 +1,37 @@
+
+
+project:
+  name: "TalentIQ"
+  version: "1.0.0"
+  description: "Binary classifier for candidate shortlisting"
+  target_column: "Hired"
+
+# Paths 
+paths:
+  raw_data:       "data/raw/resume_dataset.csv"
+  processed_data: "data/processed/cleaned.csv"
+  train_split:    "data/splits/train.csv"
+  test_split:     "data/splits/test.csv"
+  artifacts:      "artifacts/"
+  models:         "artifacts/models/"
+  logs:           "logs/pipeline.log"
+  reports:        "reports/"
+  figures:        "reports/figures/"
+  metrics:        "reports/metrics/"
+
+#  Data 
+data:
+  test_size: 0.20
+  random_state: 42
+  stratify: true
+
+# Class Imbalance 
+imbalance:
+  strategy: "smote"          # options: smote | class_weight | none
+  smote_random_state: 42
+  imbalance_threshold: 3.0   # ratio beyond which we apply strategy
+
+# Logging 
+logging:
+  level: "INFO"
+  format: "%(asctime)s | %(levelname)s | %(message)s"
