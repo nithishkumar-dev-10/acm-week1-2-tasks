@@ -1,10 +1,3 @@
-"""
-src/config_loader.py
-TalentIQ — Config + Data Loader
-mode: "sample" → loads sample_size rows  (testing / git push)
-mode: "full"   → loads all rows          (actual training)
-Set mode in config/config.yaml
-"""
 
 import yaml
 import pandas as pd

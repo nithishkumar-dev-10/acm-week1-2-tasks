@@ -1,9 +1,4 @@
-"""
-src/feature_engineering.py
-TalentIQ — Phase 2
-Creates all 7 engineered features manually. No pipeline.
-Run via: python main.py --stage features
-"""
+
 
 import os
 import pandas as pd
@@ -11,8 +6,7 @@ import numpy as np
 import joblib
 from src.config_loader import load_config, load_features
 
-# ── 5 ORIGINAL FEATURES ───────────────────────────────────────────────────────
-
+#  5 ORIGINAL FEATURES
 def add_employability_score(df):
     """0.3*CGPA + 0.4*SkillsScore + 0.3*SoftSkillsScore"""
     df["EmployabilityScore"] = (
@@ -56,7 +50,7 @@ def add_learning_index(df):
     )
     return df
 
-# ── 2 NEW FEATURES ★ ──────────────────────────────────────────────────────────
+# 2 NEW FEATURES 
 
 def add_profile_completeness(df):
     """
@@ -78,7 +72,7 @@ def add_skill_experience_gap(df):
     df["SkillExperienceGap"] = abs(df["SkillsScore"] - df["YearsExperience"] * 10)
     return df
 
-# ── SAVE FEATURE COLUMN LIST ──────────────────────────────────────────────────
+# SAVE FEATURE COLUMN LIST 
 
 def save_feature_columns(df, feat_cfg):
     target = feat_cfg["target"]
@@ -88,8 +82,7 @@ def save_feature_columns(df, feat_cfg):
     print(f"[INFO] Saved {len(feature_cols)} feature columns → artifacts/feature_columns.pkl")
     return feature_cols
 
-# ── MAIN ──────────────────────────────────────────────────────────────────────
-
+#  MAIN 
 def run_feature_engineering():
     cfg      = load_config()
     feat_cfg = load_features()

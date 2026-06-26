@@ -20,7 +20,7 @@ import joblib
 FIGURES_DIR = "reports/figures"
 os.makedirs(FIGURES_DIR, exist_ok=True)
 
-# ── 1. RANDOM FOREST — Feature Importances ────────────────────────────────────
+# 1. RANDOM FOREST — Feature Importances
 
 def plot_rf_feature_importance(model, feature_names):
     importances = model.feature_importances_
@@ -39,7 +39,7 @@ def plot_rf_feature_importance(model, feature_names):
     plt.close()
     print(f"[INFO] Saved → {path}")
 
-# ── 2. LOGISTIC REGRESSION — Coefficient Magnitude ───────────────────────────
+# LOGISTIC REGRESSION — Coefficient Magnitude 
 
 def plot_lr_coefficients(model, feature_names):
     coefs   = np.abs(model.coef_[0])
@@ -58,7 +58,7 @@ def plot_lr_coefficients(model, feature_names):
     plt.close()
     print(f"[INFO] Saved → {path}")
 
-# ── 3. XGBOOST — SHAP Values ─────────────────────────────────────────────────
+#  XGBOOST — SHAP Values 
 
 def plot_xgb_shap(model, X_test):
     try:
@@ -90,7 +90,7 @@ def plot_xgb_shap(model, X_test):
     plt.close()
     print(f"[INFO] Saved → {path2}")
 
-# ── 4. ROC CURVES — All 3 Models ─────────────────────────────────────────────
+# ROC CURVES — All 3 Models 
 
 def plot_roc_curves(models_dict, X_test, y_test):
     from sklearn.metrics import roc_curve, auc
@@ -116,7 +116,7 @@ def plot_roc_curves(models_dict, X_test, y_test):
     plt.close()
     print(f"[INFO] Saved → {path}")
 
-# ── 5. CONFUSION MATRICES — All 3 Models ─────────────────────────────────────
+# CONFUSION MATRICES — All 3 Models
 
 def plot_confusion_matrices(models_dict, X_test, y_test):
     from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
@@ -136,7 +136,7 @@ def plot_confusion_matrices(models_dict, X_test, y_test):
     plt.close()
     print(f"[INFO] Saved → {path}")
 
-# ── MAIN ──────────────────────────────────────────────────────────────────────
+# MAIN
 
 def run_plots():
     print(f"\n{'='*50}")
