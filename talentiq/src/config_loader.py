@@ -27,16 +27,19 @@ def _load_yaml(path: Path) -> dict:
 
 
 #loading the config/config.yaml 
+@lru_cache(maxsize=None)
 def load_config():
     return _load_yaml(CONFIG_FILE)
 
 
 #loading the config/features.yaml
+@lru_cache(maxsize=None)
 def load_features():
     return _load_yaml(FEATURES_FILE)
 
 
 #loading the config/hyperparameters.yaml
+@lru_cache(maxsize=None)
 def load_hyperparameters():
     return _load_yaml(HYPERPARAMETERS_FILE)
 

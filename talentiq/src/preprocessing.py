@@ -2,7 +2,7 @@ import logging
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from src.config_loader import load_config, load_features
+from src.config_loader import load_config, load_features, PROJECT_ROOT
 
 
 logger = logging.getLogger(__name__)
@@ -14,7 +14,7 @@ def load_data() -> pd.DataFrame:
     cfg = load_config()
 
     mode = cfg["mode"]
-    raw_path = Path(cfg["paths"]["raw"][mode])
+    raw_path = PROJECT_ROOT / cfg["paths"]["raw"][mode]
 
     if not raw_path.exists():
         raise FileNotFoundError(f"{raw_path} not found.")
@@ -122,9 +122,7 @@ def preprocess_data() -> pd.DataFrame:
 
     mode = cfg["mode"]
 
-    processed_path = Path(
-        cfg["paths"]["processed"][mode]
-    )
+    processed_path = PROJECT_ROOT / cfg["paths"]["processed"][mode]
 
     processed_path.parent.mkdir(
         parents=True,

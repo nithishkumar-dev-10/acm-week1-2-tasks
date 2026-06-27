@@ -3,6 +3,7 @@ import logging
 
 from src.preprocessing import preprocess_data
 from src.feature_engineering import engineer_features
+from src.train import run_training
 
 
 logging.basicConfig(
@@ -25,10 +26,13 @@ def main(stage: str) -> None:
         engineer_features(df)
         logger.info("Feature engineering completed.")
 
+    elif stage == "train":
+        run_training()
+        logger.info("Training completed.")
+
     elif stage == "pipeline":
-        df = preprocess_data()
-        engineer_features(df)
-        logger.info("Pipeline completed.")
+        run_training()
+        logger.info("Full pipeline completed.")
 
     else:
         raise ValueError(f"Unknown stage: {stage}")
@@ -45,6 +49,7 @@ if __name__ == "__main__":
         choices=[
             "preprocess",
             "features",
+            "train",
             "pipeline",
         ],
     )

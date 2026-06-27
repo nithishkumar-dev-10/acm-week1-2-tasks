@@ -37,11 +37,14 @@ def create_experience_quality(df: pd.DataFrame) -> pd.DataFrame:
     
 
     raw = (df["experience_years"] * 0.6+ df["internships"] * 0.4)
-
-    df["ExperienceQuality"] = (raw - raw.min()) / (raw.max() - raw.min())
+    #normalizing
+    denom = raw.max() - raw.min()
+    if denom != 0:
+        df["ExperienceQuality"] = (raw - raw.min()) / (raw.max() - raw.min())
+    else:
+        df["ExperienceQuality"] = 0
 
     logger.info("ExperienceQuality created.")
-
     return df
 
 
