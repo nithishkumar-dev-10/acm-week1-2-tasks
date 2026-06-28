@@ -23,6 +23,31 @@ def load_data() -> pd.DataFrame:
 
     logger.info(f"Loaded dataset ({df.shape[0]} rows, {df.shape[1]} columns)")
 
+
+    # IBM dataset: map integer columns to string labels for ordinal encoder
+    drop_cols = ['EmployeeNumber', 'EmployeeCount', 'Over18', 'StandardHours']
+    df = df.drop(columns=[c for c in drop_cols if c in df.columns])
+
+    if 'Attrition' in df.columns:
+        df['Attrition'] = df['Attrition'].map({'Yes': 1, 'No': 0})
+
+    for col in ['JobLevel', 'StockOptionLevel']:
+        if col in df.columns:
+            df[col] = df[col].astype(str)
+
+    col_maps = {
+        'Education': {1: 'Below College', 2: 'College', 3: 'Bachelor', 4: 'Master', 5: 'Doctor'},
+        'EnvironmentSatisfaction': {1: 'Low', 2: 'Medium', 3: 'High', 4: 'Very High'},
+        'JobInvolvement': {1: 'Low', 2: 'Medium', 3: 'High', 4: 'Very High'},
+        'JobSatisfaction': {1: 'Low', 2: 'Medium', 3: 'High', 4: 'Very High'},
+        'PerformanceRating': {1: 'Low', 2: 'Good', 3: 'Excellent', 4: 'Outstanding'},
+        'RelationshipSatisfaction': {1: 'Low', 2: 'Medium', 3: 'High', 4: 'Very High'},
+        'WorkLifeBalance': {1: 'Bad', 2: 'Good', 3: 'Better', 4: 'Best'},
+    }
+    for col, mapping in col_maps.items():
+        if col in df.columns:
+            df[col] = df[col].map(mapping)
+
     return df
 
 

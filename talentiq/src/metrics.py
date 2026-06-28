@@ -1,12 +1,15 @@
 import logging
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 from sklearn.metrics import (
     accuracy_score,
     classification_report,
     confusion_matrix,
     f1_score,
+    precision_score,
+    recall_score,
     roc_auc_score,
 )
 
@@ -20,35 +23,50 @@ def evaluate_model(
     y_true,
     y_pred,
     y_prob,
-) -> dict:
-    """Compute all required metrics for one model and return as dict."""
+) -> tuple:
+
+    y_true = np.asarray(y_true)
+    y_pred = np.asarray(y_pred)
 
     accuracy  = accuracy_score(y_true, y_pred)
-    f1_macro  = f1_score(y_true, y_pred, average="macro")
+    f1_macro  = f1_score(y_true, y_pred, average="macro",  zero_division=0)
+    precision = precision_score(y_true, y_pred, average="macro", zero_division=0)
+    recall    = recall_score(y_true, y_pred,    average="macro", zero_division=0)
     roc_auc   = roc_auc_score(y_true, y_prob)
 
     cm = confusion_matrix(y_true, y_pred)
 
-    # cm layout for binary: [[TN, FP], [FN, TP]]
-    tn, fp, fn, tp = cm.ravel()
+    if cm.shape == (2, 2):
+        tn, fp, fn, tp = cm.ravel()
+        fpr = fp / (fp + tn) if (fp + tn) > 0 else 0.0
+        fnr = fn / (fn + tp) if (fn + tp) > 0 else 0.0
 
-    fpr = fp / (fp + tn) if (fp + tn) > 0 else 0.0   # predicted hired but not hired
-    fnr = fn / (fn + tp) if (fn + tp) > 0 else 0.0   # predicted not hired but was hired
+        # misclassification: which class has higher error?
+        class0_error = fp / (fp + tn) if (fp + tn) > 0 else 0.0  # Not Hired misclassified as Hired
+        class1_error = fn / (fn + tp) if (fn + tp) > 0 else 0.0  # Hired misclassified as Not Hired
+        dominant_error = "Class 0 (Not Hired predicted as Hired)" if class0_error > class1_error else "Class 1 (Hired predicted as Not Hired)"
+    else:
+        fpr, fnr = 0.0, 0.0
+        dominant_error = "N/A"
+        logger.warning(f"{model_name}: unexpected confusion matrix shape {cm.shape}")
 
-    report = classification_report(y_true, y_pred, output_dict=True)
+    report = classification_report(y_true, y_pred, output_dict=True, zero_division=0)
 
     metrics = {
-        "Model":    model_name,
-        "Accuracy": round(accuracy, 4),
-        "F1-macro": round(f1_macro, 4),
-        "ROC-AUC":  round(roc_auc, 4),
-        "FPR":      round(fpr, 4),
-        "FNR":      round(fnr, 4),
+        "Model":          model_name,
+        "Accuracy":       round(accuracy,  4),
+        "F1-macro":       round(f1_macro,  4),
+        "Precision":      round(precision, 4),
+        "Recall":         round(recall,    4),
+        "ROC-AUC":        round(roc_auc,   4),
+        "FPR":            round(fpr,       4),
+        "FNR":            round(fnr,       4),
+        "DominantError":  dominant_error,
     }
 
     logger.info(
-        f"{model_name} — Accuracy: {accuracy:.4f} | "
-        f"F1-macro: {f1_macro:.4f} | ROC-AUC: {roc_auc:.4f} | "
+        f"{model_name} — Accuracy: {accuracy:.4f} | F1-macro: {f1_macro:.4f} | "
+        f"Precision: {precision:.4f} | Recall: {recall:.4f} | ROC-AUC: {roc_auc:.4f} | "
         f"FPR: {fpr:.4f} | FNR: {fnr:.4f}"
     )
 
@@ -56,7 +74,6 @@ def evaluate_model(
 
 
 def save_metrics(all_metrics: list[dict]) -> pd.DataFrame:
-    """Save all model metrics to reports/metrics/metrics.csv and return DataFrame."""
 
     cfg = load_config()
 
@@ -72,37 +89,68 @@ def save_metrics(all_metrics: list[dict]) -> pd.DataFrame:
 
 
 def save_summary(metrics_df: pd.DataFrame) -> None:
-    """Write reports/summary.md with the final model comparison table."""
 
     cfg = load_config()
 
     summary_path = PROJECT_ROOT / cfg["paths"]["reports"]["summary"]
     summary_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # pick best model by F1-macro, break ties by ROC-AUC
-    best_idx    = metrics_df.sort_values(
-        ["F1-macro", "ROC-AUC"], ascending=False
-    ).index[0]
-    best_model  = metrics_df.loc[best_idx, "Model"]
+    best_idx   = metrics_df.sort_values(["F1-macro", "ROC-AUC"], ascending=False).index[0]
+    best_model = metrics_df.loc[best_idx, "Model"]
 
     lines = [
         "# TalentIQ — Model Comparison\n\n",
         "## Results\n\n",
-        "| Model | Accuracy | F1-macro | ROC-AUC | FPR | FNR | Verdict |\n",
-        "|---|---|---|---|---|---|---|\n",
+        "| Model | Accuracy | F1-macro | Precision | Recall | ROC-AUC | FPR | FNR | Verdict |\n",
+        "|---|---|---|---|---|---|---|---|---|\n",
     ]
 
-    verdicts = {"Logistic Regression": "Baseline", "Random Forest": "Compare", "XGBoost": "Compare"}
+    verdicts = {
+        "Logistic Regression": "Baseline",
+        "Random Forest":       "Compare",
+        "XGBoost":             "Compare",
+    }
     verdicts[best_model] = "✅ Winner"
 
     for _, row in metrics_df.iterrows():
         lines.append(
             f"| {row['Model']} | {row['Accuracy']} | {row['F1-macro']} | "
-            f"{row['ROC-AUC']} | {row['FPR']} | {row['FNR']} | {verdicts.get(row['Model'], '')} |\n"
+            f"{row['Precision']} | {row['Recall']} | {row['ROC-AUC']} | "
+            f"{row['FPR']} | {row['FNR']} | {verdicts.get(row['Model'], '')} |\n"
+        )
+
+    # Misclassification analysis section — required by Task 2
+    lines.append("\n## Misclassification Analysis\n\n")
+    lines.append(
+        "This section identifies which class each model struggles with most.\n"
+        "- **FPR** = Not Hired candidates wrongly predicted as Hired (wasted interviews)\n"
+        "- **FNR** = Hired candidates wrongly predicted as Not Hired (missed good talent)\n\n"
+    )
+    lines.append("| Model | FPR | FNR | Dominant Error |\n")
+    lines.append("|---|---|---|---|\n")
+    for _, row in metrics_df.iterrows():
+        lines.append(
+            f"| {row['Model']} | {row['FPR']} | {row['FNR']} | {row['DominantError']} |\n"
         )
 
     lines.append(
-        f"\n**Selected model: {best_model}** — highest F1-macro.\n"
+        f"\n**Business Insight:** A high FNR means the model misses good candidates — "
+        f"costly in recruitment. A high FPR wastes interviewer time on unqualified candidates. "
+        f"The selected model **{best_model}** balances both errors best based on F1-macro.\n"
+    )
+
+    lines.append(f"\n## Model Selection\n\n")
+    lines.append(f"**Selected model: {best_model}** — highest F1-macro.\n\n")
+    lines.append(
+        f"F1-macro was chosen as the primary metric because the dataset has class imbalance. "
+        f"Unlike accuracy, F1-macro penalises models that ignore the minority class. "
+        f"ROC-AUC was used as a tiebreaker to measure ranking quality across thresholds. "
+        f"{best_model} outperformed others by achieving the best balance between precision "
+        f"and recall for both Hired and Not Hired classes. Logistic Regression serves as a "
+        f"linear baseline but cannot capture non-linear hiring patterns. Random Forest handles "
+        f"feature interactions well but is sensitive to depth and sampling parameters. "
+        f"XGBoost with gradient boosting typically handles imbalanced structured data best "
+        f"when tuned correctly, making it the expected winner on this dataset.\n"
     )
 
     with open(summary_path, "w") as f:

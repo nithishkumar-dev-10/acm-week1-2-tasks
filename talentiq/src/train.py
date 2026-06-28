@@ -10,17 +10,11 @@ from imblearn.over_sampling import SMOTE
 from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import (
-    GridSearchCV,
-    RandomizedSearchCV,
-    train_test_split,
-)
+from sklearn.model_selection import GridSearchCV,RandomizedSearchCV,train_test_split
+
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import (
-    OrdinalEncoder,
-    OneHotEncoder,
-    StandardScaler,
-)
+from sklearn.preprocessing import OrdinalEncoder,OneHotEncoder,StandardScaler
+
 from xgboost import XGBClassifier
 
 from src.config_loader import PROJECT_ROOT, load_config, load_features, load_hyperparameters
@@ -32,54 +26,32 @@ from src.preprocessing import preprocess_data
 logger = logging.getLogger(__name__)
 
 
-# ── 1. BUILD PREPROCESSOR PIPELINE ──────────────────────────────────────────
-
+# preprocessing pipeline 
 def build_preprocessor() -> ColumnTransformer:
     feat = load_features()
 
     ordinal_cols = list(feat["ordinal_maps"].keys())
+    #creating the order of the categories for each ordinal encoding coloumn's
     ordinal_categories = [
         list(feat["ordinal_maps"][col].keys())
         for col in ordinal_cols
     ]
 
-    onehot_cols = feat["onehot_columns"]
+    onehot_cols    = feat["onehot_columns"]
     numerical_cols = feat["numerical_features"]
+    engineered     = feat.get("engineered_features", [])
+    all_numerical  = numerical_cols + engineered
 
     preprocessor = ColumnTransformer(
         transformers=[
-            (
-                "ordinal",
-                OrdinalEncoder(
-                    categories=ordinal_categories,
-                    handle_unknown="use_encoded_value",
-                    unknown_value=-1,
-                ),
-                ordinal_cols,
-            ),
-            (
-                "onehot",
-                OneHotEncoder(
-                    drop="first",
-                    sparse_output=False,
-                    handle_unknown="ignore",
-                ),
-                onehot_cols,
-            ),
-            (
-                "scaler",
-                StandardScaler(),
-                numerical_cols,
-            ),
-        ],
-        remainder="passthrough",
-    )
+            ("ordinal", OrdinalEncoder(categories=ordinal_categories, handle_unknown="use_encoded_value", unknown_value=-1), ordinal_cols),
+            ("onehot",  OneHotEncoder(drop="first", sparse_output=False, handle_unknown="ignore"), onehot_cols),
+            ("scaler",  StandardScaler(), all_numerical),],remainder="drop",)
 
     return preprocessor
 
 
-# ── 2. LOAD AND PREPARE DATA ─────────────────────────────────────────────────
-
+# load and spliting the data(train,test,split)
 def load_and_prepare() -> tuple:
     cfg  = load_config()
     feat = load_features()
@@ -91,9 +63,7 @@ def load_and_prepare() -> tuple:
     X = df.drop(columns=[target])
     y = df[target]
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X,
-        y,
+    X_train, X_test, y_train, y_test = train_test_split(X,y,
         test_size=cfg["split"]["test_size"],
         random_state=cfg["split"]["random_state"],
         stratify=y if cfg["split"]["stratify"] else None,
@@ -114,12 +84,7 @@ def load_and_prepare() -> tuple:
 
 # ── 3. APPLY PREPROCESSOR + SMOTE ────────────────────────────────────────────
 
-def transform_and_resample(
-    preprocessor: ColumnTransformer,
-    X_train: pd.DataFrame,
-    X_test: pd.DataFrame,
-    y_train: pd.Series,
-) -> tuple:
+def transform_and_resample(preprocessor: ColumnTransformer,X_train: pd.DataFrame,X_test: pd.DataFrame,y_train: pd.Series,) -> tuple:
     cfg = load_config()
 
     X_train_enc = preprocessor.fit_transform(X_train)
@@ -156,7 +121,7 @@ def search_model(
         estimator=estimator,
         cv=hp["cv"],
         scoring=hp["scoring"],
-        n_jobs=-1,
+        n_jobs=hp.get("n_jobs", -1),
         verbose=1,
     )
 
@@ -196,10 +161,7 @@ def train_all(
     models = {
         "logistic_regression": LogisticRegression(max_iter=1000),
         "random_forest":       RandomForestClassifier(),
-        "xgboost":             XGBClassifier(
-                                   eval_metric="logloss",
-                                   use_label_encoder=False,
-                               ),
+        "xgboost":             XGBClassifier(eval_metric="logloss", use_label_encoder=False, scale_pos_weight=5.25, min_child_weight=5, reg_alpha=0.1, reg_lambda=1.0),
     }
 
     display_names = {
@@ -215,6 +177,8 @@ def train_all(
     }
 
     all_metrics = []
+
+    y_test = np.asarray(y_test)
 
     # get feature names from the fitted preprocessor saved in transform_and_resample
     _preprocessor = joblib.load(PROJECT_ROOT / "artifacts" / "preprocessor.pkl")

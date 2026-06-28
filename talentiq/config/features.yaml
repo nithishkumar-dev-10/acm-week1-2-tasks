@@ -1,51 +1,107 @@
-target: hired
+target: Attrition
 
 numerical_features:
-  - age
-  - cgpa
-  - experience_years
-  - skills_score
-  - soft_skills_score
-  - internships
-  - projects
-  - certifications
-  - hackathons
-  - research_papers
-  - programming_languages
-  - resume_length_words
+  - Age
+  - DailyRate
+  - DistanceFromHome
+  - HourlyRate
+  - MonthlyIncome
+  - MonthlyRate
+  - NumCompaniesWorked
+  - PercentSalaryHike
+  - TotalWorkingYears
+  - TrainingTimesLastYear
+  - YearsAtCompany
+  - YearsInCurrentRole
+  - YearsSinceLastPromotion
+  - YearsWithCurrManager
 
 categorical_features:
-  - education_level
-  - university_tier
-  - company_type
-
-outlier_columns:
-  - age
-  - cgpa
-  - experience_years
-  - skills_score
-  - soft_skills_score
+  - BusinessTravel
+  - Department
+  - EducationField
+  - Gender
+  - JobRole
+  - MaritalStatus
+  - OverTime
 
 ordinal_maps:
-  education_level:
-    "High School": 1
-    "Bachelor": 2
-    "Master": 3
-    "PhD": 4
+  Education:
+    "Below College": 1
+    "College": 2
+    "Bachelor": 3
+    "Master": 4
+    "Doctor": 5
 
-  university_tier:
-    "Tier 3": 1
-    "Tier 2": 2
-    "Tier 1": 3
+  EnvironmentSatisfaction:
+    "Low": 1
+    "Medium": 2
+    "High": 3
+    "Very High": 4
+
+  JobInvolvement:
+    "Low": 1
+    "Medium": 2
+    "High": 3
+    "Very High": 4
+
+  JobLevel:
+    "1": 1
+    "2": 2
+    "3": 3
+    "4": 4
+    "5": 5
+
+  JobSatisfaction:
+    "Low": 1
+    "Medium": 2
+    "High": 3
+    "Very High": 4
+
+  PerformanceRating:
+    "Low": 1
+    "Good": 2
+    "Excellent": 3
+    "Outstanding": 4
+
+  RelationshipSatisfaction:
+    "Low": 1
+    "Medium": 2
+    "High": 3
+    "Very High": 4
+
+  StockOptionLevel:
+    "0": 0
+    "1": 1
+    "2": 2
+    "3": 3
+
+  WorkLifeBalance:
+    "Bad": 1
+    "Good": 2
+    "Better": 3
+    "Best": 4
 
 onehot_columns:
-  - company_type
+  - BusinessTravel
+  - Department
+  - EducationField
+  - Gender
+  - JobRole
+  - MaritalStatus
+  - OverTime
+
+outlier_columns:
+  - MonthlyIncome
+  - TotalWorkingYears
+  - YearsAtCompany
+  - DistanceFromHome
 
 engineered_features:
-  - EmployabilityScore
-  - PortfolioStrength
-  - TechnicalReadiness
-  - ExperienceQuality
-  - LearningIndex
-  - ProfileCompleteness
-  - SkillExperienceGap
+  - IncomePerYear
+  - SatisfactionScore
+  - LoyaltyIndex
+  - WorkloadScore
+  - CareerGrowthRate
+  - OverTimeRisk
+  - TenureStabilityIndex

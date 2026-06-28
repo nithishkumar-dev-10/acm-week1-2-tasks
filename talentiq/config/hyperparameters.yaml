@@ -1,36 +1,35 @@
-
-
 logistic_regression:
   search: "grid"
-  cv: 5
+  cv: 3
   scoring: "f1_macro"
   param_grid:
-    C:       [0.01, 0.1, 1, 10, 100]
-    penalty: ["l1", "l2"]
-    solver:  ["liblinear", "saga"]
+    C:            [0.1, 1]
+    penalty:      ["l2"]
+    solver:       ["liblinear"]
     class_weight: ["balanced"]
 
 random_forest:
   search: "random"
-  cv: 5
-  n_iter: 30
+  cv: 3
+  n_iter: 5
   scoring: "f1_macro"
+  n_jobs: -1
   param_distributions:
-    n_estimators:      [100, 200, 300, 500]
-    max_depth:         [5, 10, 15, 20, null]
-    min_samples_split: [2, 5, 10]
-    min_samples_leaf:  [1, 2, 4]
+    n_estimators:      [100, 200]
+    max_depth:         [5, 10]
+    min_samples_split: [5, 10]
+    min_samples_leaf:  [2, 4]
     class_weight:      ["balanced"]
 
 xgboost:
   search: "random"
-  cv: 5
-  n_iter: 30
+  cv: 3
+  n_iter: 5
   scoring: "f1_macro"
+  n_jobs: -1
   param_distributions:
-    n_estimators:  [100, 200, 300]
-    learning_rate: [0.01, 0.05, 0.1, 0.2]
-    max_depth:     [3, 5, 7, 9]
-    subsample:     [0.6, 0.7, 0.8, 1.0]
-    colsample_bytree: [0.6, 0.8, 1.0]
-    scale_pos_weight: [1, 2, 3]   # handles imbalance in XGBoost
+    n_estimators:     [100, 200]
+    learning_rate:    [0.05, 0.1]
+    max_depth:        [3, 5]
+    subsample:        [0.7, 0.8]
+    colsample_bytree: [0.7, 0.9]

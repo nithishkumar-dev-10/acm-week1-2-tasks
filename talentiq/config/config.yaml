@@ -1,15 +1,13 @@
-
-
 mode: full
-sample_size: 5000
+sample_size: 500
 
 
 
 paths:
 
   raw:
-    sample: "data/raw/resume_dataset_sample.csv"
-    full: "data/raw/resume_dataset.csv"
+    sample: "data/raw/WA_Fn-UseC_-HR-Employee-Attrition.csv"
+    full: "data/raw/WA_Fn-UseC_-HR-Employee-Attrition.csv"
 
   processed:
     sample: "data/processed/processed_sample.csv"
