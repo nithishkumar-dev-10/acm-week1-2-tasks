@@ -125,6 +125,12 @@ def search_model(
         verbose=1,
     )
 
+    if hp["search"] == "fixed":
+        # No search — use estimator as-is with locked params
+        estimator.fit(X_train, y_train)
+        logger.info(f"{name} using fixed params (no search)")
+        return estimator
+
     if hp["search"] == "grid":
         search = GridSearchCV(
             param_grid=hp["param_grid"],
@@ -160,7 +166,7 @@ def train_all(
 
     models = {
         "logistic_regression": LogisticRegression(max_iter=1000),
-        "random_forest":       RandomForestClassifier(),
+        "random_forest":       RandomForestClassifier(random_state=42),
         "xgboost":             XGBClassifier(eval_metric="logloss", use_label_encoder=False),
     }
 
