@@ -539,7 +539,7 @@ probability = model.predict_proba(X_processed)[:, 1]
 <div align="center">
 
 **Built by [Nithish Kumar S](https://github.com/yourusername)**  
-*First-year CS student · AI Engineer in progress · Hackathon builder*
+*SECOND-year CS student · AI Engineer in progress *
 
 <br/>
 
