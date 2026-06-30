@@ -2,7 +2,7 @@
 
 <br/>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=200&section=header&text=WorkPulse&fontSize=80&fontColor=ffffff&fontAlignY=38&desc=AI-Powered%20Employee%20Attrition%20Prediction%20System&descAlignY=58&descSize=18&descColor=90cdf4&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=200&section=header&text=WorkPulse&fontSize=80&fontColor=ffffff&fontAlignY=38&desc=ML-Based%20Employee%20Attrition%20Prediction%20System&descAlignY=58&descSize=18&descColor=90cdf4&animation=fadeIn" width="100%"/>
 
 <br/>
 
