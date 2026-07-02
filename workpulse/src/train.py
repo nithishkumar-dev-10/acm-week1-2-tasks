@@ -20,7 +20,7 @@ from xgboost import XGBClassifier
 from src.config_loader import PROJECT_ROOT, load_config, load_features, load_hyperparameters
 from src.feature_engineering import engineer_features
 from src.metrics import evaluate_model, save_metrics, save_summary
-from src.plots import plot_boxplots, plot_class_distribution, plot_confusion_matrix, plot_feature_importance, plot_model_comparison, plot_roc_curve
+from src.plots import plot_boxplots, plot_class_distribution, plot_confusion_matrix, plot_feature_importance, plot_model_comparison, plot_roc_curve, plot_shap_summary
 from src.preprocessing import preprocess_data
 
 logger = logging.getLogger(__name__)
@@ -213,9 +213,17 @@ def train_all(
         plot_roc_curve(y_test, y_prob, display)
         plot_feature_importance(best_model, feature_names, display)
 
+        # SHAP explainability — summary plot + persisted explainer for use at inference time
+        explainer = plot_shap_summary(best_model, X_test, feature_names, display)
+
         save_paths[key].parent.mkdir(parents=True, exist_ok=True)
         joblib.dump(best_model, save_paths[key])
         logger.info(f"{display} saved to {save_paths[key]}")
+
+        if explainer is not None:
+            explainer_path = save_paths[key].parent / f"{key}_shap_explainer.pkl"
+            joblib.dump(explainer, explainer_path)
+            logger.info(f"{display} SHAP explainer saved to {explainer_path}")
 
     metrics_df = save_metrics(all_metrics)
     plot_model_comparison(metrics_df)

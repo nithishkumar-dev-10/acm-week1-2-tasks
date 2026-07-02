@@ -26,6 +26,73 @@ def load_artifacts(model_name: str = "random_forest"):
     return model, preprocessor, feature_columns
 
 
+def load_shap_explainer(model_name: str = "random_forest"):
+    """Load the SHAP explainer saved during training for this model, if it exists."""
+    cfg = load_config()
+    model_path = PROJECT_ROOT / cfg["paths"]["models"][model_name]
+    explainer_path = model_path.parent / f"{model_name}_shap_explainer.pkl"
+
+    if not explainer_path.exists():
+        logger.warning(
+            f"No SHAP explainer found at {explainer_path}. Re-run training to generate one."
+        )
+        return None
+
+    return joblib.load(explainer_path)
+
+
+def explain_prediction(df: pd.DataFrame, model_name: str = "random_forest") -> pd.DataFrame:
+    """
+    Compute SHAP values for the given raw input row(s), showing how much each
+    feature pushed the prediction toward/away from attrition.
+    Returns a DataFrame of SHAP values, one row per input row, one column per feature.
+    """
+    _, preprocessor, feature_columns = load_artifacts(model_name)
+    explainer = load_shap_explainer(model_name)
+
+    if explainer is None:
+        raise FileNotFoundError(
+            f"SHAP explainer for '{model_name}' not found. Re-run training first."
+        )
+
+    feat = load_features()
+    target = feat["target"]
+
+    df_clean = clean_raw_input(df)
+    if target in df_clean.columns:
+        df_clean = df_clean.drop(columns=[target])
+
+    df_input = engineer_features(df_clean)
+
+    missing_cols = set(feature_columns) - set(df_input.columns)
+    if missing_cols:
+        raise ValueError(f"Missing required columns in input: {missing_cols}")
+    df_input = df_input[feature_columns]
+
+    X = preprocessor.transform(df_input)
+    feature_names = preprocessor.get_feature_names_out()
+    X_df = pd.DataFrame(X, columns=feature_names)
+
+    shap_values = explainer.shap_values(X_df)
+    if isinstance(shap_values, list):
+        shap_values = shap_values[1]
+    elif isinstance(shap_values, np.ndarray) and shap_values.ndim == 3:
+        shap_values = shap_values[:, :, 1]
+
+    return pd.DataFrame(shap_values, columns=feature_names, index=df.index)
+
+
+def top_contributing_features(df: pd.DataFrame, model_name: str = "random_forest", top_n: int = 5) -> list:
+    """
+    For a single-row input, return the top_n features that pushed the prediction
+    the most, as (feature_name, shap_value) tuples sorted by absolute impact.
+    """
+    shap_df = explain_prediction(df, model_name)
+    row = shap_df.iloc[0]
+    ranked = row.reindex(row.abs().sort_values(ascending=False).index)
+    return list(ranked.head(top_n).items())
+
+
 def clean_raw_input(df: pd.DataFrame) -> pd.DataFrame:
     """
     Apply the exact same raw-data cleaning steps used in preprocessing.load_data(),
@@ -244,6 +311,16 @@ def run_prediction(input_path: str = None, model_name: str = "random_forest", ou
             logger.info(f"Predictions saved to {output_path}")
         logger.info(f"Predicted {len(result)} row using {model_name}.")
         print(result[["Prediction", "Probability"]].to_string(index=False))
+
+        try:
+            top_features = top_contributing_features(result, model_name)
+            print("\nTop factors behind this prediction (SHAP):")
+            for name, value in top_features:
+                direction = "increases" if value > 0 else "decreases"
+                print(f"  {name}: {value:+.4f} ({direction} attrition risk)")
+        except FileNotFoundError as e:
+            logger.warning(str(e))
+
         return
 
     if output_path is None:

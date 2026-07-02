@@ -2,8 +2,10 @@ import logging
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import seaborn as sns
+import shap
 
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.metrics import RocCurveDisplay
@@ -156,6 +158,84 @@ def plot_feature_importance(
     plt.close()
 
     logger.info(f"{model_name} feature importance saved.")
+
+#plotting shap summary (explainability)
+def plot_shap_summary(
+    model,
+    X,
+    feature_names,
+    model_name: str,
+    max_display: int = 10,
+):
+    """
+    Compute SHAP values for the given model and save a beeswarm summary plot.
+    Returns the fitted explainer (so it can be pickled/reused at inference time),
+    or None if SHAP failed for this model type.
+    """
+
+    cfg = load_config()
+
+    figure_path = Path(
+        cfg["paths"]["reports"]["figures"]
+    )
+
+    figure_path.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    X_df = X if isinstance(X, pd.DataFrame) else pd.DataFrame(X, columns=feature_names)
+
+    try:
+        if hasattr(model, "feature_importances_"):
+            # Tree-based models: RandomForest, XGBoost
+            explainer = shap.TreeExplainer(model)
+            shap_values = explainer.shap_values(X_df)
+
+            # Binary-classification TreeExplainer sometimes returns a list [class0, class1]
+            if isinstance(shap_values, list):
+                shap_values = shap_values[1]
+            # ...or a single 3D array shaped (n_samples, n_features, n_classes)
+            elif isinstance(shap_values, np.ndarray) and shap_values.ndim == 3:
+                shap_values = shap_values[:, :, 1]
+
+        elif hasattr(model, "coef_"):
+            # Linear models: LogisticRegression
+            explainer = shap.LinearExplainer(model, X_df)
+            shap_values = explainer.shap_values(X_df)
+
+        else:
+            logger.warning(
+                f"{model_name} does not support SHAP explanation for this model type."
+            )
+            return None
+
+    except Exception as e:
+        logger.warning(f"{model_name}: SHAP explainer failed ({e}), skipping SHAP plot.")
+        return None
+
+    plt.figure(figsize=(8, 6))
+
+    shap.summary_plot(
+        shap_values,
+        X_df,
+        max_display=max_display,
+        show=False,
+    )
+
+    plt.title(f"{model_name} SHAP Summary")
+
+    plt.tight_layout()
+
+    plt.savefig(
+        figure_path / f"{model_name}_shap_summary.png"
+    )
+
+    plt.close()
+
+    logger.info(f"{model_name} SHAP summary plot saved.")
+
+    return explainer
 
 #plotting model comparision
 def plot_model_comparison(
