@@ -1,4 +1,5 @@
 experiment,description,recall,precision,f1,notes
 exp01,"Baseline LR, no scaling, no class_weight",0.2748,,,"Didn't converge - max_iter reached, unscaled data"
 exp02,"Baseline LR, scaled, no class_weight",0.2810,,,"Scaling fixed convergence, recall still low - imbalance untreated"
-exp03,"Baseline LR, scaled, class_weight=balanced",0.7713,0.2837,0.4149,"Big jump from balancing classes, close to ~0.83 target. Precision dropped as tradeoff"
+exp03,"Baseline LR, scaled, class_weight=balanced",0.7713,0.2837,0.4149,"Big jump from balancing classes, close to ~0.83 target. Precision dropped as tradeoff"exp_02_freq_encoding,Added frequency encoding for all 200 columns,0.9863387978142076,0.1256089074460682,0.2228395061728395,"Baseline was 0.7712 recall, checking improvement from freq features"
+exp_03_freq_no_classweight,Frequency encoding without class_weight='balanced',0.8040593286494926,0.2641703000769428,0.39768339768339767,"Fixed degenerate model from exp_02. F1 still slightly below baseline (0.3977 vs 0.4148). class_weight='balanced' was the real cause of the earlier fake recall, not the freq features themselves."
