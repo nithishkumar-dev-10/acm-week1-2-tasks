@@ -2,7 +2,7 @@
 
 <br/>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=180&section=header&text=ACM+SIGAI&fontSize=70&fontColor=ffffff&fontAlignY=38&desc=Week+1+and+Week+2+Individual+Task+Submissions&descAlignY=58&descSize=18&descColor=90cdf4&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=180&section=header&text=ACM+SIG-AI&fontSize=70&fontColor=ffffff&fontAlignY=38&desc=Week+1+and+Week+2+Individual+Task+Submissions&descAlignY=58&descSize=18&descColor=90cdf4&animation=fadeIn" width="100%"/>
 
 <br/>
 
