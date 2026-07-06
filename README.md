@@ -1,12 +1,10 @@
-<div align="center">
-
 <br/>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=200&section=header&text=TalentIQ&fontSize=80&fontColor=ffffff&fontAlignY=38&desc=AI-Powered%20Candidate%20Shortlisting%20System&descAlignY=58&descSize=18&descColor=90cdf4&animation=fadeIn" width="100%"/>
 
 <br/>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table>
 <tr>
 <td align="center">
 
@@ -35,8 +33,8 @@
 
 <!-- TECH STACK BADGES -->
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![XGBoost](https://img.shields.io/badge/XGBoost-Gradient%20Boosting-FF6600?style=for-the-badge&logo=xgboost&logoColor=white)](https://xgboost.readthedocs.io)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-Pipeline-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
+[![XGBoost](https://img.shields.io/badge/XGBoost-Gradient%20Boosting-FF6600?style=for-the-badge&logo=xgboost&logoColor=white)](https://xgboost.readthedocs.io)
 
 <br/>
 
@@ -79,19 +77,13 @@ XGBoost<br/>
 
 <br/>
 
-> *"Recruiters receive hundreds to thousands of resumes per job opening.*  
+> *"Recruiters receive hundreds to thousands of resumes per job opening.*
 > *Manual screening is slow, inconsistent, and unscalable."*
 >
-> **TalentIQ fixes that** — a tuned ML pipeline trained on structured candidate data:  
+> **TalentIQ fixes that** — a tuned ML pipeline trained on structured candidate data:
 > education · experience · skills · certifications · projects · soft skills
 
 <br/>
-
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0f2027,100:2c5364&height=3&section=header" width="85%"/>
-
-<br/>
-
-</div>
 
 ---
 
@@ -99,16 +91,17 @@ XGBoost<br/>
 
 - [Problem Statement](#-problem-statement)
 - [Project Structure](#-project-structure)
-- [ML Pipeline Overview](#-ml-pipeline-overview)
+- [ML Pipeline Overview](#️-ml-pipeline-overview)
 - [Feature Engineering](#-feature-engineering)
 - [Model Results](#-model-results)
-- [Misclassification Analysis](#-misclassification-analysis)
+- [Misclassification Analysis](#️-misclassification-analysis)
 - [Why XGBoost Won](#-why-xgboost-won)
 - [Visualizations](#-visualizations)
 - [Quickstart](#-quickstart)
 - [Configuration](#️-configuration)
 - [Artifacts](#-artifacts)
 - [Dataset](#-dataset)
+- [Tech Stack](#-tech-stack)
 - [TransReliant (New Project)](#-transreliant-new-project)
 
 ---
@@ -264,14 +257,14 @@ Beyond raw features, **10 domain-specific features** were engineered to improve 
 
 | Model | Accuracy | F1-macro | Precision | Recall | ROC-AUC | Threshold | Verdict |
 |:------|:--------:|:--------:|:---------:|:------:|:-------:|:---------:|:-------:|
-| Logistic Regression | 0.8537 | 0.7153 | 0.7262 | 0.7062 | 0.801 | 0.72 | Baseline |
-| Random Forest | 0.8333 | 0.7116 | 0.6991 | 0.7285 | 0.794 | 0.36 | Compare |
+| Logistic Regression | 0.8537 | 0.7153 | 0.7262 | 0.7062 | 0.8010 | 0.72 | Baseline |
+| Random Forest | 0.8333 | 0.7116 | 0.6991 | 0.7285 | 0.7940 | 0.36 | Compare |
 | **XGBoost** | **0.8503** | **0.7165** | **0.7205** | **0.7128** | **0.7963** | **0.39** | **✅ Winner** |
 
 </div>
 
-> **Primary Metric: F1-macro** — chosen because the dataset has class imbalance.  
-> Unlike accuracy, F1-macro penalises models that ignore the minority class.  
+> **Primary Metric: F1-macro** — chosen because the dataset has class imbalance.
+> Unlike accuracy, F1-macro penalises models that ignore the minority class.
 > **ROC-AUC** was used as a tiebreaker for ranking quality across thresholds.
 
 ---
@@ -340,22 +333,22 @@ All figures are saved to `reports/figures/`. Key plots:
 <tr>
 <td align="center" width="33%">
 
-**ROC Curves**  
-Per-model AUC comparison  
+**ROC Curves**
+Per-model AUC comparison
 `figures/*_roc_curve.png`
 
 </td>
 <td align="center" width="33%">
 
-**Confusion Matrices**  
-TP/FP/TN/FN breakdown  
+**Confusion Matrices**
+TP/FP/TN/FN breakdown
 `figures/*_confusion_matrix.png`
 
 </td>
 <td align="center" width="33%">
 
-**Feature Importance**  
-Top predictors per model  
+**Feature Importance**
+Top predictors per model
 `figures/*_feature_importance.png`
 
 </td>
@@ -363,22 +356,22 @@ Top predictors per model
 <tr>
 <td align="center">
 
-**Model Comparison**  
-Side-by-side bar chart  
+**Model Comparison**
+Side-by-side bar chart
 `figures/model_comparison.png`
 
 </td>
 <td align="center">
 
-**Correlation Heatmap**  
-Feature correlation matrix  
+**Correlation Heatmap**
+Feature correlation matrix
 `figures/heatmap.png`
 
 </td>
 <td align="center">
 
-**SHAP Summary**  
-Feature impact on predictions  
+**SHAP Summary**
+Feature impact on predictions
 `figures/shap_summary.png`
 
 </td>
@@ -532,19 +525,54 @@ probability = model.predict_proba(X_processed)[:, 1]
 
 > A separate project living in its own top-level directory (`TransReliant/`) within this repo — not part of the TalentIQ pipeline above.
 
-**What it is:** A two-stage ML cascade for Indian railway ticket bookings — Model 1 classifies whether a booking will be **Confirmed / Not Confirmed**, and Model 2 (regression) runs only on the passengers Model 1 flags as **Not Confirmed** to estimate how bad their **Waitlist Position** is. Stage 2 only fires for the flagged subset, so no model wastes effort estimating waitlist severity for already-confirmed passengers.
+**What it is:** A two-stage ML cascade for Indian railway ticket bookings. Model 1 (classification) predicts whether a booking will be **Confirmed / Not Confirmed**. Model 2 (regression) runs **only** on the passengers Model 1 flags as **Not Confirmed**, estimating how bad their **Waitlist Position** is. Stage 2 only fires for the flagged subset, so no model wastes effort estimating waitlist severity for already-confirmed passengers — the same design pattern as a classic triage → severity-estimation setup.
+
+**Why this design, not a single model or a feature-passing cascade:** the two candidate targets (`Confirmation Status` and `Waitlist Position`) are different problem types (classification vs. regression), and in the cleaned dataset `Waitlist Position == 0` perfectly determines `Confirmation Status` — so feeding one as an input feature to predict the other would just be leaking the same information back to itself. Routing (run Stage 2 only on the subset Stage 1 flags) avoids that leakage while still producing a severity estimate for exactly the passengers who need one.
 
 <div align="center">
 
 | Property | Value |
-|----------|-------|
+|---|---|
 | Stage 1 | Classification — `Confirmation Status` (Confirmed / Not Confirmed) |
 | Stage 2 | Regression — `Waitlist Position` (1–200), on Stage-1-flagged rows only |
 | Dataset | [Indian Railway Ticket Confirmation — Kaggle](https://www.kaggle.com/datasets/aaryananil/indian-railway-ticket-confirmation) |
 | Records | 20,045 rows |
 | Models | XGBClassifier + XGBRegressor |
+| Dropped columns | `Train Number` (near-unique ID, 17,979 unique values, no signal), `PNR Number`, `Booking Channel` |
 
 </div>
+
+**Features used:**
+
+- **Categorical:** Class of Travel, Quota, Source Station, Destination Station, Train Type, Special Considerations, Holiday or Peak Season
+- **Numerical:** Number of Passengers, Travel Distance, Number of Stations, Travel Time, Seat Availability, journey_month, journey_dayofweek, days_before_journey
+
+**Pipeline architecture:**
+
+```
+Raw ticket booking fields
+        │
+        ▼
+ [ Model 1: XGBClassifier ]
+   predicts Confirmation Status
+        │
+   ┌────┴─────┐
+   │          │
+Confirmed  Not Confirmed (routed)
+   │          │
+   │          ▼
+   │   [ Model 2: XGBRegressor ]
+   │   predicts Waitlist Position
+   │          │
+   └─────┬────┘
+         ▼
+  Final output: status + (if applicable) estimated waitlist severity
+```
+
+**Evaluation is done at three levels**, not just the final output:
+- **Stage 1** — Accuracy, F1, ROC-AUC, chosen decision threshold
+- **Stage 2** — RMSE / MAE, evaluated on its own held-out split
+- **System-level** — the full cascade run end-to-end on the whole test set, including a *coverage* stat (% of test rows where Stage 2 actually fires) and Stage 2 error recomputed on the subset Stage 1 actually routes to it (which can differ from Stage 2's own clean-split number)
 
 **Project structure:**
 
@@ -590,11 +618,13 @@ python run_pipeline.py   # regenerates artifacts, metrics, figures
 python main.py            # interactive prediction CLI
 ```
 
+> 📎 Full write-up (EDA, per-stage metrics, misclassification analysis, and design justification) lives in `TransReliant/reports/report.md` once the pipeline has been run.
+
 ---
 
 <div align="center">
 
-**Built by [Nithish Kumar S](https://github.com/yourusername)**  
+**Built by [Nithish Kumar S](https://github.com/yourusername)**
 *First-year CS student · AI Engineer in progress · Hackathon builder*
 
 <br/>
