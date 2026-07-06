@@ -98,7 +98,7 @@ Ridge · RF · XGBoost<br/>
 
 ## 🎯 Problem Statement
 
-Public transport systems have uncertainty in ticket confirmations and delays. Users lack a data-driven reliability metric before planning journeys. TransReliant solves this by providing predictive reliability insights.
+Indian Railways passengers often face uncertainty in ticket confirmations and waitlist outcomes before planning their journeys. TransReliant addresses this challenge by providing data-driven predictions for ticket confirmation reliability and estimated waitlist severity, enabling passengers to make more informed travel decisions.
 
 ---
 
