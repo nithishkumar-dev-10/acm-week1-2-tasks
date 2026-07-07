@@ -1,47 +1,43 @@
 data:
-  raw: "data/raw/ticket_confirmation.csv"
-  cleaned: "data/processed/cleaned.csv"
-  featured: "data/processed/featured.csv"
-  splits_dir: "data/processed/splits/"
-
+  raw: data/raw/ticket_confirmation.csv
+  cleaned: data/processed/cleaned.csv
+  featured: data/processed/featured.csv
+  splits_dir: data/processed/splits/
 target:
-  stage1: "Confirmation Status"
-  stage2: "Waitlist Position"
-
+  stage1: Confirmation Status
+  stage2: Waitlist Position
 drop_columns:
-  - "Train Number"
-  - "PNR Number"
-  - "Booking Channel"
-  - "Current Status"
-
+- Train Number
+- PNR Number
+- Booking Channel
+- Current Status
 features:
   categorical:
-    - "Class of Travel"
-    - "Quota"
-    - "Source Station"
-    - "Destination Station"
-    - "Train Type"
-    - "Special Considerations"
-    - "Holiday or Peak Season"
-    - "booking_urgency_bucket"
-    - "Age of Passengers"
+  - Class of Travel
+  - Quota
+  - Source Station
+  - Destination Station
+  - Train Type
+  - Special Considerations
+  - Holiday or Peak Season
+  - booking_urgency_bucket
+  - Age of Passengers
   numerical:
-    - "Number of Passengers"
-    - "Travel Distance"
-    - "Number of Stations"
-    - "Travel Time"
-    - "Seat Availability"
-    - "journey_month"
-    - "journey_dayofweek"
-    - "days_before_journey"
-    - "seat_pressure"            
-    - "route_length_per_stop"     
-    - "is_peak_or_holiday"
-
+  - Number of Passengers
+  - Travel Distance
+  - Number of Stations
+  - Travel Time
+  - Seat Availability
+  - journey_month
+  - journey_dayofweek
+  - days_before_journey
+  - seat_pressure
+  - route_length_per_stop
+  - is_peak_or_holiday
 artifacts:
-  preprocessor_stage1: "artifacts/models/preprocessor_stage1.pkl"
-  preprocessor_stage2: "artifacts/models/preprocessor_stage2.pkl"
-  model_stage1: "artifacts/models/stage1_classifier.pkl"
-  model_stage2: "artifacts/models/stage2_regressor.pkl"
-
+  preprocessor_stage1: artifacts/models/preprocessor_stage1.pkl
+  preprocessor_stage2: artifacts/models/preprocessor_stage2.pkl
+  model_stage1: artifacts/models/stage1_classifier.pkl
+  model_stage2: artifacts/models/stage2_regressor.pkl
 random_seed: 42
+threshold: 0.55
