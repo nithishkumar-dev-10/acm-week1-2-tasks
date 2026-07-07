@@ -18,6 +18,9 @@ from sklearn.metrics import (
     confusion_matrix,
     classification_report,
     ConfusionMatrixDisplay,
+    mean_squared_error,
+    mean_absolute_error,
+    r2_score,
 )
 
 from config_loader import load_config
@@ -55,6 +58,9 @@ PRECISION_FLOOR = 0.6
 THRESHOLD_GRID = np.round(np.arange(0.10, 0.90 + 1e-9, 0.05), 2)
 
 
+# ---------------------------------------------------------------------------
+# Loading
+# ---------------------------------------------------------------------------
 
 def load_stage1_test_split(cfg: dict):
     splits_dir = Path(cfg["data"]["splits_dir"])
@@ -122,6 +128,10 @@ def load_stage1_artifacts(cfg: dict):
 
     return model, preprocessor
 
+
+# ---------------------------------------------------------------------------
+# Step 12 — threshold optimization
+# ---------------------------------------------------------------------------
 
 def sweep_thresholds(y_true: pd.Series, y_proba: np.ndarray) -> pd.DataFrame:
     """
@@ -309,10 +319,11 @@ def save_metrics_csv(y_true: pd.Series, y_pred: np.ndarray, y_proba: np.ndarray,
     return metrics_df
 
 
+# ---------------------------------------------------------------------------
+# Stage 1 entry point — Steps 12+13
+# ---------------------------------------------------------------------------
 
-
-def main():
-    cfg = load_config()
+def evaluate_stage1(cfg: dict):
     model, preprocessor = load_stage1_artifacts(cfg)
     X_test, y_test = load_stage1_test_split(cfg)
 
@@ -348,6 +359,126 @@ def main():
 
     print(f"\nSteps 12+13 complete. Threshold={chosen_threshold:.2f} written to config.yaml. "
           f"Figures saved in reports/figures/, metrics in reports/metrics/stage1_metrics.csv.")
+
+    return chosen_threshold
+
+
+# ---------------------------------------------------------------------------
+# Step 16 — Stage 2 evaluation
+# ---------------------------------------------------------------------------
+
+def load_stage2_test_split(cfg: dict):
+    splits_dir = Path(cfg["data"]["splits_dir"])
+    X_test = pd.read_csv(splits_dir / "stage2_X_test.csv")
+    y_test = pd.read_csv(splits_dir / "stage2_y_test.csv").iloc[:, 0]
+    return X_test, y_test
+
+
+def load_stage2_artifacts(cfg: dict):
+    model_path = Path(cfg["artifacts"]["model_stage2"])
+    prep_path = Path(cfg["artifacts"]["preprocessor_stage2"])
+
+    if not model_path.exists():
+        raise FileNotFoundError(
+            f"Stage 2 model not found at {model_path.resolve()} — run train_stage2.py first."
+        )
+    if not prep_path.exists():
+        raise FileNotFoundError(
+            f"Stage 2 preprocessor not found at {prep_path.resolve()} — run train_stage2.py first."
+        )
+
+    model = joblib.load(model_path)
+    preprocessor = joblib.load(prep_path)
+    print(f"Loaded Stage 2 model ({type(model).__name__}) from {model_path}")
+    print(f"Loaded Stage 2 preprocessor from {prep_path}")
+    return model, preprocessor
+
+
+def save_pred_vs_actual(y_true: pd.Series, y_pred: np.ndarray, out_path: Path):
+    fig, ax = plt.subplots(figsize=(6.5, 6.5))
+    ax.scatter(y_true, y_pred, alpha=0.3, s=12)
+    lo = min(y_true.min(), y_pred.min())
+    hi = max(y_true.max(), y_pred.max())
+    ax.plot([lo, hi], [lo, hi], linestyle="--", color="red", label="Identity (perfect prediction)")
+    ax.set_xlabel("Actual Waitlist Position")
+    ax.set_ylabel("Predicted Waitlist Position")
+    ax.set_title("Stage 2 — Predicted vs Actual")
+    ax.legend()
+    fig.tight_layout()
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_path, dpi=150)
+    plt.close(fig)
+    print(f"Saved predicted-vs-actual plot -> {out_path}")
+
+
+def save_residuals_plot(y_true: pd.Series, y_pred: np.ndarray, out_path: Path):
+    residuals = np.asarray(y_true) - y_pred
+    fig, ax = plt.subplots(figsize=(7, 5))
+    ax.scatter(y_pred, residuals, alpha=0.3, s=12)
+    ax.axhline(0, color="red", linestyle="--")
+    ax.set_xlabel("Predicted Waitlist Position")
+    ax.set_ylabel("Residual (Actual - Predicted)")
+    ax.set_title("Stage 2 — Residuals vs Predicted")
+    fig.tight_layout()
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_path, dpi=150)
+    plt.close(fig)
+    print(f"Saved residuals plot -> {out_path}")
+
+
+def save_stage2_metrics_csv(rmse: float, mae: float, r2: float, out_path: Path):
+    metrics_df = pd.DataFrame([
+        {"metric": "RMSE", "value": rmse},
+        {"metric": "MAE", "value": mae},
+        {"metric": "R2", "value": r2},
+    ])
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    metrics_df.to_csv(out_path, index=False)
+    print(f"Saved Stage 2 metrics -> {out_path}")
+    return metrics_df
+
+
+def evaluate_stage2(cfg: dict):
+    model, preprocessor = load_stage2_artifacts(cfg)
+    X_test, y_test = load_stage2_test_split(cfg)
+
+    X_test_t = preprocessor.transform(X_test)
+    y_pred = model.predict(X_test_t)
+
+    rmse = float(np.sqrt(mean_squared_error(y_test, y_pred)))
+    mae = float(mean_absolute_error(y_test, y_pred))
+    r2 = float(r2_score(y_test, y_pred))
+
+    print(f"\n=== Stage 2 held-out test performance ({type(model).__name__}) ===")
+    print(f"Test RMSE: {rmse:.4f}")
+    print(f"Test MAE:  {mae:.4f}")
+    print(f"Test R2:   {r2:.4f}")
+
+    save_pred_vs_actual(y_test, y_pred, Path("reports/figures/pred_vs_actual_stage2.png"))
+    save_residuals_plot(y_test, y_pred, Path("reports/figures/residuals_stage2.png"))
+    save_stage2_metrics_csv(rmse, mae, r2, Path("reports/metrics/stage2_metrics.csv"))
+
+    log_experiment(
+        stage="2", model_name=f"{type(model).__name__}_evaluate_TEST",
+        test_metric_name="rmse", test_metric_value=rmse,
+    )
+    log_experiment(
+        stage="2", model_name=f"{type(model).__name__}_evaluate_TEST",
+        test_metric_name="r2", test_metric_value=r2,
+    )
+
+    print(f"\nStep 16 complete. Figures saved in reports/figures/, "
+          f"metrics in reports/metrics/stage2_metrics.csv.")
+
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
+
+def main():
+    cfg = load_config()
+    evaluate_stage1(cfg)
+    evaluate_stage2(cfg)
 
 
 if __name__ == "__main__":
