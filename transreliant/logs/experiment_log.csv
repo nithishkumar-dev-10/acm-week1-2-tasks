@@ -59,3 +59,35 @@
 2026-07-08T00:45:24,1,XGBClassifier_evaluate_TEST,,,,,roc_auc,0.50765
 2026-07-08T00:45:24,2,Ridge_evaluate_TEST,,,,,rmse,58.60044
 2026-07-08T00:45:24,2,Ridge_evaluate_TEST,,,,,r2,-0.00214
+2026-07-08T22:55:02,2,ridge,,rmse,58.24265,0.46677,,
+2026-07-08T22:56:57,2,rf,,rmse,58.77695,0.3463,,
+2026-07-08T22:56:58,2,xgb,,rmse,63.05479,0.74941,,
+2026-07-08T22:57:01,2,ridge_tuned,{'model__alpha': 100.0},rmse,58.12999,0.45946,,
+2026-07-08T22:57:01,2,ridge_tuned_TEST,,,,,rmse,58.60044
+2026-07-08T22:57:01,2,ridge_tuned_TEST,,,,,mae,51.1804
+2026-07-08T22:57:01,2,ridge_tuned_TEST,,,,,r2,-0.00214
+2026-07-08T23:50:39,1,logreg,,f1,0.57772,0.00626,,
+2026-07-08T23:50:39,1,logreg,,roc_auc,0.49946,0.00519,,
+2026-07-08T23:52:31,1,rf,,f1,0.74795,0.00463,,
+2026-07-08T23:52:31,1,rf,,roc_auc,0.49953,0.00581,,
+2026-07-08T23:52:34,1,xgb,,f1,0.64555,0.00987,,
+2026-07-08T23:52:34,1,xgb,,roc_auc,0.49995,0.00672,,
+2026-07-08T23:52:38,1,logreg_tuned,"{'model__solver': 'lbfgs', 'model__penalty': 'l2', 'model__C': 0.01}",roc_auc,0.49982,0.00597,,
+2026-07-08T23:52:38,1,logreg_tuned,"{'model__solver': 'lbfgs', 'model__penalty': 'l2', 'model__C': 0.01}",f1,0.57671,0.00659,,
+2026-07-08T23:55:08,1,rf_tuned,"{'model__n_estimators': 200, 'model__min_samples_leaf': 1, 'model__max_features': 'sqrt', 'model__max_depth': 4}",roc_auc,0.50385,0.00909,,
+2026-07-08T23:55:08,1,rf_tuned,"{'model__n_estimators': 200, 'model__min_samples_leaf': 1, 'model__max_features': 'sqrt', 'model__max_depth': 4}",f1,0.57967,0.0105,,
+2026-07-08T23:55:25,1,xgb_tuned,"{'model__subsample': 0.7, 'model__n_estimators': 600, 'model__max_depth': 5, 'model__learning_rate': 0.1, 'model__colsample_bytree': 0.85}",roc_auc,0.50471,0.0042,,
+2026-07-08T23:55:25,1,xgb_tuned,"{'model__subsample': 0.7, 'model__n_estimators': 600, 'model__max_depth': 5, 'model__learning_rate': 0.1, 'model__colsample_bytree': 0.85}",f1,0.65629,0.00559,,
+2026-07-08T23:55:25,1,xgb_tuned_TEST,,,,,roc_auc,0.50765
+2026-07-08T23:55:25,1,xgb_tuned_TEST,,,,,f1,0.64794
+2026-07-08T23:55:25,2,ridge,,rmse,58.24265,0.46677,,
+2026-07-08T23:57:20,2,rf,,rmse,58.77695,0.3463,,
+2026-07-08T23:57:21,2,xgb,,rmse,63.05479,0.74941,,
+2026-07-08T23:57:22,2,ridge_tuned,{'model__alpha': 100.0},rmse,58.12999,0.45946,,
+2026-07-08T23:57:22,2,ridge_tuned_TEST,,,,,rmse,58.60044
+2026-07-08T23:57:22,2,ridge_tuned_TEST,,,,,mae,51.1804
+2026-07-08T23:57:22,2,ridge_tuned_TEST,,,,,r2,-0.00214
+2026-07-08T23:57:22,1,XGBClassifier_threshold_selection,,,,,chosen_threshold,0.55
+2026-07-08T23:57:22,1,XGBClassifier_evaluate_TEST,,,,,roc_auc,0.50765
+2026-07-08T23:57:23,2,Ridge_evaluate_TEST,,,,,rmse,58.60044
+2026-07-08T23:57:23,2,Ridge_evaluate_TEST,,,,,r2,-0.00214

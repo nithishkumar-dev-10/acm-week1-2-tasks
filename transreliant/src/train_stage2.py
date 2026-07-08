@@ -17,9 +17,6 @@ from utils import log_experiment
 AAA_LOW_R2_THRESHOLD = 0.05  # below this, we flag rather than declare victory
 
 
-# ---------------------------------------------------------------------------
-# Step 14 — build + split the Stage 2 subset
-# ---------------------------------------------------------------------------
 
 def load_featured_data(cfg: dict) -> pd.DataFrame:
     path = Path(cfg["data"]["featured"])
@@ -84,9 +81,7 @@ def load_stage2_splits(cfg: dict):
     return X_train, X_test, y_train, y_test
 
 
-# ---------------------------------------------------------------------------
-# Step 15 — model comparison
-# ---------------------------------------------------------------------------
+
 
 def compare_models(X_train, y_train, cfg: dict) -> dict:
     """
@@ -130,9 +125,6 @@ def pick_best_baseline_model(results: dict) -> str:
     return best_name
 
 
-# ---------------------------------------------------------------------------
-# Step 15 — hyperparameter tuning of the winner
-# ---------------------------------------------------------------------------
 
 def get_search_space(model_name: str, cfg: dict) -> dict:
     """
@@ -256,9 +248,7 @@ def save_artifacts(best_pipe, cfg: dict):
     print(f"Saved Stage 2 model        -> {model_path}")
 
 
-# ---------------------------------------------------------------------------
-# Entry point — build subset -> split -> compare -> tune -> evaluate -> save
-# ---------------------------------------------------------------------------
+
 
 def main():
     cfg = load_config()
