@@ -1,4 +1,31 @@
+# run_pipeline.py
+"""
+Step 18 — single end-to-end runnable script.
+One command, empty artifacts/ folder -> trained artifacts + figures + metrics:
 
+    python run_pipeline.py
+
+Matches your ACTUAL src/ files rather than the roadmap's illustrative
+pseudocode:
+- train_stage1.main() already runs the full Step 10+11 sequence internally
+  (baseline compare -> tune on CV AUC -> evaluate on test -> save
+  preprocessor_stage1.pkl + stage1_classifier.pkl separately).
+- train_stage2.main() does the same for Step 14+15 (compare -> tune on
+  CV RMSE -> evaluate on test -> save preprocessor_stage2.pkl +
+  stage2_regressor.pkl).
+- evaluate.evaluate_stage1(cfg) / evaluate_stage2(cfg) then run Step 12
+  (threshold sweep, writes chosen threshold back into config.yaml) and
+  Step 13/16 (all confusion matrix / ROC / PR / feature-importance /
+  pred-vs-actual / residuals figures + metrics CSVs).
+
+NOTE on data_cleaning.py / feature_engineering.py: those two aren't
+wired in below because they weren't part of what you shared. This script
+currently assumes data/processed/featured.csv already exists (it must,
+since your Stage 1/2 training already ran off it through Step 16). If you
+have those two scripts with clean(df, cfg) / add_features(df) functions,
+uncomment the block marked TODO to make this a true empty-folder ->
+trained-artifacts run.
+"""
 import sys
 from pathlib import Path
 
@@ -48,11 +75,14 @@ def main():
     evaluate.evaluate_stage1(cfg)   # Steps 12+13
     evaluate.evaluate_stage2(cfg)   # Step 16
 
+    print("\n=== System-level (cascade) evaluation ===")
+    evaluate.evaluate_system(cfg)   # Step 20
+
     print(
         "\nPipeline complete.\n"
         "  Artifacts -> artifacts/models/\n"
         "  Figures   -> reports/figures/\n"
-        "  Metrics   -> reports/metrics/\n"
+        "  Metrics   -> reports/metrics/ (incl. system_metrics.csv)\n"
         "  Logs      -> logs/experiment_log.csv"
     )
 
