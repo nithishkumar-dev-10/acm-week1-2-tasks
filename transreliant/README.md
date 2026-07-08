@@ -43,7 +43,7 @@ Classification → Regression<br/>
 <br/>
 <b>📦 Dataset</b><br/>
 Indian Railway Tickets<br/>
-<code>20,045 rows</code>
+<code>30,000 rows · 22 cols</code>
 </td>
 <td align="center" width="25%" style="padding: 10px">
 <br/>
@@ -87,6 +87,7 @@ Ridge · RF · XGBoost<br/>
 - [Feature Engineering](#-feature-engineering)
 - [Cascade Design](#-cascade-design)
 - [Stage-Wise Evaluation](#-stage-wise-evaluation)
+- [Results](#-results)
 - [Threshold Optimization](#-threshold-optimization)
 - [Quickstart](#-quickstart)
 - [Configuration](#️-configuration)
@@ -110,6 +111,10 @@ TransReliant answers this with a two-stage system built on the Indian Railway ti
 - **Stage 2** runs only for passengers Stage 1 flags as **Not Confirmed**, and predicts their **Waitlist Position** — turning a binary outcome into a concrete reliability estimate.
 
 This gives users a single, data-driven answer to the question the problem statement raises: not just *will my ticket confirm*, but *if not, how bad will it be*.
+
+<div align="center">
+<img src="reports/figures/architecture.png" alt="TransReliant Cascade architecture diagram" width="90%"/>
+</div>
 
 ---
 
@@ -221,10 +226,10 @@ All statistics used for encoding/scaling are fit on the training split only and 
 
 ## 🧠 Cascade Design
 
-- **Stage 1 (Classification):** Predicts `Confirmation Status` from booking and journey features. Selected via cross-validated comparison of Logistic Regression, Random Forest, and XGBoost, then hyperparameter-tuned.
-- **Stage 2 (Regression):** Predicts `Waitlist Position` for the passengers who are actually not confirmed, trained on true labels rather than Stage 1's own predictions, so classification errors are never compounded into the regression target.
-- **Inference-time routing:** Stage 2 only executes for passengers Stage 1 flags as "Not Confirmed" — Stage 1's output decides whether Stage 2 runs at all.
-- **Independent preprocessing:** Each stage fits its own `ColumnTransformer`, since Stage 2 trains on a smaller, distributionally different subset.
+- **Stage 1 (Classification):** Predicts `Confirmation Status` from booking and journey features. Tuned via cross-validated comparison of Logistic Regression, Random Forest, and XGBoost, selected on ROC-AUC (not F1 — F1 is misleading here given the class imbalance), followed by hyperparameter search on the winner.
+- **Stage 2 (Regression):** Predicts `Waitlist Position` for passengers **actually** not confirmed in the training data — never on Stage 1's own predictions, to avoid compounding classification errors into the regression target.
+- **Inference-time routing:** Stage 2 only executes for passengers Stage 1 flags as "Not Confirmed." This is the literal cascade wiring — Stage 1's output decides *whether* Stage 2 runs, not what features it sees.
+- **Independent preprocessing:** Each stage fits its own `ColumnTransformer`, since Stage 2 trains on a smaller, distributionally different subset — sharing a fitted preprocessor across stages would leak Stage 1's population statistics into Stage 2.
 
 ---
 
@@ -238,11 +243,39 @@ All statistics used for encoding/scaling are fit on the training split only and 
 
 Every model comparison (Stage 1 and Stage 2) is logged run-by-run — not just the final winner — in [`logs/experiment_log.csv`](logs/experiment_log.csv).
 
+### 📈 Results
+
+*(Test set, n = 6,000. Source: `reports/metrics/stage1_metrics.csv`, `stage2_metrics.csv`. `system_metrics.csv` — coverage — not yet generated/uploaded.)*
+
+| Metric | Stage 1 (Classification) | Stage 2 (Regression) |
+|---|---|---|
+| Primary metric | ROC-AUC: **0.508** | RMSE: **58.60** |
+| Accuracy | 0.506 | — |
+| Precision / Recall (Not Confirmed) | 0.346 / 0.530 | — |
+| F1 (Not Confirmed) | 0.418 | — |
+| MAE | — | 51.18 |
+| R² | — | **-0.002** |
+| Coverage (% routed to Stage 2) | `TODO` — needs `system_metrics.csv` (test set is 33.5% "Not Confirmed" by actual label, n=2,011/6,000, but coverage should be measured off *predicted* routing at threshold 0.55, not the true label) | same |
+
+> ⚠️ **Honest finding:** Stage 1 ROC-AUC (0.508) is statistically indistinguishable
+> from a coin flip, and Stage 2 R² (-0.002) means the regressor performs
+> *slightly worse* than just predicting the mean waitlist position for every
+> passenger. The engineered features (`seat_pressure`, `booking_urgency_bucket`,
+> `route_length_per_stop`, `is_peak_or_holiday`) currently carry effectively no
+> predictive signal for either target in this dataset. This is a real, useful
+> result to report as-is — it validates that the cascade *architecture* (routing,
+> leakage-safe splits, independent preprocessing) is correctly wired end-to-end,
+> but it means the *feature set* does not yet explain confirmation status or
+> waitlist severity. The "Status: Completed ✅" banner above refers to the
+> pipeline being built and runnable, not to strong predictive performance —
+> that is the next problem to solve, likely via richer features (e.g. per-route
+> or per-train historical confirmation rates) rather than more model tuning.
+
 ---
 
 ## 🎯 Threshold Optimization
 
-The default 0.5 decision threshold is not used. Since a missed "Not Confirmed" passenger (someone blindsided with no waitlist estimate) is costlier than a false alarm (Stage 2 runs unnecessarily), the threshold is optimized for **recall on the "Not Confirmed" class**, subject to a minimum precision constraint, rather than for raw F1. The chosen threshold is stored in `config.yaml` — not hardcoded in source.
+The default 0.5 decision threshold is not used. Since a missed "Not Confirmed" passenger (someone blindsided with no waitlist estimate) is costlier than a false alarm (Stage 2 runs unnecessarily), the threshold is optimized for **recall on the "Not Confirmed" class**, subject to a minimum precision constraint, rather than for raw F1. The chosen threshold — **0.55** — is stored in `config.yaml`, not hardcoded in source.
 
 ---
 
@@ -292,9 +325,9 @@ Estimated Waitlist Pos. : 63 (out of ~200)
 | Setting | Value | Notes |
 |---|---|---|
 | Train/test split | 80% / 20% | `random_state=42`, stratified on Stage 1 target |
-| Model family, Stage 1 | Best of LR / RF / XGBoost | Selected by cross-validated F1 |
+| Model family, Stage 1 | Best of LR / RF / XGBoost | Selected by cross-validated ROC-AUC |
 | Model family, Stage 2 | Best of Ridge / RF / XGBoost | Selected by cross-validated RMSE |
-| Decision threshold | Tuned, stored in `config.yaml` | Optimized for recall on "Not Confirmed," subject to a precision floor |
+| Decision threshold | **0.55**, stored in `config.yaml` | Optimized for recall on "Not Confirmed," subject to a precision floor |
 | External data | None | All features derived from the single ticket confirmation dataset |
 
 ---
@@ -303,19 +336,33 @@ Estimated Waitlist Pos. : 63 (out of ~200)
 
 | Artifact | Path | Description |
 |---|---|---|
-| Stage 1 pipeline | `artifacts/models/stage1_classifier.pkl` | Preprocessor + tuned classifier, joblib-serialized |
-| Stage 2 pipeline | `artifacts/models/stage2_regressor.pkl` | Preprocessor + tuned regressor, joblib-serialized |
+| Stage 1 preprocessor | `artifacts/models/preprocessor_stage1.pkl` | Fitted `ColumnTransformer` for Stage 1, joblib-serialized |
+| Stage 1 classifier | `artifacts/models/stage1_classifier.pkl` | Tuned classifier, joblib-serialized |
+| Stage 2 preprocessor | `artifacts/models/preprocessor_stage2.pkl` | Fitted `ColumnTransformer` for Stage 2, joblib-serialized |
+| Stage 2 regressor | `artifacts/models/stage2_regressor.pkl` | Tuned regressor, joblib-serialized |
+
+Each stage saves its preprocessor and model as separate files — Stage 2 fits its own `ColumnTransformer` rather than reusing Stage 1's, so all four artifacts are required for prediction.
 
 **Using the saved cascade for prediction:**
 
 ```python
 import joblib
+from src.config_loader import load_config
 from src.pipeline import predict_cascade
 
-stage1_pipeline = joblib.load("artifacts/models/stage1_classifier.pkl")
-stage2_pipeline = joblib.load("artifacts/models/stage2_regressor.pkl")
+cfg = load_config("config.yaml")
 
-results = predict_cascade(new_bookings_df, stage1_pipeline, stage2_pipeline, threshold=0.40)
+preprocessor_stage1 = joblib.load("artifacts/models/preprocessor_stage1.pkl")
+stage1_model = joblib.load("artifacts/models/stage1_classifier.pkl")
+preprocessor_stage2 = joblib.load("artifacts/models/preprocessor_stage2.pkl")
+stage2_model = joblib.load("artifacts/models/stage2_regressor.pkl")
+
+results = predict_cascade(
+    new_bookings_df,
+    preprocessor_stage1, stage1_model,
+    preprocessor_stage2, stage2_model,
+    cfg,
+)
 # results["confirmation_prediction"], results["estimated_waitlist_position"]
 ```
 
@@ -329,7 +376,8 @@ results = predict_cascade(new_bookings_df, stage1_pipeline, stage2_pipeline, thr
 | Stage 1 Target | `Confirmation Status` (Confirmed / Not Confirmed) |
 | Stage 2 Target | `Waitlist Position` (1–200), Not-Confirmed subset only |
 | Records | 20,045 rows |
-| Dropped Columns | `Train Number` (near-unique ID), `PNR Number`, `Booking Channel` |
+| Dropped Columns | `Train Number` (near-unique ID), `PNR Number`, `Booking Channel`, `Current Status` |
+| Rejected Data | A separate 100-row delay dataset — no shared key with the ticket data and too small to train a reliable regressor |
 
 ---
 

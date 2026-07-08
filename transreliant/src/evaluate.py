@@ -1,4 +1,3 @@
-
 import csv
 from datetime import datetime
 from pathlib import Path
@@ -472,6 +471,147 @@ def evaluate_stage2(cfg: dict):
 
 
 # ---------------------------------------------------------------------------
+# Step 20 — overall system (cascade) evaluation
+# ---------------------------------------------------------------------------
+
+def _load_stage2_own_test_rmse(cfg: dict):
+    """
+    Best-effort read of Step 16's own-test-split RMSE from
+    reports/metrics/stage2_metrics.csv, for side-by-side comparison in
+    system_metrics.csv. Returns None if that file doesn't exist yet
+    (e.g. evaluate_system() called before evaluate_stage2()).
+    """
+    path = Path("reports/metrics/stage2_metrics.csv")
+    if not path.exists():
+        return None
+    df = pd.read_csv(path)
+    row = df[df["metric"] == "RMSE"]
+    if row.empty:
+        return None
+    return float(row["value"].iloc[0])
+
+
+def evaluate_system(cfg: dict):
+    """
+    Step 20 — evaluate the CASCADE AS A WHOLE over Stage 1's entire
+    held-out test set, not each model in isolation (that's Steps 13/16).
+
+    Re-derives the exact Stage 1 train/test split in-memory (same
+    feature_cols, test_size, stratify, random_state as
+    train_stage1.split_and_save_stage1) so the returned X_test/y_test
+    keep their original featured.csv index — the persisted
+    stage1_X_test.csv loses the index on save, so re-splitting in
+    memory is what lets us look up each row's true Waitlist Position
+    for the coverage/routing analysis below.
+    """
+    from train_stage1 import load_featured_data, split_and_save_stage1
+    from pipeline import load_cascade_artifacts, predict_cascade
+
+    df = load_featured_data(cfg)
+    _, X1_test, _, y1_test = split_and_save_stage1(df, cfg)
+
+    stage1_model, stage1_prep, stage2_model, stage2_prep, threshold = load_cascade_artifacts(cfg)
+
+    # ---- Run the full cascade over the entire Stage 1 test set ----
+    cascade_out = predict_cascade(
+        X1_test, stage1_model, stage1_prep, stage2_model, stage2_prep, threshold, cfg
+    )
+
+    y_pred = (cascade_out["confirmation_prediction"] == "Confirmed").astype(int)
+    y_pred.index = X1_test.index
+    # Reconstruct P(Confirmed) from the stored confidence (which is
+    # P(predicted class), not always P(Confirmed) directly).
+    proba_confirmed = np.where(
+        y_pred.values == 1,
+        cascade_out["confirmation_confidence"].values,
+        1 - cascade_out["confirmation_confidence"].values,
+    )
+
+    # ---- End-to-end classification metrics (system-level restatement of Step 13) ----
+    report = classification_report(
+        y1_test, y_pred, target_names=["Not Confirmed", "Confirmed"], output_dict=True, zero_division=0
+    )
+    system_auc = roc_auc_score(y1_test, proba_confirmed)
+
+    # ---- Coverage: % of test set where Stage 2 even fires ----
+    coverage = float((y_pred == 0).mean())
+
+    # ---- Stage 2 RMSE/MAE on the subset Stage 1 actually routed to it ----
+    # (actually-Not-Confirmed AND correctly flagged by Stage 1 — NOT the
+    # same population as Step 16's clean Stage-2-only test split.)
+    status_col = cfg["target"]["stage1"]
+    waitlist_col = cfg["target"]["stage2"]
+    actually_not_confirmed = (y1_test == 0)
+    correctly_routed = actually_not_confirmed & (y_pred == 0)
+    routed_idx = y1_test.index[correctly_routed]
+
+    if len(routed_idx) > 0:
+        actual_waitlist = df.loc[routed_idx, waitlist_col]
+        predicted_waitlist = cascade_out.loc[routed_idx, "estimated_waitlist_position"]
+        routed_rmse = float(np.sqrt(mean_squared_error(actual_waitlist, predicted_waitlist)))
+        routed_mae = float(mean_absolute_error(actual_waitlist, predicted_waitlist))
+    else:
+        routed_rmse, routed_mae = float("nan"), float("nan")
+        print("WARNING: Stage 1 correctly routed zero rows to Stage 2 in this test set — "
+              "routed-subset RMSE/MAE are undefined (NaN).")
+
+    own_test_rmse = _load_stage2_own_test_rmse(cfg)
+
+    print(f"\n=== Step 20: system-level (cascade) evaluation ===")
+    print(f"System AUC (Confirmed vs Not Confirmed): {system_auc:.4f}")
+    print(f"Coverage (% test set routed to Stage 2): {coverage:.4f}")
+    print(f"Stage 2 RMSE on Stage-1-routed subset: {routed_rmse:.4f}  (n={len(routed_idx)})")
+    if own_test_rmse is not None:
+        print(f"Stage 2 RMSE on its own clean test split (Step 16, for comparison): {own_test_rmse:.4f}")
+        print("Note: these two RMSE numbers differ because the routed-subset population "
+              "includes rows Stage 1 mis-flagged, while Step 16's split is ground-truth-clean.")
+
+    # ---- Save reports/metrics/system_metrics.csv ----
+    rows = []
+    for label, stats in report.items():
+        if label == "accuracy":
+            rows.append({"metric": "accuracy", "value": stats})
+        else:
+            rows.append({"metric": f"{label}_precision", "value": stats["precision"]})
+            rows.append({"metric": f"{label}_recall", "value": stats["recall"]})
+            rows.append({"metric": f"{label}_f1", "value": stats["f1-score"]})
+    rows.append({"metric": "system_roc_auc", "value": system_auc})
+    rows.append({"metric": "coverage_pct_routed_to_stage2", "value": coverage})
+    rows.append({"metric": "stage2_rmse_on_routed_subset", "value": routed_rmse})
+    rows.append({"metric": "stage2_mae_on_routed_subset", "value": routed_mae})
+    rows.append({"metric": "stage2_rmse_own_clean_test_split_step16", "value": own_test_rmse})
+    rows.append({"metric": "threshold_used", "value": threshold})
+    rows.append({"metric": "n_routed_to_stage2", "value": len(routed_idx)})
+
+    out_path = Path("reports/metrics/system_metrics.csv")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    pd.DataFrame(rows).to_csv(out_path, index=False)
+    print(f"Saved system-level metrics -> {out_path}")
+
+    log_experiment(
+        stage="system", model_name="cascade",
+        test_metric_name="system_roc_auc", test_metric_value=system_auc,
+    )
+    log_experiment(
+        stage="system", model_name="cascade",
+        test_metric_name="coverage_pct_routed_to_stage2", test_metric_value=coverage,
+    )
+    log_experiment(
+        stage="system", model_name="cascade",
+        test_metric_name="stage2_rmse_on_routed_subset", test_metric_value=routed_rmse,
+    )
+
+    print("Step 20 complete.\n")
+    return {
+        "system_auc": system_auc,
+        "coverage": coverage,
+        "routed_rmse": routed_rmse,
+        "routed_mae": routed_mae,
+        "own_test_rmse": own_test_rmse,
+    }
+
+
+# ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
 
@@ -479,6 +619,7 @@ def main():
     cfg = load_config()
     evaluate_stage1(cfg)
     evaluate_stage2(cfg)
+    evaluate_system(cfg)
 
 
 if __name__ == "__main__":
