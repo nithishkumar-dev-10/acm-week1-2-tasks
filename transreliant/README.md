@@ -243,35 +243,7 @@ All statistics used for encoding/scaling are fit on the training split only and 
 
 Every model comparison (Stage 1 and Stage 2) is logged run-by-run — not just the final winner — in [`logs/experiment_log.csv`](logs/experiment_log.csv).
 
-### 📈 Results
 
-*(Test set, n = 6,000. Source: `reports/metrics/stage1_metrics.csv`, `stage2_metrics.csv`. `system_metrics.csv` — coverage — not yet generated/uploaded.)*
-
-| Metric | Stage 1 (Classification) | Stage 2 (Regression) |
-|---|---|---|
-| Primary metric | ROC-AUC: **0.508** | RMSE: **58.60** |
-| Accuracy | 0.506 | — |
-| Precision / Recall (Not Confirmed) | 0.346 / 0.530 | — |
-| F1 (Not Confirmed) | 0.418 | — |
-| MAE | — | 51.18 |
-| R² | — | **-0.002** |
-| Coverage (% routed to Stage 2) | `TODO` — needs `system_metrics.csv` (test set is 33.5% "Not Confirmed" by actual label, n=2,011/6,000, but coverage should be measured off *predicted* routing at threshold 0.55, not the true label) | same |
-
-> ⚠️ **Honest finding:** Stage 1 ROC-AUC (0.508) is statistically indistinguishable
-> from a coin flip, and Stage 2 R² (-0.002) means the regressor performs
-> *slightly worse* than just predicting the mean waitlist position for every
-> passenger. The engineered features (`seat_pressure`, `booking_urgency_bucket`,
-> `route_length_per_stop`, `is_peak_or_holiday`) currently carry effectively no
-> predictive signal for either target in this dataset. This is a real, useful
-> result to report as-is — it validates that the cascade *architecture* (routing,
-> leakage-safe splits, independent preprocessing) is correctly wired end-to-end,
-> but it means the *feature set* does not yet explain confirmation status or
-> waitlist severity. The "Status: Completed ✅" banner above refers to the
-> pipeline being built and runnable, not to strong predictive performance —
-> that is the next problem to solve, likely via richer features (e.g. per-route
-> or per-train historical confirmation rates) rather than more model tuning.
-
----
 
 ## 🎯 Threshold Optimization
 
