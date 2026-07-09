@@ -5,7 +5,7 @@ from config_loader import load_config
 
 
 def load_raw_data(cfg: dict) -> pd.DataFrame:
-    """Load the raw ticket confirmation CSV."""
+    
     raw_path = Path(cfg["data"]["raw"])
     if not raw_path.exists():
         raise FileNotFoundError(f"Raw data not found at {raw_path.resolve()}")
@@ -16,7 +16,7 @@ def load_raw_data(cfg: dict) -> pd.DataFrame:
 
 
 def drop_leak_and_id_columns(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
-    """Drop columns listed in config.drop_columns (IDs + leakage)."""
+   
     cols_to_drop = [c for c in cfg["drop_columns"] if c in df.columns]
     missing = [c for c in cfg["drop_columns"] if c not in df.columns]
     if missing:
@@ -28,15 +28,7 @@ def drop_leak_and_id_columns(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
 
 
 def derive_date_features(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Parse Date of Journey / Booking Date into datetime, derive:
-      - journey_month
-      - journey_dayofweek
-      - days_before_journey = (journey_date - booking_date).days
-    Then drop the two raw date columns (they're not usable as model features directly).
-    These three derived columns are required by config.yaml -> features.numerical,
-    so this step MUST run before featured.csv / model training.
-    """
+  
     if "Date of Journey" not in df.columns or "Booking Date" not in df.columns:
         print("Warning: date columns not found, skipping date feature derivation.")
         return df
@@ -60,12 +52,7 @@ def derive_date_features(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def encode_targets(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
-    """
-    - Confirmation Status: text -> binary {Confirmed: 1, Not Confirmed: 0}
-    - Waitlist Position: strip 'WL' prefix, coerce to numeric.
-        * Confirmed rows (status == 1) with missing/0 WL -> 0 (legitimately not waitlisted)
-        * Not Confirmed rows with missing WL -> can't train Stage 2 without a label -> drop row
-    """
+
     status_col = cfg["target"]["stage1"]   # "Confirmation Status"
     wl_col = cfg["target"]["stage2"]        # "Waitlist Position"
 
@@ -97,23 +84,14 @@ def encode_targets(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
 
 
 def check_and_handle_nulls(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
-    """
-    Handle nulls column-by-column instead of blindly dropping rows.
-    - 'Special Considerations' nulls mean 'no special consideration' -> fill with 'None', don't drop.
-    - Any other unexpected nulls -> drop only those specific rows.
-    (Waitlist Position / Confirmation Status nulls are already resolved in encode_targets().)
-    """
+  
     null_counts = df.isnull().sum()
     nulls_present = null_counts[null_counts > 0]
     print("Null values found before targeted fill:")
     print(nulls_present if len(nulls_present) > 0 else "None")
 
     if "Special Considerations" in df.columns:
-        # IMPORTANT: don't fill with the literal string "None" — pandas' read_csv
-        # treats "None" as a default NA value, so it silently turns back into a
-        # null the moment cleaned.csv is saved and re-read (this was the actual
-        # bug before, not a broken fillna call). Use a sentinel that isn't in
-        # pandas' default na_values list instead.
+       
         df["Special Considerations"] = df["Special Considerations"].astype(object)
         df["Special Considerations"] = df["Special Considerations"].where(
             df["Special Considerations"].notna(), "No_Special_Consideration"
@@ -134,7 +112,7 @@ def check_and_handle_nulls(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
 
 
 def check_duplicates(df: pd.DataFrame) -> pd.DataFrame:
-    """Report and drop exact duplicate rows."""
+   
     dupe_count = df.duplicated().sum()
     if dupe_count > 0:
         print(f"Found {dupe_count} duplicate rows, dropping them.")
@@ -145,10 +123,7 @@ def check_duplicates(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def run_leakage_guardrails(df: pd.DataFrame, cfg: dict) -> None:
-    """
-    Permanent asserts proving no leakage / no broken targets made it past cleaning.
-    Keep these forever — they're what actually prove the claims in your report.
-    """
+    
     status_col = cfg["target"]["stage1"]
     wl_col = cfg["target"]["stage2"]
 
