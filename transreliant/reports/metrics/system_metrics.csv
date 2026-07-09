@@ -1,0 +1,21 @@
+metric,value
+Not Confirmed_precision,0.34554294975688815
+Not Confirmed_recall,0.5300845350571854
+Not Confirmed_f1,0.41836734693877553
+Confirmed_precision,0.6758147512864494
+Confirmed_recall,0.4938581098019554
+Confirmed_f1,0.570683661645423
+accuracy,0.506
+macro avg_precision,0.5106788505216688
+macro avg_recall,0.5119713224295704
+macro avg_f1,0.49452550429209924
+weighted avg_precision,0.5651186524737916
+weighted avg_recall,0.506
+weighted avg_f1,0.519632310166245
+system_roc_auc,0.507650202652022
+coverage_pct_routed_to_stage2,0.5141666666666667
+stage2_rmse_on_routed_subset,56.47493591401018
+stage2_mae_on_routed_subset,48.44277673545966
+stage2_rmse_own_clean_test_split_step16,58.60043921438989
+threshold_used,0.55
+n_routed_to_stage2,1066.0

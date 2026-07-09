@@ -1,25 +1,4 @@
-# src/train.py
-"""
-Stage 1 training pipeline — merges the former Step 10 (baseline model
-comparison, train_stage1.py) and Step 11 (hyperparameter tuning,
-tune_stage1.py) into a single script.
 
-IMPORTANT CONTEXT (read before trusting the numbers this script prints):
-Baseline comparison showed AUC ~0.50 for logreg/rf/xgb — i.e. no model
-could rank Confirmed vs Not-Confirmed better than a coin flip. A raw-data
-diagnostic (chi2 / correlation of every feature against Confirmation Status)
-confirmed every usable feature is statistically unrelated to the target.
-RF's high F1 in the baseline comparison was the class-imbalance trap: with
-66.5% positive class, leaning toward "Confirmed" buys F1 without any real
-discrimination.
-
-So the tuning stage selects on ROC-AUC, not F1 — AUC can't be gamed by
-class imbalance the way F1 can, so it's the honest metric here. Expect
-tuning to produce only marginal AUC movement around 0.50. That is the
-*correct* result given the data, not a bug in this script. If test AUC
-comes back meaningfully above ~0.52-0.53, treat it with suspicion (recheck
-for leakage) rather than celebrating it.
-"""
 import pandas as pd
 import numpy as np
 import joblib
@@ -43,10 +22,6 @@ from utils import log_experiment
 AAA_LOW_AUC_THRESHOLD = 0.55  # below this, we flag rather than declare victory
 
 
-# ---------------------------------------------------------------------------
-# Data loading / splitting
-# ---------------------------------------------------------------------------
-
 def load_featured_data(cfg: dict) -> pd.DataFrame:
     path = Path(cfg["data"]["featured"])
     if not path.exists():
@@ -57,11 +32,7 @@ def load_featured_data(cfg: dict) -> pd.DataFrame:
 
 
 def split_and_save_stage1(df: pd.DataFrame, cfg: dict):
-    """
-    Stratified 80/20 split on Confirmation Status (stratify because of the
-    class imbalance from EDA). Persist all 4 pieces to disk so no script
-    ever re-splits with a different seed downstream.
-    """
+   
     target_col = cfg["target"]["stage1"]
     numeric_cols = cfg["features"]["numerical"]
     categorical_cols = cfg["features"]["categorical"]
@@ -98,16 +69,9 @@ def load_stage1_splits(cfg: dict):
     return X_train, X_test, y_train, y_test
 
 
-# ---------------------------------------------------------------------------
-# Step 10 — baseline model comparison
-# ---------------------------------------------------------------------------
 
 def compare_models(X_train, y_train, cfg: dict) -> dict:
-    """
-    5-fold StratifiedKFold CV across LogReg / RandomForest / XGBoost.
-    Scored on F1 and ROC-AUC — not accuracy, because of class imbalance.
-    Every model's CV result gets logged regardless of who wins.
-    """
+    
     neg = (y_train == 0).sum()
     pos = (y_train == 1).sum()
     scale_pos_weight = neg / pos
@@ -155,16 +119,10 @@ def pick_best_baseline_model(results: dict) -> str:
     return best_name
 
 
-# ---------------------------------------------------------------------------
-# Step 11 — hyperparameter tuning
-# ---------------------------------------------------------------------------
+
 
 def get_search_spaces(cfg: dict, y_train: pd.Series) -> dict:
-    """
-    Modest grids — this dataset doesn't reward large search budgets (see
-    module docstring), so RandomizedSearchCV with n_iter capped keeps this
-    fast instead of burning time chasing noise.
-    """
+
     neg = (y_train == 0).sum()
     pos = (y_train == 1).sum()
     scale_pos_weight = neg / pos
@@ -271,9 +229,6 @@ def pick_best_tuned_model(results: dict) -> str:
     return best_name
 
 
-# ---------------------------------------------------------------------------
-# Evaluation / artifact saving
-# ---------------------------------------------------------------------------
 
 def evaluate_on_test(best_pipe, X_test, y_test, model_name: str):
     y_pred = best_pipe.predict(X_test)
@@ -326,9 +281,7 @@ def save_artifacts(best_pipe, cfg: dict):
     print(f"Saved tuned model        -> {model_path}")
 
 
-# ---------------------------------------------------------------------------
-# Entry point — baseline comparison -> tuning -> evaluation -> save
-# ---------------------------------------------------------------------------
+
 
 def main():
     cfg = load_config()

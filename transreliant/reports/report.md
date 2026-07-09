@@ -56,25 +56,40 @@ This section should embed 5–8 figures with 1–2 sentences each, e.g.:
 
 ## 4. Data Cleaning & Feature Engineering
 
-`[TODO — fill in the specific transformations from your Steps 6–7
-data_cleaning.py / feature_engineering.py]`
+**`seat_pressure`** — computed as `Number of Passengers / (Seat
+Availability + 1)`. The `+1` is purely a div-by-zero guard, not a
+correction for messy data — `Seat Availability` ranges 0–499 with no
+negative values. The feature is right-skewed as expected (most bookings
+have low pressure, a long tail of high-pressure ones), but group means
+between Confirmed and Not-Confirmed are nearly identical (0.078 vs 0.079),
+so separation is weak. It's kept anyway as the most logically-grounded
+engineered feature for Stage 1, without expecting it to carry the model
+on its own.
 
-Final feature set used by both stages (`config.yaml`):
+**`booking_urgency_bucket`** — binned from `days_before_journey` into
+`last_minute` / `short` / `planned` / `early`. In this dataset it's
+effectively a dead feature: `Date of Journey` is always exactly
+`Booking Date` + 244 days for all 30,000 rows (zero variance, confirmed
+in EDA), so every row falls into the same `early` bucket after binning.
+It one-hot-encodes into a single always-1 column that contributes nothing
+to either model. The binning logic itself isn't broken — there's simply
+no booking-lead-time variation in this dataset to bucket. Kept in the
+pipeline for structural completeness and to match what the assignment
+expects, with this limitation documented rather than silently dropped.
 
-**Categorical (9):** `Class of Travel`, `Quota`, `Source Station`,
-`Destination Station`, `Train Type`, `Special Considerations`,
-`Holiday or Peak Season`, `booking_urgency_bucket`, `Age of Passengers`
+**Why `Waitlist Position` is excluded from the Stage 2 feature set** — it
+is the Stage 2 *target*, not an input feature. Including it as a feature
+would be direct label leakage: the model would trivially learn to copy
+its own prediction target rather than learning any real relationship
+between booking/journey characteristics and waitlist severity.
 
-**Numerical (11):** `Number of Passengers`, `Travel Distance`,
-`Number of Stations`, `Travel Time`, `Seat Availability`,
-`journey_month`, `journey_dayofweek`, `days_before_journey`,
-`seat_pressure`, `route_length_per_stop`, `is_peak_or_holiday`
-
-Explain here specifically:
-- What `seat_pressure` represents and how it's computed
-- What `booking_urgency_bucket` represents and how it's computed
-- Why `Waitlist Position` is excluded from the Stage 2 feature set (it's
-  the target, not a feature, for that stage)
+Two other engineered features are also in the set: `route_length_per_stop`
+(`Travel Distance / (Number of Stations + 1)`) showed no separation with
+`Confirmation Status` either, but was kept mainly for Stage 2 on the
+chance route geography correlates with waitlist severity — untested.
+`is_peak_or_holiday` (binary flag from `Holiday or Peak Season`) showed
+negligible separation (~66.7% Confirmed regardless of the flag) but was
+cheap to keep.
 
 ## 5. Pipeline Architecture
 
@@ -177,23 +192,27 @@ failure (see Limitations).
 
 ## 8. System-Level Evaluation
 
-`[TODO — fill in the exact numbers printed by evaluate.evaluate_system()
-after you run the updated run_pipeline.py / evaluate.py — this section
-needs:]`
+Running the full cascade end-to-end over the Stage 1 test set (Step 20)
+gives:
 
-- **System ROC-AUC** (end-to-end, over the full Stage 1 test set):
-  `[value from reports/metrics/system_metrics.csv, key: system_roc_auc]`
-- **Coverage** — % of the test set actually routed to Stage 2:
-  `[value, key: coverage_pct_routed_to_stage2]`
-- **Stage 2 RMSE on the Stage-1-routed subset** (passengers Stage 1
-  actually flagged Not Confirmed — some correctly, some not) vs. **Stage
-  2's own clean test RMSE (58.6004, section 7)**:
-  `[value, key: stage2_rmse_on_routed_subset]`
+- **System ROC-AUC:** 0.5077 — matches Stage 1's own held-out AUC
+  (Section 6), as expected, since the end-to-end classification decision
+  is still Stage 1's.
+- **Coverage (% of test set routed to Stage 2):** 51.42% — well above the
+  dataset's true Not-Confirmed rate of 33.5%. This gap is a direct
+  consequence of the threshold=0.55 operating point: at that threshold,
+  precision on the Not-Confirmed class is only 0.3455 (Section 6), so
+  Stage 1 is routing a large number of actually-Confirmed passengers into
+  Stage 2 as false positives, inflating coverage well past the true
+  Not-Confirmed proportion.
+- **Stage 2 RMSE on the Stage-1-routed subset:** 56.4749 (n=1066), vs.
+  58.6004 on Stage 2's own ground-truth-clean test split (Section 7). The
+  routed-subset number is slightly *lower*, which is a bit counter-
+  intuitive given it includes Stage 1's misclassifications — but with both
+  numbers this close to the ~58 RMSE ceiling of a near-random model
+  (Section 7's R² ≈ -0.0021), this difference isn't meaningful signal, just
+  noise around a model that isn't predicting much of anything either way.
 
-These two Stage 2 RMSE numbers are expected to differ: Step 7's number is
-evaluated on Stage 2's own ground-truth-clean test split, while this
-number is evaluated on whichever rows Stage 1 actually routed to it —
-a population that can include rows Stage 1 mis-classified.
 
 ## 9. Justification for Multi-Model Design
 

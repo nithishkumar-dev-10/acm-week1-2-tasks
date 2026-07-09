@@ -57,8 +57,7 @@ def load_cascade_artifacts(cfg: dict):
 
 
 def main():
-    """Smoke test: load real artifacts and run the cascade on a few
-    held-out Stage 1 test rows, printing the result."""
+    
     cfg = load_config()
     stage1_model, stage1_prep, stage2_model, stage2_prep, threshold = load_cascade_artifacts(cfg)
 

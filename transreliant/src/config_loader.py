@@ -2,10 +2,7 @@ import yaml
 from pathlib import Path
 
 def load_config(config_path: str = "config.yaml") -> dict:
-    """
-    Loads config.yaml from project root and returns it as a dict.
-    Every other script imports this instead of hardcoding paths.
-    """
+    
     path = Path(config_path)
     if not path.exists():
         raise FileNotFoundError(f"Config file not found at {path.resolve()}")

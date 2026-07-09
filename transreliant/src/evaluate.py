@@ -35,8 +35,7 @@ except ImportError:
     def log_experiment(stage=None, model_name=None, params=None,
                         cv_metric_name=None, cv_metric_mean=None, cv_metric_std=None,
                         test_metric_name=None, test_metric_value=None, **kwargs):
-        """Fallback logger matching the schema in the roadmap (Step 21),
-        used only if src/utils.py isn't importable in this environment."""
+        
         log_path = Path("logs/experiment_log.csv")
         log_path.parent.mkdir(parents=True, exist_ok=True)
         is_new = not log_path.exists()
@@ -57,10 +56,6 @@ PRECISION_FLOOR = 0.6
 THRESHOLD_GRID = np.round(np.arange(0.10, 0.90 + 1e-9, 0.05), 2)
 
 
-# ---------------------------------------------------------------------------
-# Loading
-# ---------------------------------------------------------------------------
-
 def load_stage1_test_split(cfg: dict):
     splits_dir = Path(cfg["data"]["splits_dir"])
     X_test = pd.read_csv(splits_dir / "stage1_X_test.csv")
@@ -76,8 +71,7 @@ def load_stage1_train_split(cfg: dict):
 
 
 def _fallback_preprocessor(cfg: dict):
-    """Reproduces the Step 8 ColumnTransformer spec if preprocessing.py
-    isn't importable: numeric -> StandardScaler, categorical -> OneHotEncoder."""
+   
     from sklearn.compose import ColumnTransformer
     from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
@@ -90,16 +84,7 @@ def _fallback_preprocessor(cfg: dict):
 
 
 def load_stage1_artifacts(cfg: dict):
-    """
-    Load the tuned Stage 1 model and its fitted preprocessor.
 
-    If preprocessor_stage1.pkl isn't on disk (e.g. only the model artifact
-    was carried over), rebuild it deterministically by refitting on the
-    persisted train split with the Step 8 spec. Refitting on the exact same
-    train split reproduces the identical fitted transformer, since neither
-    StandardScaler nor OneHotEncoder involves randomness — so this is safe,
-    not an approximation.
-    """
     model_path = Path(cfg["artifacts"]["model_stage1"])
     prep_path = Path(cfg["artifacts"]["preprocessor_stage1"])
 
@@ -128,17 +113,10 @@ def load_stage1_artifacts(cfg: dict):
     return model, preprocessor
 
 
-# ---------------------------------------------------------------------------
-# Step 12 — threshold optimization
-# ---------------------------------------------------------------------------
+
 
 def sweep_thresholds(y_true: pd.Series, y_proba: np.ndarray) -> pd.DataFrame:
-    """
-    y_proba = P(Confirmed). A row is predicted Confirmed (1) if
-    y_proba >= t, else Not Confirmed (0). For each threshold, compute
-    precision/recall on the Not Confirmed class (0) — that's the class
-    the cost argument in Step 12 cares about catching.
-    """
+
     rows = []
     for t in THRESHOLD_GRID:
         y_pred = (y_proba >= t).astype(int)
@@ -149,14 +127,7 @@ def sweep_thresholds(y_true: pd.Series, y_proba: np.ndarray) -> pd.DataFrame:
 
 
 def pick_threshold(sweep_df: pd.DataFrame) -> float:
-    """
-    Among thresholds where precision(Not Confirmed) >= 0.6, pick the one
-    with the highest recall(Not Confirmed). If none clear the precision
-    floor, fall back to the threshold with the highest precision achieved
-    and print a warning — this can legitimately happen when Stage 1 has
-    close to no real signal (see module docstring), so don't be surprised
-    if the 0.6 floor isn't cleanly met.
-    """
+    
     MIN_USABLE_RECALL = 0.05  # below this, "meets the floor" is a near-empty-prediction artifact
 
     eligible = sweep_df[sweep_df["precision_not_confirmed"] >= PRECISION_FLOOR]
@@ -229,9 +200,6 @@ def write_threshold_to_config(threshold: float, config_path: str = "config.yaml"
     print(f"Wrote threshold={cfg_raw['threshold']} into {path}")
 
 
-# ---------------------------------------------------------------------------
-# Step 13 — Stage 1 evaluation
-# ---------------------------------------------------------------------------
 
 def save_confusion_matrix(y_true: pd.Series, y_pred: np.ndarray, out_path: Path):
     cm = confusion_matrix(y_true, y_pred, labels=[NOT_CONFIRMED, CONFIRMED])
@@ -318,9 +286,6 @@ def save_metrics_csv(y_true: pd.Series, y_pred: np.ndarray, y_proba: np.ndarray,
     return metrics_df
 
 
-# ---------------------------------------------------------------------------
-# Stage 1 entry point — Steps 12+13
-# ---------------------------------------------------------------------------
 
 def evaluate_stage1(cfg: dict):
     model, preprocessor = load_stage1_artifacts(cfg)
@@ -470,17 +435,10 @@ def evaluate_stage2(cfg: dict):
           f"metrics in reports/metrics/stage2_metrics.csv.")
 
 
-# ---------------------------------------------------------------------------
-# Step 20 — overall system (cascade) evaluation
-# ---------------------------------------------------------------------------
+
 
 def _load_stage2_own_test_rmse(cfg: dict):
-    """
-    Best-effort read of Step 16's own-test-split RMSE from
-    reports/metrics/stage2_metrics.csv, for side-by-side comparison in
-    system_metrics.csv. Returns None if that file doesn't exist yet
-    (e.g. evaluate_system() called before evaluate_stage2()).
-    """
+    
     path = Path("reports/metrics/stage2_metrics.csv")
     if not path.exists():
         return None
@@ -492,18 +450,7 @@ def _load_stage2_own_test_rmse(cfg: dict):
 
 
 def evaluate_system(cfg: dict):
-    """
-    Step 20 — evaluate the CASCADE AS A WHOLE over Stage 1's entire
-    held-out test set, not each model in isolation (that's Steps 13/16).
-
-    Re-derives the exact Stage 1 train/test split in-memory (same
-    feature_cols, test_size, stratify, random_state as
-    train_stage1.split_and_save_stage1) so the returned X_test/y_test
-    keep their original featured.csv index — the persisted
-    stage1_X_test.csv loses the index on save, so re-splitting in
-    memory is what lets us look up each row's true Waitlist Position
-    for the coverage/routing analysis below.
-    """
+    
     from train_stage1 import load_featured_data, split_and_save_stage1
     from pipeline import load_cascade_artifacts, predict_cascade
 
@@ -611,9 +558,7 @@ def evaluate_system(cfg: dict):
     }
 
 
-# ---------------------------------------------------------------------------
-# Entry point
-# ---------------------------------------------------------------------------
+
 
 def main():
     cfg = load_config()

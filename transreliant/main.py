@@ -69,8 +69,7 @@ def prompt_categorical(field: str, options: list) -> str:
 
 
 def collect_input(cfg: dict) -> dict:
-    """Prompt for the 6 key fields; category options pulled from featured.csv
-    so the CLI only ever offers values that actually exist in the data."""
+  
     featured_path = Path(cfg["data"]["featured"])
     df = pd.read_csv(featured_path)
 

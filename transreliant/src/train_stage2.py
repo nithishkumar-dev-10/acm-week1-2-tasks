@@ -28,10 +28,7 @@ def load_featured_data(cfg: dict) -> pd.DataFrame:
 
 
 def build_stage2_subset(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
-    """
-    Filter to GROUND-TRUTH Not-Confirmed rows only (see module docstring —
-    this is the single most important design decision in the cascade).
-    """
+    
     status_col = cfg["target"]["stage1"]  # "Confirmation Status"
     stage2_df = df[df[status_col] == 0].copy()
     print(f"Stage 2 subset: {stage2_df.shape[0]} genuinely Not-Confirmed rows "
@@ -40,11 +37,7 @@ def build_stage2_subset(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
 
 
 def split_and_save_stage2(stage2_df: pd.DataFrame, cfg: dict):
-    """
-    80/20 split on the Stage 2 subset. No stratification — Waitlist Position
-    is continuous. `Confirmation Status` is dropped from the feature set
-    (constant=0 in this subset, would look like a leak).
-    """
+    
     target_col = cfg["target"]["stage2"]  # "Waitlist Position"
     numeric_cols = cfg["features"]["numerical"]
     categorical_cols = cfg["features"]["categorical"]
@@ -84,12 +77,7 @@ def load_stage2_splits(cfg: dict):
 
 
 def compare_models(X_train, y_train, cfg: dict) -> dict:
-    """
-    5-fold CV across Ridge / RandomForestRegressor / XGBRegressor, scored on
-    RMSE (via neg_root_mean_squared_error — sklearn's cross_val_score always
-    maximizes, hence "neg"). Every model's CV result gets logged regardless
-    of who wins.
-    """
+    
     models = {
         "ridge": Ridge(random_state=cfg["random_seed"]),
         "rf": RandomForestRegressor(random_state=cfg["random_seed"]),
@@ -127,10 +115,7 @@ def pick_best_baseline_model(results: dict) -> str:
 
 
 def get_search_space(model_name: str, cfg: dict) -> dict:
-    """
-    Param grid per model. GridSearchCV runs only on whichever model won
-    compare_models() — no point tuning the losers.
-    """
+    
     spaces = {
         "ridge": {
             "estimator": Ridge(random_state=cfg["random_seed"]),
@@ -191,9 +176,6 @@ def tune_winner(winner_name: str, X_train, y_train, cfg: dict):
     return best_pipe, cv_rmse_mean, cv_rmse_std, search.best_params_
 
 
-# ---------------------------------------------------------------------------
-# Evaluation / artifact saving
-# ---------------------------------------------------------------------------
 
 def evaluate_on_test(best_pipe, X_test, y_test, model_name: str):
     y_pred = best_pipe.predict(X_test)

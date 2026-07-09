@@ -15,12 +15,7 @@ def log_experiment(
     test_metric_value: float = None,
     log_path: str = "logs/experiment_log.csv",
 ) -> None:
-    """
-    Append-only experiment log. Every cross_val_score call and every final
-    test evaluation calls this — one row per (stage, model, metric).
-    Never overwrites; this is the record that proves you compared
-    alternatives instead of just picking XGBoost by default.
-    """
+   
     log_file = Path(log_path)
     log_file.parent.mkdir(parents=True, exist_ok=True)
     file_exists = log_file.exists()
