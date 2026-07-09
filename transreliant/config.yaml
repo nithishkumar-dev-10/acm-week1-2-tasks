@@ -22,6 +22,7 @@ features:
   - Holiday or Peak Season
   - booking_urgency_bucket
   - Age of Passengers
+  - route_pair
   numerical:
   - Number of Passengers
   - Travel Distance
@@ -40,4 +41,4 @@ artifacts:
   model_stage1: artifacts/models/stage1_classifier.pkl
   model_stage2: artifacts/models/stage2_regressor.pkl
 random_seed: 42
-threshold: 0.55
+threshold: 0.6
