@@ -15,7 +15,7 @@ def log_experiment(
     test_metric_value: float = None,
     log_path: str = "logs/experiment_log.csv",
 ) -> None:
-   
+
     log_file = Path(log_path)
     log_file.parent.mkdir(parents=True, exist_ok=True)
     file_exists = log_file.exists()
@@ -38,4 +38,14 @@ def log_experiment(
             writer.writeheader()
         writer.writerow(row)
 
-    print(f"Logged: stage={stage}, model={model_name}, {cv_metric_name}={row['cv_metric_mean']}")
+    # BUG FIX: the old print always referenced cv_metric_name/cv_metric_mean, even when a
+    # call only logged a test metric (cv_metric_mean=None). That made the console output
+    # disagree with what was actually written to the CSV. This now prints whichever metric(s)
+    # were actually passed in, so console output always matches the logged row.
+    logged_parts = [f"stage={stage}", f"model={model_name}"]
+    if cv_metric_name and row["cv_metric_mean"] != "":
+        logged_parts.append(f"{cv_metric_name}={row['cv_metric_mean']}")
+    if test_metric_name and row["test_metric_value"] != "":
+        logged_parts.append(f"{test_metric_name}={row['test_metric_value']}")
+
+    print("Logged: " + ", ".join(logged_parts))

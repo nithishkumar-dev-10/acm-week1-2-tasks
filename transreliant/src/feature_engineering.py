@@ -47,6 +47,12 @@ def add_booking_urgency_bucket(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def add_route_pair(df: pd.DataFrame) -> pd.DataFrame:
+    df["route_pair"] = df["Source Station"] + "_" + df["Destination Station"]
+    print("Added route_pair.")
+    return df
+
+
 def sanity_check(df: pd.DataFrame) -> None:
     
     new_cols = ["is_peak_or_holiday", "seat_pressure", "route_length_per_stop", "booking_urgency_bucket"]
@@ -72,6 +78,7 @@ def add_features(df: pd.DataFrame) -> pd.DataFrame:
     df = add_seat_pressure(df)
     df = add_route_length_per_stop(df)
     df = add_booking_urgency_bucket(df)
+    df = add_route_pair(df)
     return df
 
 
