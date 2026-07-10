@@ -113,7 +113,7 @@ TransReliant answers this with a two-stage system built on the Indian Railway ti
 This gives users a single, data-driven answer to the question the problem statement raises: not just *will my ticket confirm*, but *if not, how bad will it be*.
 
 <div align="center">
-<img src="reports/figures/architecture.png" alt="TransReliant Cascade architecture diagram" width="90%"/>
+<img src="reports/figures/pipeline_arch.png" alt="TransReliant Cascade architecture diagram" width="90%"/>
 </div>
 
 ---
@@ -245,20 +245,20 @@ Every model comparison (Stage 1 and Stage 2) is logged run-by-run — not just t
 
 ### 📈 Results
 
-*(Test set, n = 6,000. Source: `reports/metrics/stage1_metrics.csv`, `stage2_metrics.csv`. `system_metrics.csv` — coverage — not yet generated/uploaded.)*
+*(Test set, n = 6,000. Source: `reports/metrics/stage1_metrics.csv`, `stage2_metrics.csv`, `system_metrics.csv`.)*
 
 | Metric | Stage 1 (Classification) | Stage 2 (Regression) |
 |---|---|---|
-| Primary metric | ROC-AUC: **0.508** | RMSE: **58.60** |
-| Accuracy | 0.506 | — |
-| Precision / Recall (Not Confirmed) | 0.346 / 0.530 | — |
-| F1 (Not Confirmed) | 0.418 | — |
-| MAE | — | 51.18 |
-| R² | — | **-0.002** |
-| Coverage (% routed to Stage 2) | `TODO` — needs `system_metrics.csv` (test set is 33.5% "Not Confirmed" by actual label, n=2,011/6,000, but coverage should be measured off *predicted* routing at threshold 0.55, not the true label) | same |
+| Primary metric | ROC-AUC: **0.499** | RMSE: **58.57** |
+| Accuracy | 0.421 | — |
+| Precision / Recall (Not Confirmed) | 0.339 / 0.764 | — |
+| F1 (Not Confirmed) | 0.469 | — |
+| MAE | — | 51.17 |
+| R² | — | **-0.001** |
+| Coverage (% routed to Stage 2) | 75.63% (n=1,536/6,000) | same |
 
-> ⚠️ **Honest finding:** Stage 1 ROC-AUC (0.508) is statistically indistinguishable
-> from a coin flip, and Stage 2 R² (-0.002) means the regressor performs
+> ⚠️ **Honest finding:** Stage 1 ROC-AUC (0.499) is statistically indistinguishable
+> from a coin flip, and Stage 2 R² (-0.001) means the regressor performs
 > *slightly worse* than just predicting the mean waitlist position for every
 > passenger. The engineered features (`seat_pressure`, `booking_urgency_bucket`,
 > `route_length_per_stop`, `is_peak_or_holiday`) currently carry effectively no
@@ -270,12 +270,17 @@ Every model comparison (Stage 1 and Stage 2) is logged run-by-run — not just t
 > pipeline being built and runnable, not to strong predictive performance —
 > that is the next problem to solve, likely via richer features (e.g. per-route
 > or per-train historical confirmation rates) rather than more model tuning.
+>
+> Note also that the Stage 2 winning model is currently a tuned
+> **RandomForestRegressor** — an earlier training run had selected Ridge,
+> but a retrain shifted the baseline CV ranking. See `reports/report.md`
+> §7 for details.
 
 ---
 
 ## 🎯 Threshold Optimization
 
-The default 0.5 decision threshold is not used. Since a missed "Not Confirmed" passenger (someone blindsided with no waitlist estimate) is costlier than a false alarm (Stage 2 runs unnecessarily), the threshold is optimized for **recall on the "Not Confirmed" class**, subject to a minimum precision constraint, rather than for raw F1. The chosen threshold — **0.55** — is stored in `config.yaml`, not hardcoded in source.
+The default 0.5 decision threshold is not used. Since a missed "Not Confirmed" passenger (someone blindsided with no waitlist estimate) is costlier than a false alarm (Stage 2 runs unnecessarily), the threshold is optimized for **recall on the "Not Confirmed" class**, subject to a minimum precision constraint, rather than for raw F1. The chosen threshold — **0.6** as of the current run — is stored in `config.yaml`, not hardcoded in source. (An earlier training run had landed on 0.55; retraining shifted the precision/recall trade-off slightly, moving the selected operating point.)
 
 ---
 
@@ -327,7 +332,7 @@ Estimated Waitlist Pos. : 63 (out of ~200)
 | Train/test split | 80% / 20% | `random_state=42`, stratified on Stage 1 target |
 | Model family, Stage 1 | Best of LR / RF / XGBoost | Selected by cross-validated ROC-AUC |
 | Model family, Stage 2 | Best of Ridge / RF / XGBoost | Selected by cross-validated RMSE |
-| Decision threshold | **0.55**, stored in `config.yaml` | Optimized for recall on "Not Confirmed," subject to a precision floor |
+| Decision threshold | **0.6**, stored in `config.yaml` | Optimized for recall on "Not Confirmed," subject to a precision floor |
 | External data | None | All features derived from the single ticket confirmation dataset |
 
 ---

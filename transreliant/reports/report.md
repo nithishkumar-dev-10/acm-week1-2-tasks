@@ -43,16 +43,36 @@ linking.
 
 ## 3. EDA Summary
 
-`[TODO — fill in from your Step 5 EDA notebook/script]`
+Findings below are drawn from `notebooks/eda.ipynb`:
 
-This section should embed 5–8 figures with 1–2 sentences each, e.g.:
-- Class balance of `Confirmation Status` (~66.5% Confirmed, per the training
-  split's class balance below)
-- Distribution of `Waitlist Position` (worth noting explicitly — see
-  Limitations, section 10)
-- Correlation heatmap of numeric features
-- Distributions of `Travel Distance`, `days_before_journey`, `Seat
-  Availability`
+- **Class balance:** `Confirmation Status` is imbalanced roughly 2:1 —
+  66.5% Confirmed, 33.5% Not Confirmed. This ruled out plain accuracy as
+  a Stage 1 metric in favor of ROC-AUC / F1 on the minority class.
+- **`Waitlist Position` distribution:** null for ~67% of rows (Confirmed
+  passengers legitimately have no waitlist number). On the genuinely
+  Not-Confirmed subset (10,053 rows), it's close to uniform across
+  1–200 (mean ≈ 99.4, median = 100, std ≈ 58.0) rather than concentrated
+  near 1 the way a real queue would be — this foreshadows Stage 2's
+  near-zero R² (Section 7).
+- **`days_before_journey` is a constant.** `Date of Journey` equals
+  `Booking Date` + 244 days for all 30,000 rows with zero exceptions.
+  This makes `days_before_journey` zero-variance (correlation with the
+  target undefined) and collapses `booking_urgency_bucket` into a single
+  "early" category for every row — both are dead features in this
+  dataset, not just weak ones.
+- **Correlation check:** every remaining numeric feature (`Seat
+  Availability`, `Travel Distance`, `Number of Stations`, `Travel Time`,
+  `Number of Passengers`, `journey_month`, `journey_dayofweek`) has
+  |r| < 0.01 with `Confirmation Status`. This is the concrete root cause
+  behind Stage 1's chance-level AUC (Section 6), not a modeling gap.
+- **`Current Status` is a leakage column** — it maps perfectly onto
+  `Confirmation Status` (Waitlisted → always Not Confirmed; RAC/Confirmed
+  → always Confirmed), which is why it's dropped rather than engineered.
+- **`Train Number`** (25,553 unique / 30,000 rows) and **`PNR Number`**
+  (unique per row) are ID-like with no generalizable signal — dropped.
+- **`Age of Passengers`**, **`Holiday or Peak Season`**, and **`Booking
+  Channel`** are all roughly even categorical splits with no standout
+  skew.
 
 ## 4. Data Cleaning & Feature Engineering
 
@@ -93,7 +113,7 @@ cheap to keep.
 
 ## 5. Pipeline Architecture
 
-![Pipeline Architecture](figures/pipeline_architecture.png)
+![Pipeline Architecture](figures/pipeline_arch.png)
 
 The cascade is **routing-based**, not feature-passing: Model 1's output is
 a routing decision (does this row go to Model 2 at all?), not a feature
@@ -112,11 +132,11 @@ balance 66.5% Confirmed.
 
 | Model | F1 | ROC-AUC |
 |---|---|---|
-| Logistic Regression | 0.5777 (±0.0063) | 0.4995 (±0.0052) |
-| Random Forest | 0.7479 (±0.0046) | 0.4995 (±0.0058) |
-| XGBoost | 0.6456 (±0.0099) | 0.4999 (±0.0067) |
+| Logistic Regression | 0.5904 (±0.0082) | 0.5054 (±0.0052) |
+| Random Forest | 0.7489 (±0.0035) | 0.5041 (±0.0046) |
+| XGBoost | 0.6121 (±0.0104) | 0.5072 (±0.0091) |
 
-Note Random Forest's high F1 despite AUC at chance level — this is the
+Note Random Forest's high F1 despite AUC near chance level — this is the
 class-imbalance trap: with 66.5% positive class, leaning toward
 "Confirmed" buys F1 without any real discrimination. Model selection was
 therefore done on **ROC-AUC**, not F1, since AUC can't be gamed by class
@@ -126,29 +146,33 @@ imbalance the same way.
 
 | Model | CV AUC | CV F1 |
 |---|---|---|
-| Random Forest (tuned) | 0.5038 (±0.0091) | 0.5797 (±0.0105) |
-| XGBoost (tuned) | 0.5047 (±0.0042) | 0.5663 (±0.0056) |
+| Logistic Regression (tuned) | 0.5054 (±0.0054) | 0.5898 (±0.0087) |
+| Random Forest (tuned) | 0.5070 (±0.0065) | 0.5875 (±0.0155) |
+| XGBoost (tuned) | 0.5070 (±0.0039) | 0.6398 (±0.0056) |
 
-**Selected model: XGBoost** (best tuned CV AUC = 0.5047).
+**Selected model: XGBoost** (best tuned CV AUC = 0.5070, narrowly ahead of
+Random Forest at 0.5070 — tie broken by XGBoost's higher CV F1).
 
 **Held-out test performance:**
-- Test F1: 0.6479
-- Test AUC: 0.5077
-- Confusion matrix: `[[754, 1257], [1475, 2514]]`
+- Test F1 (default 0.5 threshold): 0.6354
+- Test AUC: 0.4992
+- Confusion matrix at the selected operating threshold (0.6): `[[1536, 475], [3002, 987]]`
 
 | Class | Precision | Recall | F1 | Support |
 |---|---|---|---|---|
-| Not Confirmed (0) | 0.34 | 0.37 | 0.36 | 2011 |
-| Confirmed (1) | 0.67 | 0.63 | 0.65 | 3989 |
+| Not Confirmed (0) | 0.34 | 0.76 | 0.47 | 2011 |
+| Confirmed (1) | 0.68 | 0.25 | 0.36 | 3989 |
+| **Accuracy** | | | **0.4205** | 6000 |
 
-**Threshold selection (Step 12):** a precision floor of 0.6 on the
-Not-Confirmed class was only clearable in a degenerate, near-empty
-prediction region (threshold 0.10, recall ≈ 0.0005 — technically meets the
-floor by predicting almost nobody as Not Confirmed). The pipeline
-correctly falls back to the best non-degenerate precision/recall
-trade-off: **threshold = 0.55** (precision = 0.3455, recall = 0.5301).
+**Threshold selection (Step 12):** the same precision-floor selection
+logic from Step 12 was re-run against the retrained models. The fallback
+landed on **threshold = 0.6** this run (precision = 0.3385, recall =
+0.7638) rather than the 0.55 seen in an earlier training run — retraining
+shifted the precision/recall trade-off slightly, so the non-degenerate
+operating point moved with it. `config.yaml` reflects the current value
+(0.6).
 
-**Finding:** Test AUC (0.5077) is at/near random chance (0.50). This
+**Finding:** Test AUC (0.4992) is at/near random chance (0.50). This
 matches a raw-data audit showing no available feature is statistically
 related to `Confirmation Status`. This is treated as a **dataset finding**,
 not a modeling failure — see Limitations (section 10).
@@ -167,20 +191,36 @@ not a modeling failure — see Limitations (section 10).
 
 | Model | CV RMSE |
 |---|---|
-| Ridge | 58.2427 (±0.4668) |
+| Ridge | 60.0509 (±0.6108) |
+| Random Forest | 58.9017 (±0.2779) |
+| XGBoost | 60.7462 (±1.0067) |
 
-`[TODO — fill in RandomForestRegressor and XGBRegressor CV RMSE from your
-run — these were cut off in the terminal capture used to draft this
-report]`
+**Selected model: Random Forest** (lowest baseline CV RMSE among the
+three compared).
 
-**Selected model: Ridge** (best CV RMSE among the three compared).
+> **Note on model selection:** an earlier training run selected **Ridge**
+> as the Stage 2 winner (CV RMSE ≈ 58.24 at the time). On this retrained
+> run, Random Forest came out ahead at the baseline stage and was carried
+> through tuning instead. This is a legitimate re-run outcome — CV scores
+> for near-random targets sit close enough together that small changes in
+> resampling can flip the ranking — but it means `artifacts/models/
+> stage2_regressor.pkl` is now a tuned `RandomForestRegressor`, not
+> `Ridge`. Anyone loading that artifact directly should expect that type.
+
+**Tuned model (RandomizedSearchCV):**
+
+| Model | CV RMSE |
+|---|---|
+| Random Forest (tuned) | 57.8775 (±0.4366) |
+
+Best params: `max_depth=3, min_samples_leaf=1, n_estimators=600`.
 
 **Held-out test performance:**
-- Test RMSE: 58.6004
-- Test MAE: 51.1804
-- Test R²: -0.0021
+- Test RMSE: 58.5685
+- Test MAE: 51.1669
+- Test R²: -0.0010
 
-**Finding:** Test R² (-0.0021) is at/near zero — the model explains almost
+**Finding:** Test R² (-0.0010) is at/near zero — the model explains almost
 none of the variance in `Waitlist Position`. This lines up with the EDA
 observation that `Waitlist Position` looks close to uniformly distributed
 across 1–200 rather than driven by booking/journey features the way a real
@@ -195,22 +235,25 @@ failure (see Limitations).
 Running the full cascade end-to-end over the Stage 1 test set (Step 20)
 gives:
 
-- **System ROC-AUC:** 0.5077 — matches Stage 1's own held-out AUC
+- **System ROC-AUC:** 0.4992 — matches Stage 1's own held-out AUC
   (Section 6), as expected, since the end-to-end classification decision
   is still Stage 1's.
-- **Coverage (% of test set routed to Stage 2):** 51.42% — well above the
-  dataset's true Not-Confirmed rate of 33.5%. This gap is a direct
-  consequence of the threshold=0.55 operating point: at that threshold,
-  precision on the Not-Confirmed class is only 0.3455 (Section 6), so
-  Stage 1 is routing a large number of actually-Confirmed passengers into
-  Stage 2 as false positives, inflating coverage well past the true
-  Not-Confirmed proportion.
-- **Stage 2 RMSE on the Stage-1-routed subset:** 56.4749 (n=1066), vs.
-  58.6004 on Stage 2's own ground-truth-clean test split (Section 7). The
+- **Coverage (% of test set routed to Stage 2):** 75.63% (n=1,536 of
+  6,000) — well above the dataset's true Not-Confirmed rate of 33.5%.
+  This gap is a direct consequence of the threshold=0.6 operating point:
+  at that threshold, precision on the Not-Confirmed class is only 0.3385
+  (Section 6), so Stage 1 is routing a large number of actually-Confirmed
+  passengers into Stage 2 as false positives, inflating coverage well past
+  the true Not-Confirmed proportion. This gap is larger than the 51.42%
+  coverage seen on the earlier 0.55-threshold run — a direct effect of the
+  new threshold's much higher Not-Confirmed recall (0.7638 vs. the earlier
+  run's 0.5301) pulling more passengers into Stage 2.
+- **Stage 2 RMSE on the Stage-1-routed subset:** 57.4637 (n=1,536), vs.
+  58.5685 on Stage 2's own ground-truth-clean test split (Section 7). The
   routed-subset number is slightly *lower*, which is a bit counter-
   intuitive given it includes Stage 1's misclassifications — but with both
   numbers this close to the ~58 RMSE ceiling of a near-random model
-  (Section 7's R² ≈ -0.0021), this difference isn't meaningful signal, just
+  (Section 7's R² ≈ -0.0010), this difference isn't meaningful signal, just
   noise around a model that isn't predicting much of anything either way.
 
 
@@ -236,25 +279,3 @@ fundamentally different problem types:
   decide "does this row even need a Model 2 prediction," not just to
   produce a feature for Model 2 to consume.
 
-## 10. Limitations
-
-- **`Waitlist Position` looks synthetic.** Its near-uniform distribution
-  across 1–200 (Section 3/7) doesn't resemble real waitlist clearing
-  dynamics, where position should correlate with booking timing, seat
-  availability, and demand. This likely explains Stage 2's near-zero R².
-- **`Confirmation Status` shows no real signal from available features.**
-  Both baseline and tuned Stage 1 models plateau at AUC ≈ 0.50 (random
-  chance) regardless of algorithm or tuning. A raw-data audit (chi²/
-  correlation of every feature against the target) confirms this — it is
-  a property of the dataset, not a fixable modeling gap.
-- **Threshold selection is degenerate at one end.** The only threshold
-  that technically clears the intended precision ≥ 0.6 floor
-  (Section 6/Step 12) does so only by predicting "Not Confirmed" for
-  almost no one (recall ≈ 0.0005). The pipeline documents this and falls
-  back to the best non-degenerate trade-off (threshold = 0.55) rather than
-  reporting a misleading "precision floor met" result.
-- **Training Stage 2 on ground-truth vs. predicted routing.** Stage 2 is
-  *trained* on the ground-truth Not-Confirmed subset (no leakage into
-  Stage 1), but at *inference* time it only ever receives rows Stage 1
-  predicts as Not Confirmed — a documented, deliberate design choice (see
-  Section 8 for how this affects the reported RMSE).
