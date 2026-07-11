@@ -15,7 +15,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score, roc_auc_score, confusion_matrix, classification_report
 from xgboost import XGBClassifier
 
-from config_loader import load_config
+from config_loader import load_config, get_path
 from preprocessing import build_stage1_preprocessor
 from utils import log_experiment
 
@@ -23,7 +23,7 @@ AAA_LOW_AUC_THRESHOLD = 0.55  # below this, we flag rather than declare victory
 
 
 def load_featured_data(cfg: dict) -> pd.DataFrame:
-    path = Path(cfg["data"]["featured"])
+    path = Path(get_path(cfg, "data", "featured"))
     if not path.exists():
         raise FileNotFoundError(f"Featured data not found at {path.resolve()} — run feature_engineering.py first.")
     df = pd.read_csv(path)

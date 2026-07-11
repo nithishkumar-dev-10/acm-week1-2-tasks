@@ -1,4 +1,3 @@
-
 import sys
 from pathlib import Path
 
@@ -6,7 +5,7 @@ sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 import pandas as pd
 
-from config_loader import load_config
+from config_loader import load_config, get_path
 from pipeline import load_cascade_artifacts, predict_cascade
 
 
@@ -24,7 +23,7 @@ KEY_CATEGORICAL_FIELDS = [
 
 def compute_defaults(cfg: dict) -> dict:
 
-    featured_path = Path(cfg["data"]["featured"])
+    featured_path = Path(get_path(cfg, "data", "featured"))
     if not featured_path.exists():
         raise FileNotFoundError(
             f"{featured_path} not found — run run_pipeline.py at least once first."
@@ -70,7 +69,7 @@ def prompt_categorical(field: str, options: list) -> str:
 
 def collect_input(cfg: dict) -> dict:
   
-    featured_path = Path(cfg["data"]["featured"])
+    featured_path = Path(get_path(cfg, "data", "featured"))
     df = pd.read_csv(featured_path)
 
     print("Enter passenger booking details (press Ctrl+C to quit):\n")

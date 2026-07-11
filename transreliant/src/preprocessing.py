@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from config_loader import load_config
+from config_loader import load_config, get_path
 
 
 def get_feature_lists(cfg: dict) -> tuple[list, list]:
@@ -40,7 +40,7 @@ def build_stage2_preprocessor(cfg: dict) -> ColumnTransformer:
 
 def sanity_check_columns(cfg: dict) -> None:
  
-    featured_path = Path(cfg["data"]["featured"])
+    featured_path = Path(get_path(cfg, "data", "featured"))
     if not featured_path.exists():
         raise FileNotFoundError(f"Featured data not found at {featured_path.resolve()} — run feature_engineering.py first.")
 

@@ -10,7 +10,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from xgboost import XGBRegressor
 
-from config_loader import load_config
+from config_loader import load_config, get_path
 from preprocessing import build_stage2_preprocessor
 from utils import log_experiment
 
@@ -19,7 +19,7 @@ AAA_LOW_R2_THRESHOLD = 0.05  # below this, we flag rather than declare victory
 
 
 def load_featured_data(cfg: dict) -> pd.DataFrame:
-    path = Path(cfg["data"]["featured"])
+    path = Path(get_path(cfg, "data", "featured"))
     if not path.exists():
         raise FileNotFoundError(f"Featured data not found at {path.resolve()} — run feature_engineering.py first.")
     df = pd.read_csv(path)

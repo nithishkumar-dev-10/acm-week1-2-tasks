@@ -1,12 +1,12 @@
 import pandas as pd
 import numpy as np
 from pathlib import Path
-from config_loader import load_config
+from config_loader import load_config, get_path
 
 
 def load_raw_data(cfg: dict) -> pd.DataFrame:
     
-    raw_path = Path(cfg["data"]["raw"])
+    raw_path = Path(get_path(cfg, "data", "raw"))
     if not raw_path.exists():
         raise FileNotFoundError(f"Raw data not found at {raw_path.resolve()}")
     df = pd.read_csv(raw_path)
@@ -136,7 +136,7 @@ def run_leakage_guardrails(df: pd.DataFrame, cfg: dict) -> None:
 
 def save_cleaned_data(df: pd.DataFrame, cfg: dict) -> None:
     """Save cleaned dataframe to the processed data path."""
-    out_path = Path(cfg["data"]["cleaned"])
+    out_path = Path(get_path(cfg, "data", "cleaned"))
     out_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(out_path, index=False)
     print(f"Saved cleaned data to {out_path} — final shape: {df.shape}")

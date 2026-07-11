@@ -1,7 +1,15 @@
+mode: full
+sample_size: 500
 data:
-  raw: data/raw/ticket_confirmation.csv
-  cleaned: data/processed/cleaned.csv
-  featured: data/processed/featured.csv
+  raw:
+    sample: data/raw/ticket_confirmation_sample.csv
+    full: data/raw/ticket_confirmation.csv
+  cleaned:
+    sample: data/processed/cleaned_sample.csv
+    full: data/processed/cleaned.csv
+  featured:
+    sample: data/processed/featured_sample.csv
+    full: data/processed/featured.csv
   splits_dir: data/processed/splits/
 target:
   stage1: Confirmation Status

@@ -2,12 +2,12 @@
 import pandas as pd
 import numpy as np
 from pathlib import Path
-from config_loader import load_config
+from config_loader import load_config, get_path
 
 
 def load_cleaned_data(cfg: dict) -> pd.DataFrame:
  
-    cleaned_path = Path(cfg["data"]["cleaned"])
+    cleaned_path = Path(get_path(cfg, "data", "cleaned"))
     if not cleaned_path.exists():
         raise FileNotFoundError(f"Cleaned data not found at {cleaned_path.resolve()} — run data_cleaning.py first.")
     df = pd.read_csv(cleaned_path)
@@ -66,7 +66,7 @@ def sanity_check(df: pd.DataFrame) -> None:
 
 
 def save_featured_data(df: pd.DataFrame, cfg: dict) -> None:
-    out_path = Path(cfg["data"]["featured"])
+    out_path = Path(get_path(cfg, "data", "featured"))
     out_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(out_path, index=False)
     print(f"Saved featured data to {out_path} — final shape: {df.shape}")

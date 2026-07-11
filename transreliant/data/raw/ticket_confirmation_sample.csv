@@ -1,0 +1,501 @@
+PNR Number,Train Number,Date of Journey,Class of Travel,Quota,Source Station,Destination Station,Booking Date,Current Status,Number of Passengers,Age of Passengers,Booking Channel,Travel Distance,Number of Stations,Travel Time,Train Type,Seat Availability,Special Considerations,Holiday or Peak Season,Waitlist Position,Confirmation Status
+PNR0000002308,46069,2030-12-27,Sleeper,General,NJP,SBC,2030-04-27,RAC,3,Child,Mobile App,632,5,30,Shatabdi,312,Senior Citizen,No,,Confirmed
+PNR0000022404,31179,2086-01-03,Sleeper,Tatkal,JU,JP,2085-05-04,Confirmed,1,Senior Citizen,IRCTC Website,1609,19,12,Shatabdi,324,Senior Citizen,Yes,,Confirmed
+PNR0000023397,64582,2088-09-22,Sleeper,General,ADI,UMB,2088-01-22,Confirmed,4,Adult,Counter,1057,17,3,Rajdhani,66,,Yes,,Confirmed
+PNR0000025058,68898,2093-04-10,1AC,Premium Tatkal,SBC,JU,2092-08-09,Waitlisted,1,Senior Citizen,Counter,1548,12,17,Express,221,,No,WL034,Not Confirmed
+PNR0000002664,70354,2031-12-18,Sleeper,Premium Tatkal,ADI,ADI,2031-04-18,Waitlisted,5,Adult,IRCTC Website,1765,16,40,Superfast,41,Defense Quota,No,WL002,Not Confirmed
+PNR0000008511,76434,2047-12-21,2AC,Ladies,ASR,SC,2047-04-21,RAC,5,Child,Mobile App,173,16,5,Superfast,158,Defense Quota,No,,Confirmed
+PNR0000005148,13602,2038-10-06,1AC,General,JHS,CNB,2038-02-04,RAC,1,Child,Mobile App,1677,16,8,Superfast,446,,Yes,,Confirmed
+PNR0000007790,66541,2045-12-30,Sleeper,General,UMB,ADI,2045-04-30,RAC,1,Adult,Counter,1265,2,43,Shatabdi,212,Defense Quota,No,,Confirmed
+PNR0000011311,15365,2055-08-21,1AC,Ladies,SC,MMCT,2054-12-20,Confirmed,5,Adult,IRCTC Website,1437,9,36,Superfast,21,Defense Quota,No,,Confirmed
+PNR0000019043,42667,2076-10-21,3AC,Ladies,BCT,SBC,2076-02-20,RAC,4,Senior Citizen,IRCTC Website,1051,10,12,Superfast,316,Senior Citizen,No,,Confirmed
+PNR0000010784,55618,2054-03-12,1AC,Ladies,NJP,JP,2053-07-11,RAC,2,Adult,Mobile App,1787,12,45,Rajdhani,420,Senior Citizen,No,,Confirmed
+PNR0000022246,86068,2085-07-29,Sleeper,Premium Tatkal,JU,BSB,2084-11-27,Confirmed,1,Adult,Counter,1918,16,11,Superfast,335,Defense Quota,Yes,,Confirmed
+PNR0000003268,40795,2033-08-13,Sleeper,Premium Tatkal,MMCT,SC,2032-12-12,Waitlisted,5,Child,IRCTC Website,1497,4,15,Shatabdi,54,,Yes,WL140,Not Confirmed
+PNR0000015947,46403,2068-04-30,1AC,Ladies,SC,LTT,2067-08-30,Confirmed,2,Senior Citizen,Counter,1262,11,42,Rajdhani,78,Defense Quota,Yes,,Confirmed
+PNR0000014977,14716,2065-09-03,Sleeper,Premium Tatkal,KOAA,BBS,2065-01-02,Confirmed,2,Senior Citizen,Counter,1638,17,16,Shatabdi,286,Defense Quota,No,,Confirmed
+PNR0000014474,88394,2064-04-18,1AC,Ladies,ADI,BSB,2063-08-18,RAC,4,Child,Counter,728,16,23,Shatabdi,8,Defense Quota,No,,Confirmed
+PNR0000028694,40869,2103-03-26,1AC,General,BBS,CSMT,2102-07-25,Waitlisted,3,Child,Counter,673,14,36,Rajdhani,83,Defense Quota,Yes,WL128,Not Confirmed
+PNR0000014054,55206,2063-02-23,2AC,Tatkal,MAS,SC,2062-06-24,Waitlisted,1,Senior Citizen,IRCTC Website,1611,2,32,Shatabdi,263,,Yes,WL190,Not Confirmed
+PNR0000026545,25716,2097-05-06,3AC,Premium Tatkal,BCT,GKP,2096-09-04,Waitlisted,4,Child,Counter,399,2,35,Express,88,,No,WL097,Not Confirmed
+PNR0000014980,59452,2065-09-06,Sleeper,Premium Tatkal,UMB,ADI,2065-01-05,RAC,5,Senior Citizen,IRCTC Website,1774,2,3,Shatabdi,239,Defense Quota,Yes,,Confirmed
+PNR0000017636,59685,2072-12-14,Sleeper,Tatkal,GKP,CSMT,2072-04-14,Confirmed,2,Senior Citizen,IRCTC Website,1509,19,27,Express,328,Defense Quota,Yes,,Confirmed
+PNR0000003931,53619,2035-06-07,1AC,Tatkal,BBS,JP,2034-10-06,Confirmed,1,Adult,Counter,1613,5,26,Shatabdi,305,Senior Citizen,No,,Confirmed
+PNR0000008387,64832,2047-08-19,1AC,Tatkal,LKO,BSB,2046-12-18,Waitlisted,4,Senior Citizen,Counter,385,6,23,Express,245,,Yes,WL175,Not Confirmed
+PNR0000008028,22235,2046-08-25,2AC,Tatkal,NDLS,MAS,2045-12-24,Confirmed,2,Senior Citizen,Mobile App,1502,12,25,Rajdhani,400,Senior Citizen,Yes,,Confirmed
+PNR0000009482,72801,2050-08-18,3AC,General,UMB,ASR,2049-12-17,Confirmed,4,Child,IRCTC Website,445,15,16,Superfast,220,Senior Citizen,Yes,,Confirmed
+PNR0000022572,96234,2086-06-20,1AC,Premium Tatkal,SC,MMCT,2085-10-19,Waitlisted,4,Child,Mobile App,217,6,21,Rajdhani,7,Senior Citizen,Yes,WL199,Not Confirmed
+PNR0000015107,77663,2066-01-11,2AC,Premium Tatkal,ADI,MAS,2065-05-12,RAC,1,Senior Citizen,IRCTC Website,475,8,5,Express,33,Senior Citizen,Yes,,Confirmed
+PNR0000003673,20534,2034-09-22,1AC,General,UMB,LTT,2034-01-21,Confirmed,4,Child,Counter,998,2,16,Superfast,196,Senior Citizen,No,,Confirmed
+PNR0000021388,90444,2083-03-24,1AC,Tatkal,LTT,LTT,2082-07-23,RAC,4,Child,Counter,1881,2,30,Express,180,Defense Quota,Yes,,Confirmed
+PNR0000005937,90935,2040-12-03,Sleeper,Tatkal,ASR,NDLS,2040-04-03,Confirmed,3,Senior Citizen,Mobile App,1187,5,38,Express,302,Defense Quota,No,,Confirmed
+PNR0000027033,90653,2098-09-06,1AC,Tatkal,MMCT,NDLS,2098-01-05,RAC,4,Child,Counter,1324,9,26,Shatabdi,306,Senior Citizen,Yes,,Confirmed
+PNR0000029271,28768,2104-10-23,3AC,Ladies,GKP,JP,2104-02-22,Confirmed,3,Adult,Mobile App,235,2,43,Superfast,309,Defense Quota,No,,Confirmed
+PNR0000021880,86771,2084-07-28,Sleeper,Tatkal,BSB,MMCT,2083-11-27,RAC,4,Child,Counter,767,5,10,Rajdhani,264,Senior Citizen,No,,Confirmed
+PNR0000006508,38332,2042-06-27,3AC,Ladies,SBC,MMCT,2041-10-26,Waitlisted,5,Child,Mobile App,672,8,46,Express,298,Senior Citizen,Yes,WL104,Not Confirmed
+PNR0000021457,55035,2083-06-01,2AC,Ladies,ASR,ASR,2082-09-30,Waitlisted,1,Senior Citizen,Mobile App,1625,15,46,Shatabdi,180,,Yes,WL128,Not Confirmed
+PNR0000020071,71186,2079-08-15,2AC,General,BCT,HWH,2078-12-14,Confirmed,5,Adult,Mobile App,438,5,37,Rajdhani,387,,Yes,,Confirmed
+PNR0000027012,25613,2098-08-16,Sleeper,Ladies,BBS,JU,2097-12-15,Waitlisted,2,Senior Citizen,Counter,1659,7,9,Express,387,,No,WL140,Not Confirmed
+PNR0000010092,67920,2052-04-19,3AC,General,BCT,JHS,2051-08-19,Waitlisted,3,Child,Mobile App,560,19,5,Rajdhani,449,Defense Quota,No,WL022,Not Confirmed
+PNR0000022567,16024,2086-06-15,Sleeper,General,CNB,BCT,2085-10-14,RAC,4,Child,Counter,1247,18,18,Rajdhani,445,,No,,Confirmed
+PNR0000012976,11927,2060-03-12,3AC,Ladies,BBS,KOAA,2059-07-12,Confirmed,5,Child,Counter,179,9,23,Express,493,,No,,Confirmed
+PNR0000003813,34736,2035-02-09,2AC,Tatkal,JHS,MMCT,2034-06-10,Waitlisted,5,Child,Counter,718,7,2,Express,113,Senior Citizen,No,WL138,Not Confirmed
+PNR0000007337,53632,2044-10-03,1AC,Premium Tatkal,JU,JHS,2044-02-02,Confirmed,4,Senior Citizen,Counter,286,9,16,Shatabdi,386,Senior Citizen,No,,Confirmed
+PNR0000024483,87242,2091-09-13,2AC,Ladies,NJP,HWH,2091-01-12,RAC,3,Senior Citizen,IRCTC Website,864,6,25,Shatabdi,151,Defense Quota,Yes,,Confirmed
+PNR0000019592,64164,2078-04-23,Sleeper,Tatkal,CSMT,UMB,2077-08-22,Waitlisted,2,Senior Citizen,IRCTC Website,51,13,29,Shatabdi,205,Senior Citizen,No,WL172,Not Confirmed
+PNR0000005121,57722,2038-09-09,Sleeper,Ladies,ASR,NDLS,2038-01-08,Confirmed,4,Child,Counter,1092,13,17,Rajdhani,384,Defense Quota,Yes,,Confirmed
+PNR0000014905,88201,2065-06-23,2AC,Ladies,JHS,JU,2064-10-22,RAC,1,Child,Counter,364,6,30,Shatabdi,243,Senior Citizen,Yes,,Confirmed
+PNR0000008223,13395,2047-03-08,1AC,General,JHS,MMCT,2046-07-07,Waitlisted,3,Senior Citizen,Mobile App,309,13,37,Rajdhani,292,Senior Citizen,Yes,WL090,Not Confirmed
+PNR0000002868,87258,2032-07-09,Sleeper,Ladies,UMB,LKO,2031-11-08,RAC,3,Child,IRCTC Website,1288,12,36,Rajdhani,124,,Yes,,Confirmed
+PNR0000002342,45655,2031-01-30,3AC,Premium Tatkal,PNBE,KOAA,2030-05-31,Waitlisted,4,Senior Citizen,Counter,1098,16,23,Superfast,327,Defense Quota,No,WL131,Not Confirmed
+PNR0000008832,95215,2048-11-06,3AC,General,MMCT,MMCT,2048-03-07,Confirmed,4,Child,Mobile App,917,13,41,Superfast,160,Defense Quota,Yes,,Confirmed
+PNR0000007932,93435,2046-05-21,2AC,Ladies,KOAA,SC,2045-09-19,Confirmed,4,Child,Counter,1798,18,13,Express,119,,No,,Confirmed
+PNR0000016557,18393,2069-12-31,Sleeper,Premium Tatkal,UMB,NJP,2069-05-01,Waitlisted,3,Senior Citizen,Counter,752,6,21,Superfast,23,Defense Quota,Yes,WL040,Not Confirmed
+PNR0000020604,70701,2081-01-29,Sleeper,Premium Tatkal,BSB,KOAA,2080-05-30,RAC,2,Child,Counter,351,7,13,Express,289,Defense Quota,No,,Confirmed
+PNR0000012983,29174,2060-03-19,2AC,Ladies,BSB,CSMT,2059-07-19,Waitlisted,3,Child,Mobile App,711,19,7,Rajdhani,1,,Yes,WL014,Not Confirmed
+PNR0000003014,42949,2032-12-02,1AC,General,LTT,NJP,2032-04-02,RAC,4,Adult,Mobile App,962,12,45,Superfast,228,Senior Citizen,Yes,,Confirmed
+PNR0000027331,24751,2099-07-01,2AC,Premium Tatkal,NJP,JHS,2098-10-30,RAC,1,Child,Counter,735,13,47,Superfast,19,Defense Quota,Yes,,Confirmed
+PNR0000012124,72943,2057-11-11,1AC,General,ADI,BBS,2057-03-12,Waitlisted,5,Adult,IRCTC Website,1817,8,26,Superfast,441,,No,WL007,Not Confirmed
+PNR0000003752,56578,2034-12-10,2AC,Tatkal,PNBE,JHS,2034-04-10,RAC,5,Senior Citizen,Counter,912,14,7,Rajdhani,96,,Yes,,Confirmed
+PNR0000027387,35892,2099-08-26,1AC,Tatkal,LTT,LKO,2098-12-25,Waitlisted,2,Adult,Mobile App,1526,8,12,Rajdhani,91,Senior Citizen,Yes,WL132,Not Confirmed
+PNR0000012335,27726,2058-06-10,2AC,General,BSB,ADI,2057-10-09,Waitlisted,4,Adult,Counter,1153,16,8,Express,181,Senior Citizen,Yes,WL083,Not Confirmed
+PNR0000011544,27329,2056-04-10,3AC,Premium Tatkal,JP,NDLS,2055-08-10,Confirmed,4,Senior Citizen,Mobile App,1508,5,30,Shatabdi,135,Senior Citizen,No,,Confirmed
+PNR0000011356,39285,2055-10-05,Sleeper,Ladies,BBS,GKP,2055-02-03,Confirmed,1,Child,Counter,525,5,41,Superfast,328,Senior Citizen,No,,Confirmed
+PNR0000002676,37842,2031-12-30,1AC,Premium Tatkal,MMCT,KOAA,2031-04-30,Waitlisted,2,Adult,Mobile App,1753,7,19,Rajdhani,349,Defense Quota,Yes,WL056,Not Confirmed
+PNR0000028738,28760,2103-05-09,3AC,Tatkal,CNB,BCT,2102-09-07,Confirmed,4,Senior Citizen,Counter,1608,7,35,Rajdhani,310,Defense Quota,Yes,,Confirmed
+PNR0000029995,38801,2106-10-17,3AC,Tatkal,BCT,CSMT,2106-02-15,Confirmed,5,Child,Mobile App,1451,2,9,Rajdhani,409,,No,,Confirmed
+PNR0000020747,87712,2081-06-21,3AC,Premium Tatkal,JP,MMCT,2080-10-20,Confirmed,3,Adult,IRCTC Website,568,6,43,Rajdhani,332,Defense Quota,Yes,,Confirmed
+PNR0000013375,38839,2061-04-15,3AC,General,GKP,ADI,2060-08-14,Waitlisted,4,Senior Citizen,Mobile App,513,4,46,Rajdhani,442,Senior Citizen,Yes,WL088,Not Confirmed
+PNR0000017986,77880,2073-11-29,1AC,Tatkal,BCT,UMB,2073-03-30,RAC,5,Child,Counter,1207,14,23,Shatabdi,467,Defense Quota,No,,Confirmed
+PNR0000007885,87201,2046-04-04,Sleeper,Ladies,NJP,GKP,2045-08-03,Waitlisted,3,Senior Citizen,Mobile App,1450,16,11,Shatabdi,319,,Yes,WL016,Not Confirmed
+PNR0000013332,81081,2061-03-03,1AC,Premium Tatkal,UMB,UMB,2060-07-02,Waitlisted,3,Child,Counter,1546,14,21,Express,10,Defense Quota,Yes,WL158,Not Confirmed
+PNR0000009585,16202,2050-11-29,Sleeper,Premium Tatkal,MMCT,JU,2050-03-30,Confirmed,3,Adult,IRCTC Website,213,11,11,Express,429,,No,,Confirmed
+PNR0000006332,34435,2042-01-02,3AC,Ladies,SBC,LKO,2041-05-03,Confirmed,5,Child,Mobile App,1714,17,40,Shatabdi,447,,No,,Confirmed
+PNR0000024429,56417,2091-07-21,Sleeper,General,BCT,ADI,2090-11-19,RAC,2,Child,Mobile App,1432,15,27,Express,121,Defense Quota,No,,Confirmed
+PNR0000018079,86842,2074-03-02,Sleeper,Tatkal,MMCT,BSB,2073-07-01,RAC,2,Child,Mobile App,1113,5,44,Express,23,Senior Citizen,Yes,,Confirmed
+PNR0000005201,35027,2038-11-28,1AC,General,UMB,MAS,2038-03-29,RAC,3,Adult,Mobile App,380,17,8,Shatabdi,309,,No,,Confirmed
+PNR0000000747,67647,2026-09-18,1AC,Premium Tatkal,CNB,HWH,2026-01-17,Waitlisted,4,Child,Counter,1547,17,4,Rajdhani,317,Senior Citizen,No,WL179,Not Confirmed
+PNR0000009760,76206,2051-05-23,Sleeper,Premium Tatkal,LKO,BBS,2050-09-21,RAC,2,Child,Counter,1266,7,18,Express,463,Senior Citizen,Yes,,Confirmed
+PNR0000029612,32507,2105-09-29,3AC,General,BCT,SC,2105-01-28,Confirmed,3,Adult,Mobile App,306,14,31,Rajdhani,460,,No,,Confirmed
+PNR0000019992,49455,2079-05-28,Sleeper,Tatkal,ASR,BCT,2078-09-26,Confirmed,5,Child,IRCTC Website,787,3,27,Shatabdi,60,Defense Quota,Yes,,Confirmed
+PNR0000023189,25988,2088-02-27,1AC,General,ADI,UMB,2087-06-28,Confirmed,2,Senior Citizen,Mobile App,109,5,13,Superfast,150,Defense Quota,Yes,,Confirmed
+PNR0000025535,17448,2094-07-31,3AC,Ladies,HWH,CNB,2093-11-29,Confirmed,4,Senior Citizen,Counter,800,18,31,Shatabdi,12,Defense Quota,No,,Confirmed
+PNR0000017963,69189,2073-11-06,Sleeper,Tatkal,LTT,LKO,2073-03-07,Waitlisted,5,Senior Citizen,IRCTC Website,1130,13,19,Superfast,442,Defense Quota,No,WL109,Not Confirmed
+PNR0000025246,86534,2093-10-15,1AC,General,SBC,SC,2093-02-13,Confirmed,5,Adult,Mobile App,640,15,25,Shatabdi,367,,No,,Confirmed
+PNR0000005081,80638,2038-07-31,3AC,General,LKO,BCT,2037-11-29,Confirmed,3,Child,IRCTC Website,933,12,31,Rajdhani,226,,No,,Confirmed
+PNR0000009350,90531,2050-04-08,3AC,Tatkal,BCT,JU,2049-08-07,Confirmed,3,Child,IRCTC Website,1533,18,34,Rajdhani,171,Defense Quota,Yes,,Confirmed
+PNR0000010982,81672,2054-09-26,1AC,Premium Tatkal,LKO,BSB,2054-01-25,Waitlisted,3,Child,Mobile App,1861,13,42,Superfast,135,Defense Quota,No,WL075,Not Confirmed
+PNR0000023621,42855,2089-05-04,3AC,Premium Tatkal,CSMT,ADI,2088-09-02,Confirmed,3,Child,Counter,1611,4,20,Express,42,Senior Citizen,Yes,,Confirmed
+PNR0000013235,75940,2060-11-26,Sleeper,Ladies,JP,LTT,2060-03-27,Confirmed,1,Child,IRCTC Website,1056,16,38,Superfast,177,,No,,Confirmed
+PNR0000019367,52656,2077-09-10,3AC,Ladies,SC,BSB,2077-01-09,RAC,3,Adult,Mobile App,745,10,36,Superfast,248,,Yes,,Confirmed
+PNR0000001190,84487,2027-12-05,1AC,Ladies,MMCT,ADI,2027-04-05,Confirmed,3,Child,Counter,1537,19,14,Rajdhani,102,Defense Quota,Yes,,Confirmed
+PNR0000000821,80865,2026-12-01,2AC,Ladies,BBS,BBS,2026-04-01,Waitlisted,1,Senior Citizen,Counter,1728,5,14,Express,204,Defense Quota,Yes,WL198,Not Confirmed
+PNR0000015878,49944,2068-02-21,3AC,General,BBS,ASR,2067-06-22,Waitlisted,4,Adult,IRCTC Website,1000,12,34,Shatabdi,278,Senior Citizen,No,WL116,Not Confirmed
+PNR0000020497,82015,2080-10-14,Sleeper,Ladies,JU,ASR,2080-02-13,Confirmed,2,Adult,Counter,849,6,23,Express,393,Defense Quota,No,,Confirmed
+PNR0000009419,16063,2050-06-16,1AC,General,ADI,BSB,2049-10-15,Confirmed,3,Adult,Mobile App,138,10,17,Rajdhani,120,Defense Quota,Yes,,Confirmed
+PNR0000028100,82262,2101-08-09,3AC,Premium Tatkal,ADI,MMCT,2100-12-08,Confirmed,5,Adult,Counter,1926,10,35,Rajdhani,98,Defense Quota,Yes,,Confirmed
+PNR0000008892,58302,2049-01-05,1AC,General,BSB,JU,2048-05-06,Waitlisted,3,Child,IRCTC Website,1213,13,26,Shatabdi,185,Defense Quota,No,WL109,Not Confirmed
+PNR0000004461,41735,2036-11-18,1AC,Ladies,GKP,NDLS,2036-03-19,Waitlisted,5,Adult,Mobile App,388,16,10,Shatabdi,164,Defense Quota,No,WL094,Not Confirmed
+PNR0000025229,13468,2093-09-28,1AC,General,PNBE,NJP,2093-01-27,Confirmed,4,Adult,Counter,125,17,42,Shatabdi,497,Defense Quota,Yes,,Confirmed
+PNR0000029985,49846,2106-10-07,2AC,Premium Tatkal,JHS,GKP,2106-02-05,Waitlisted,2,Senior Citizen,IRCTC Website,1148,10,19,Express,407,,Yes,WL138,Not Confirmed
+PNR0000012606,37552,2059-03-08,3AC,General,LKO,LTT,2058-07-07,Waitlisted,2,Senior Citizen,IRCTC Website,1303,4,13,Express,143,Senior Citizen,No,WL159,Not Confirmed
+PNR0000025978,76264,2095-10-17,1AC,Ladies,NDLS,SBC,2095-02-15,Waitlisted,2,Adult,Mobile App,287,6,26,Express,58,Senior Citizen,No,WL006,Not Confirmed
+PNR0000019132,49302,2077-01-18,Sleeper,Ladies,HWH,BCT,2076-05-19,Confirmed,4,Adult,Mobile App,800,6,29,Shatabdi,214,Senior Citizen,Yes,,Confirmed
+PNR0000014740,63472,2065-01-09,2AC,Ladies,MMCT,NDLS,2064-05-10,Confirmed,3,Senior Citizen,Counter,1723,8,44,Shatabdi,145,Defense Quota,Yes,,Confirmed
+PNR0000012146,54286,2057-12-03,Sleeper,Premium Tatkal,SC,SC,2057-04-03,Confirmed,3,Adult,Counter,246,14,46,Shatabdi,310,Senior Citizen,Yes,,Confirmed
+PNR0000002744,23258,2032-03-07,1AC,Premium Tatkal,CNB,CSMT,2031-07-07,Confirmed,3,Senior Citizen,Counter,769,10,25,Shatabdi,98,Defense Quota,No,,Confirmed
+PNR0000010114,39427,2052-05-11,Sleeper,Premium Tatkal,CSMT,LKO,2051-09-10,RAC,2,Adult,Counter,384,3,15,Shatabdi,306,,Yes,,Confirmed
+PNR0000002383,57288,2031-03-12,1AC,Ladies,JU,LTT,2030-07-11,Confirmed,4,Adult,Mobile App,1755,13,35,Superfast,198,,Yes,,Confirmed
+PNR0000009153,55098,2049-09-23,2AC,Ladies,CNB,JU,2049-01-22,Confirmed,5,Senior Citizen,Mobile App,1090,7,39,Express,441,,Yes,,Confirmed
+PNR0000001406,37155,2028-07-08,Sleeper,General,CSMT,CNB,2027-11-07,Confirmed,3,Senior Citizen,Mobile App,729,4,38,Superfast,492,,No,,Confirmed
+PNR0000016560,88547,2070-01-03,3AC,Tatkal,HWH,NDLS,2069-05-04,Confirmed,1,Senior Citizen,Mobile App,474,4,40,Express,385,,Yes,,Confirmed
+PNR0000019361,99572,2077-09-04,2AC,Tatkal,JU,BBS,2077-01-03,RAC,2,Adult,Counter,1466,6,37,Rajdhani,268,,Yes,,Confirmed
+PNR0000010342,12705,2052-12-25,2AC,Tatkal,UMB,JHS,2052-04-25,Confirmed,2,Adult,Counter,114,6,47,Superfast,186,Defense Quota,No,,Confirmed
+PNR0000027756,92652,2100-08-30,Sleeper,General,CSMT,NDLS,2099-12-29,Waitlisted,5,Adult,IRCTC Website,938,12,26,Rajdhani,146,Defense Quota,Yes,WL166,Not Confirmed
+PNR0000017614,71258,2072-11-22,3AC,General,HWH,KOAA,2072-03-23,RAC,2,Child,Mobile App,1951,13,18,Express,39,Defense Quota,Yes,,Confirmed
+PNR0000019906,38095,2079-03-03,Sleeper,Ladies,ADI,ADI,2078-07-02,RAC,4,Senior Citizen,IRCTC Website,139,14,35,Express,259,,No,,Confirmed
+PNR0000024530,82446,2091-10-30,3AC,Premium Tatkal,HWH,BBS,2091-02-28,RAC,2,Senior Citizen,Mobile App,526,18,30,Express,283,Senior Citizen,Yes,,Confirmed
+PNR0000027308,95986,2099-06-08,3AC,General,NDLS,ADI,2098-10-07,Confirmed,2,Adult,Mobile App,511,9,25,Rajdhani,296,,Yes,,Confirmed
+PNR0000017788,44409,2073-05-15,1AC,Tatkal,CNB,ADI,2072-09-13,Waitlisted,5,Senior Citizen,IRCTC Website,183,3,38,Rajdhani,478,Defense Quota,Yes,WL095,Not Confirmed
+PNR0000013075,27037,2060-06-19,3AC,General,NDLS,GKP,2059-10-19,Waitlisted,5,Child,IRCTC Website,161,2,40,Shatabdi,129,,No,WL152,Not Confirmed
+PNR0000022089,14255,2085-02-22,3AC,Tatkal,CNB,BCT,2084-06-23,Confirmed,1,Child,Counter,449,2,3,Superfast,441,,Yes,,Confirmed
+PNR0000028573,71349,2102-11-25,2AC,Ladies,MMCT,UMB,2102-03-26,RAC,5,Senior Citizen,Counter,369,14,5,Shatabdi,469,Senior Citizen,Yes,,Confirmed
+PNR0000020568,13896,2080-12-24,3AC,General,MAS,PNBE,2080-04-24,Waitlisted,3,Senior Citizen,IRCTC Website,148,14,24,Express,437,,No,WL155,Not Confirmed
+PNR0000017890,63433,2073-08-25,3AC,General,BBS,UMB,2072-12-24,RAC,1,Senior Citizen,Counter,1675,9,46,Express,95,Senior Citizen,No,,Confirmed
+PNR0000016837,21634,2070-10-07,3AC,Premium Tatkal,BBS,LKO,2070-02-05,Confirmed,1,Child,Mobile App,684,16,33,Superfast,121,,No,,Confirmed
+PNR0000006552,92515,2042-08-10,Sleeper,Premium Tatkal,SC,SBC,2041-12-09,RAC,2,Senior Citizen,Counter,238,18,42,Rajdhani,142,,No,,Confirmed
+PNR0000019637,79574,2078-06-07,2AC,Tatkal,JU,BBS,2077-10-06,RAC,3,Adult,IRCTC Website,1542,2,22,Superfast,429,Senior Citizen,No,,Confirmed
+PNR0000018294,34975,2074-10-03,3AC,Ladies,NJP,LKO,2074-02-01,Confirmed,2,Adult,IRCTC Website,991,12,7,Superfast,162,Defense Quota,Yes,,Confirmed
+PNR0000002876,90455,2032-07-17,Sleeper,Premium Tatkal,NJP,JHS,2031-11-16,RAC,3,Adult,Mobile App,247,9,26,Superfast,343,Defense Quota,Yes,,Confirmed
+PNR0000002982,70907,2032-10-31,2AC,Premium Tatkal,SC,JU,2032-03-01,RAC,5,Adult,Counter,1019,9,16,Rajdhani,476,,No,,Confirmed
+PNR0000017410,45178,2072-05-02,2AC,Tatkal,SBC,BCT,2071-09-01,Waitlisted,5,Child,Counter,1742,8,30,Express,456,,Yes,WL062,Not Confirmed
+PNR0000015162,84571,2066-03-07,3AC,Tatkal,KOAA,NJP,2065-07-06,Waitlisted,1,Adult,IRCTC Website,105,5,47,Rajdhani,18,Defense Quota,Yes,WL033,Not Confirmed
+PNR0000002153,12299,2030-07-25,2AC,Ladies,MMCT,ADI,2029-11-23,RAC,5,Senior Citizen,Mobile App,1175,5,18,Express,371,,No,,Confirmed
+PNR0000018700,93612,2075-11-13,1AC,Premium Tatkal,JHS,BCT,2075-03-14,RAC,2,Adult,Counter,429,3,45,Superfast,114,,No,,Confirmed
+PNR0000007667,38360,2045-08-29,2AC,Ladies,ASR,MAS,2044-12-28,Confirmed,3,Senior Citizen,Counter,1219,19,31,Rajdhani,216,Senior Citizen,No,,Confirmed
+PNR0000015243,48079,2066-05-27,1AC,Tatkal,PNBE,JU,2065-09-25,Waitlisted,3,Senior Citizen,Mobile App,1106,5,32,Rajdhani,207,Defense Quota,No,WL086,Not Confirmed
+PNR0000016857,92647,2070-10-27,3AC,Tatkal,LKO,UMB,2070-02-25,Waitlisted,2,Child,IRCTC Website,1237,6,44,Express,100,Defense Quota,No,WL026,Not Confirmed
+PNR0000013961,48096,2062-11-22,1AC,Tatkal,ASR,JHS,2062-03-23,Confirmed,2,Child,Counter,1774,19,4,Shatabdi,272,,Yes,,Confirmed
+PNR0000000217,77348,2025-04-06,Sleeper,General,UMB,BCT,2024-08-05,RAC,1,Senior Citizen,Counter,1737,15,3,Express,215,,No,,Confirmed
+PNR0000023287,98588,2088-06-04,3AC,General,MAS,ASR,2087-10-04,RAC,3,Child,Counter,1083,14,3,Shatabdi,181,,Yes,,Confirmed
+PNR0000002213,95063,2030-09-23,1AC,Premium Tatkal,BBS,NJP,2030-01-22,RAC,5,Adult,Mobile App,1284,3,5,Express,209,Defense Quota,No,,Confirmed
+PNR0000006580,50306,2042-09-07,Sleeper,Ladies,JU,SC,2042-01-06,RAC,2,Adult,Mobile App,1869,9,44,Rajdhani,226,,No,,Confirmed
+PNR0000027602,12093,2100-03-29,3AC,Tatkal,CNB,PNBE,2099-07-28,RAC,2,Adult,Mobile App,143,10,5,Shatabdi,191,Senior Citizen,No,,Confirmed
+PNR0000019376,40760,2077-09-19,3AC,Premium Tatkal,KOAA,JHS,2077-01-18,RAC,1,Senior Citizen,Mobile App,1720,5,41,Express,163,Defense Quota,Yes,,Confirmed
+PNR0000007539,75157,2045-04-23,2AC,Tatkal,MAS,ADI,2044-08-22,Waitlisted,3,Senior Citizen,Counter,1137,14,30,Superfast,311,Senior Citizen,Yes,WL131,Not Confirmed
+PNR0000014976,57537,2065-09-02,1AC,General,ADI,LKO,2065-01-01,Waitlisted,3,Senior Citizen,Counter,768,14,31,Express,97,,Yes,WL022,Not Confirmed
+PNR0000010128,26846,2052-05-25,2AC,General,HWH,BSB,2051-09-24,Waitlisted,4,Adult,Counter,568,3,21,Shatabdi,323,,Yes,WL113,Not Confirmed
+PNR0000005705,28935,2040-04-15,1AC,Ladies,SBC,GKP,2039-08-15,Confirmed,1,Adult,Counter,1130,13,41,Shatabdi,367,,Yes,,Confirmed
+PNR0000005953,17462,2040-12-19,Sleeper,Ladies,BCT,MMCT,2040-04-19,Waitlisted,1,Adult,IRCTC Website,1131,11,32,Shatabdi,168,Defense Quota,Yes,WL141,Not Confirmed
+PNR0000000538,89929,2026-02-21,2AC,Tatkal,SBC,SC,2025-06-22,Waitlisted,5,Senior Citizen,Mobile App,1519,17,34,Shatabdi,318,Defense Quota,No,WL112,Not Confirmed
+PNR0000021663,86951,2083-12-24,Sleeper,Ladies,KOAA,BCT,2083-04-24,Confirmed,3,Child,IRCTC Website,1710,10,41,Express,325,,No,,Confirmed
+PNR0000021567,66209,2083-09-19,2AC,Tatkal,SBC,JU,2083-01-18,Confirmed,3,Child,Mobile App,1729,9,39,Shatabdi,245,,Yes,,Confirmed
+PNR0000028982,39839,2104-01-08,1AC,Tatkal,JU,CNB,2103-05-09,Waitlisted,4,Child,Mobile App,1513,11,2,Rajdhani,453,Senior Citizen,Yes,WL074,Not Confirmed
+PNR0000007427,73816,2045-01-01,Sleeper,General,ASR,GKP,2044-05-02,RAC,1,Child,Counter,1941,8,7,Superfast,148,,Yes,,Confirmed
+PNR0000020725,52099,2081-05-30,3AC,Premium Tatkal,JHS,PNBE,2080-09-28,RAC,1,Adult,IRCTC Website,1880,14,32,Superfast,478,,No,,Confirmed
+PNR0000004181,50896,2036-02-12,2AC,Tatkal,CSMT,PNBE,2035-06-13,Waitlisted,2,Adult,Mobile App,476,17,9,Rajdhani,21,,No,WL101,Not Confirmed
+PNR0000018701,60273,2075-11-14,2AC,Ladies,BBS,NJP,2075-03-15,RAC,2,Senior Citizen,IRCTC Website,1160,12,8,Superfast,455,Defense Quota,No,,Confirmed
+PNR0000015414,35701,2066-11-14,Sleeper,General,ASR,SBC,2066-03-15,RAC,1,Senior Citizen,Mobile App,997,19,17,Rajdhani,229,,Yes,,Confirmed
+PNR0000012154,38555,2057-12-11,3AC,Tatkal,PNBE,KOAA,2057-04-11,Waitlisted,2,Child,Mobile App,133,9,7,Shatabdi,253,Defense Quota,Yes,WL013,Not Confirmed
+PNR0000000579,63547,2026-04-03,2AC,Ladies,LTT,HWH,2025-08-02,Confirmed,2,Senior Citizen,IRCTC Website,1849,16,42,Superfast,401,,Yes,,Confirmed
+PNR0000002168,28084,2030-08-09,3AC,Ladies,LKO,GKP,2029-12-08,RAC,1,Adult,IRCTC Website,1134,3,6,Express,492,Senior Citizen,No,,Confirmed
+PNR0000024419,92425,2091-07-11,3AC,General,HWH,BSB,2090-11-09,Waitlisted,4,Child,IRCTC Website,100,9,16,Superfast,300,,No,WL182,Not Confirmed
+PNR0000000250,84994,2025-05-09,2AC,Tatkal,BSB,SC,2024-09-07,RAC,4,Senior Citizen,Counter,1963,12,19,Rajdhani,143,,No,,Confirmed
+PNR0000015692,54133,2067-08-19,Sleeper,Tatkal,KOAA,NJP,2066-12-18,Waitlisted,5,Child,IRCTC Website,259,8,35,Superfast,486,Defense Quota,Yes,WL175,Not Confirmed
+PNR0000009971,18840,2051-12-20,Sleeper,Ladies,SBC,BSB,2051-04-20,Waitlisted,1,Child,Counter,1151,5,24,Rajdhani,444,,No,WL197,Not Confirmed
+PNR0000016180,54628,2068-12-19,3AC,Ladies,MMCT,MMCT,2068-04-19,Waitlisted,1,Child,IRCTC Website,1616,7,39,Rajdhani,88,Senior Citizen,No,WL102,Not Confirmed
+PNR0000011489,26090,2056-02-15,3AC,Ladies,CSMT,ADI,2055-06-16,Confirmed,2,Adult,Mobile App,440,7,44,Express,72,Defense Quota,No,,Confirmed
+PNR0000009144,23707,2049-09-14,2AC,Tatkal,SC,LKO,2049-01-13,Waitlisted,4,Child,Mobile App,1976,11,17,Express,274,Defense Quota,Yes,WL195,Not Confirmed
+PNR0000029432,61602,2105-04-02,1AC,Ladies,CNB,JU,2104-08-01,Waitlisted,3,Senior Citizen,Counter,1938,4,46,Rajdhani,474,Senior Citizen,No,WL138,Not Confirmed
+PNR0000025790,91424,2095-04-12,Sleeper,Premium Tatkal,ADI,MAS,2094-08-11,RAC,1,Senior Citizen,Mobile App,1275,16,21,Rajdhani,26,,No,,Confirmed
+PNR0000005771,44241,2040-06-20,3AC,Premium Tatkal,JHS,MAS,2039-10-20,Waitlisted,3,Child,IRCTC Website,430,18,42,Rajdhani,22,Defense Quota,Yes,WL147,Not Confirmed
+PNR0000026746,40933,2097-11-23,Sleeper,General,SBC,LKO,2097-03-24,Waitlisted,5,Senior Citizen,Counter,203,3,13,Superfast,26,Senior Citizen,Yes,WL013,Not Confirmed
+PNR0000002325,54111,2031-01-13,2AC,Tatkal,PNBE,LTT,2030-05-14,Waitlisted,3,Child,Mobile App,520,13,39,Superfast,26,Senior Citizen,No,WL126,Not Confirmed
+PNR0000015430,11964,2066-11-30,2AC,Premium Tatkal,LKO,ASR,2066-03-31,Confirmed,2,Senior Citizen,Counter,1995,7,8,Shatabdi,168,Senior Citizen,No,,Confirmed
+PNR0000000430,32235,2025-11-05,3AC,Tatkal,SBC,CSMT,2025-03-06,Waitlisted,1,Child,IRCTC Website,152,16,39,Superfast,317,Defense Quota,Yes,WL108,Not Confirmed
+PNR0000010768,99660,2054-02-24,3AC,Ladies,GKP,ADI,2053-06-25,RAC,5,Child,Mobile App,1317,19,16,Express,242,Senior Citizen,Yes,,Confirmed
+PNR0000002532,14111,2031-08-08,Sleeper,Ladies,GKP,NJP,2030-12-07,Waitlisted,3,Child,Counter,805,3,17,Shatabdi,320,,No,WL084,Not Confirmed
+PNR0000002457,82545,2031-05-25,3AC,Ladies,MMCT,NDLS,2030-09-23,RAC,2,Adult,Mobile App,1520,2,15,Rajdhani,489,Defense Quota,Yes,,Confirmed
+PNR0000019186,48619,2077-03-13,3AC,Premium Tatkal,NDLS,MAS,2076-07-12,Waitlisted,1,Child,Mobile App,1735,6,27,Express,346,,Yes,WL177,Not Confirmed
+PNR0000027235,25928,2099-03-27,Sleeper,Ladies,UMB,SBC,2098-07-26,Confirmed,3,Child,Mobile App,235,11,45,Superfast,489,,Yes,,Confirmed
+PNR0000022291,41952,2085-09-12,Sleeper,Ladies,UMB,NDLS,2085-01-11,Confirmed,5,Senior Citizen,IRCTC Website,963,11,3,Shatabdi,319,Senior Citizen,No,,Confirmed
+PNR0000011212,24757,2055-05-14,1AC,Premium Tatkal,SBC,KOAA,2054-09-12,RAC,5,Child,Counter,597,14,37,Express,141,,No,,Confirmed
+PNR0000000505,79257,2026-01-19,3AC,Premium Tatkal,JP,NDLS,2025-05-20,Waitlisted,4,Child,IRCTC Website,211,8,14,Rajdhani,480,,No,WL089,Not Confirmed
+PNR0000023112,53302,2087-12-12,1AC,General,MAS,MAS,2087-04-12,RAC,4,Senior Citizen,Counter,1790,12,2,Shatabdi,182,Defense Quota,No,,Confirmed
+PNR0000018779,68319,2076-01-31,3AC,Ladies,NDLS,HWH,2075-06-01,Waitlisted,5,Adult,IRCTC Website,1397,6,27,Shatabdi,413,Senior Citizen,No,WL092,Not Confirmed
+PNR0000019082,41279,2076-11-29,2AC,General,BBS,LTT,2076-03-30,RAC,2,Adult,Mobile App,152,5,36,Shatabdi,101,Defense Quota,Yes,,Confirmed
+PNR0000017894,12636,2073-08-29,2AC,Premium Tatkal,JP,HWH,2072-12-28,RAC,2,Child,Mobile App,1173,9,18,Rajdhani,84,,No,,Confirmed
+PNR0000019006,80233,2076-09-14,2AC,Ladies,CSMT,MMCT,2076-01-14,Confirmed,3,Adult,Counter,235,8,4,Shatabdi,139,,Yes,,Confirmed
+PNR0000019690,78140,2078-07-30,2AC,Tatkal,NJP,BBS,2077-11-28,Waitlisted,4,Child,IRCTC Website,1308,3,3,Superfast,424,Senior Citizen,Yes,WL057,Not Confirmed
+PNR0000027093,32762,2098-11-05,1AC,General,MAS,CSMT,2098-03-06,Waitlisted,5,Adult,IRCTC Website,1458,10,43,Shatabdi,204,Senior Citizen,No,WL089,Not Confirmed
+PNR0000023179,66744,2088-02-17,3AC,Premium Tatkal,CSMT,SBC,2087-06-18,Confirmed,2,Senior Citizen,IRCTC Website,1321,17,24,Shatabdi,480,Senior Citizen,No,,Confirmed
+PNR0000012626,13726,2059-03-28,2AC,Ladies,JP,LTT,2058-07-27,Waitlisted,5,Child,Mobile App,194,14,17,Shatabdi,44,Senior Citizen,Yes,WL195,Not Confirmed
+PNR0000003834,22656,2035-03-02,3AC,Tatkal,SC,SC,2034-07-01,Waitlisted,4,Adult,Mobile App,1391,11,40,Rajdhani,314,Senior Citizen,No,WL023,Not Confirmed
+PNR0000001330,22473,2028-04-23,Sleeper,Ladies,MAS,MMCT,2027-08-23,RAC,3,Adult,Mobile App,563,15,16,Superfast,148,Defense Quota,No,,Confirmed
+PNR0000021466,82078,2083-06-10,1AC,Tatkal,BBS,NJP,2082-10-09,RAC,2,Child,Counter,402,9,11,Superfast,47,Senior Citizen,Yes,,Confirmed
+PNR0000023828,31721,2089-11-27,2AC,Tatkal,NDLS,ASR,2089-03-28,Confirmed,4,Child,Counter,1476,5,39,Express,291,Senior Citizen,Yes,,Confirmed
+PNR0000002541,21228,2031-08-17,2AC,Ladies,MAS,CSMT,2030-12-16,Confirmed,3,Child,Counter,1093,19,46,Express,383,Defense Quota,No,,Confirmed
+PNR0000028612,42787,2103-01-03,Sleeper,Premium Tatkal,HWH,KOAA,2102-05-04,Waitlisted,4,Senior Citizen,Mobile App,1412,7,25,Shatabdi,102,Defense Quota,Yes,WL179,Not Confirmed
+PNR0000021995,32725,2084-11-20,1AC,General,GKP,MMCT,2084-03-21,Waitlisted,4,Adult,Mobile App,1330,17,17,Rajdhani,480,Senior Citizen,No,WL089,Not Confirmed
+PNR0000011899,49622,2057-03-31,3AC,Ladies,JP,LTT,2056-07-30,Confirmed,5,Adult,IRCTC Website,966,19,31,Rajdhani,466,,Yes,,Confirmed
+PNR0000025872,28775,2095-07-03,2AC,Premium Tatkal,JU,ASR,2094-11-01,RAC,3,Adult,Mobile App,498,5,42,Express,31,Defense Quota,No,,Confirmed
+PNR0000026225,73970,2096-06-20,Sleeper,Tatkal,PNBE,UMB,2095-10-20,Confirmed,1,Child,Mobile App,1904,18,22,Superfast,396,Defense Quota,No,,Confirmed
+PNR0000015805,65514,2067-12-10,Sleeper,Premium Tatkal,JU,GKP,2067-04-10,Waitlisted,1,Adult,Counter,792,11,2,Superfast,431,,Yes,WL081,Not Confirmed
+PNR0000009555,39078,2050-10-30,Sleeper,General,KOAA,NDLS,2050-02-28,RAC,3,Adult,IRCTC Website,473,6,16,Shatabdi,132,Defense Quota,Yes,,Confirmed
+PNR0000007567,56084,2045-05-21,1AC,Tatkal,NJP,ASR,2044-09-19,Confirmed,2,Senior Citizen,Counter,1665,19,15,Express,132,,Yes,,Confirmed
+PNR0000003507,75487,2034-04-09,Sleeper,Ladies,BCT,CSMT,2033-08-08,Waitlisted,1,Child,Counter,1668,7,43,Shatabdi,34,Defense Quota,No,WL101,Not Confirmed
+PNR0000008834,59555,2048-11-08,Sleeper,General,KOAA,ASR,2048-03-09,RAC,1,Child,IRCTC Website,700,5,28,Express,365,Senior Citizen,No,,Confirmed
+PNR0000018784,55706,2076-02-05,1AC,Premium Tatkal,BSB,SBC,2075-06-06,RAC,5,Adult,IRCTC Website,1047,4,35,Shatabdi,417,Senior Citizen,Yes,,Confirmed
+PNR0000029857,50353,2106-06-01,3AC,Ladies,MAS,MMCT,2105-09-30,Waitlisted,4,Senior Citizen,IRCTC Website,1933,10,18,Shatabdi,421,Defense Quota,No,WL023,Not Confirmed
+PNR0000023587,79942,2089-03-31,Sleeper,Premium Tatkal,GKP,MAS,2088-07-30,Confirmed,3,Adult,IRCTC Website,1384,18,38,Superfast,392,Defense Quota,Yes,,Confirmed
+PNR0000028267,20841,2102-01-23,3AC,Premium Tatkal,GKP,LKO,2101-05-24,Waitlisted,1,Senior Citizen,Mobile App,946,12,39,Superfast,322,Senior Citizen,No,WL068,Not Confirmed
+PNR0000005844,16587,2040-09-01,Sleeper,Premium Tatkal,ASR,ADI,2040-01-01,Waitlisted,1,Senior Citizen,Mobile App,954,11,8,Rajdhani,219,Defense Quota,No,WL097,Not Confirmed
+PNR0000026476,20483,2097-02-26,2AC,Ladies,SBC,JU,2096-06-27,Waitlisted,1,Senior Citizen,Counter,535,19,21,Rajdhani,409,Defense Quota,Yes,WL161,Not Confirmed
+PNR0000024198,85629,2090-12-02,3AC,Premium Tatkal,PNBE,BCT,2090-04-02,Confirmed,3,Adult,IRCTC Website,1944,18,41,Rajdhani,494,Senior Citizen,No,,Confirmed
+PNR0000028881,93326,2103-09-29,1AC,Premium Tatkal,LKO,BCT,2103-01-28,RAC,5,Senior Citizen,Counter,1236,9,33,Express,216,,No,,Confirmed
+PNR0000004845,80046,2037-12-07,2AC,Tatkal,LTT,NJP,2037-04-07,Waitlisted,3,Senior Citizen,IRCTC Website,1597,17,36,Superfast,149,Defense Quota,Yes,WL084,Not Confirmed
+PNR0000004985,89452,2038-04-26,3AC,Ladies,ASR,PNBE,2037-08-25,Confirmed,5,Child,IRCTC Website,1315,18,28,Express,164,Defense Quota,No,,Confirmed
+PNR0000023399,50975,2088-09-24,Sleeper,General,SBC,ASR,2088-01-24,Waitlisted,3,Child,IRCTC Website,1056,14,14,Rajdhani,255,Senior Citizen,Yes,WL154,Not Confirmed
+PNR0000025569,55650,2094-09-03,2AC,Tatkal,CNB,HWH,2094-01-02,Waitlisted,3,Child,IRCTC Website,979,3,5,Superfast,491,Senior Citizen,Yes,WL071,Not Confirmed
+PNR0000020262,79742,2080-02-22,2AC,Ladies,CNB,SC,2079-06-23,Confirmed,5,Adult,Counter,1199,14,2,Shatabdi,402,,No,,Confirmed
+PNR0000020856,68609,2081-10-08,Sleeper,General,NDLS,MAS,2081-02-06,Waitlisted,3,Child,Mobile App,1361,5,33,Shatabdi,245,,Yes,WL049,Not Confirmed
+PNR0000026822,34428,2098-02-07,1AC,Ladies,GKP,BSB,2097-06-08,Confirmed,5,Senior Citizen,IRCTC Website,1009,3,8,Express,409,,Yes,,Confirmed
+PNR0000009317,58321,2050-03-06,3AC,Premium Tatkal,ASR,GKP,2049-07-05,Confirmed,2,Senior Citizen,Mobile App,1311,4,29,Superfast,230,Defense Quota,No,,Confirmed
+PNR0000025506,72844,2094-07-02,2AC,General,LKO,ASR,2093-10-31,Waitlisted,2,Adult,Mobile App,418,14,39,Express,121,Defense Quota,Yes,WL119,Not Confirmed
+PNR0000014847,82594,2065-04-26,Sleeper,General,ADI,MMCT,2064-08-25,Waitlisted,2,Adult,IRCTC Website,1630,16,45,Shatabdi,149,Senior Citizen,No,WL095,Not Confirmed
+PNR0000007842,62553,2046-02-20,Sleeper,Tatkal,ASR,HWH,2045-06-21,RAC,4,Adult,Mobile App,569,9,17,Superfast,394,,Yes,,Confirmed
+PNR0000028647,69237,2103-02-07,1AC,Ladies,BSB,ASR,2102-06-08,Waitlisted,3,Adult,Mobile App,1772,18,3,Superfast,303,,Yes,WL022,Not Confirmed
+PNR0000029984,71585,2106-10-06,Sleeper,Tatkal,SBC,BCT,2106-02-04,Confirmed,2,Child,IRCTC Website,1814,13,47,Rajdhani,150,Senior Citizen,No,,Confirmed
+PNR0000013048,15240,2060-05-23,Sleeper,Tatkal,SC,ADI,2059-09-22,RAC,1,Senior Citizen,Counter,734,11,21,Rajdhani,31,,Yes,,Confirmed
+PNR0000025099,46401,2093-05-21,3AC,Premium Tatkal,JU,HWH,2092-09-19,RAC,1,Adult,Counter,1153,17,42,Express,374,Senior Citizen,No,,Confirmed
+PNR0000014856,93655,2065-05-05,3AC,Premium Tatkal,GKP,HWH,2064-09-03,Waitlisted,2,Child,IRCTC Website,1246,12,12,Superfast,114,Defense Quota,Yes,WL075,Not Confirmed
+PNR0000025013,27143,2093-02-24,2AC,Ladies,MAS,MMCT,2092-06-25,Waitlisted,5,Adult,IRCTC Website,1111,4,36,Rajdhani,284,Defense Quota,No,WL129,Not Confirmed
+PNR0000010739,85021,2054-01-26,1AC,Premium Tatkal,KOAA,NJP,2053-05-27,Waitlisted,1,Adult,IRCTC Website,1319,19,32,Express,26,Defense Quota,No,WL076,Not Confirmed
+PNR0000016094,25787,2068-09-24,Sleeper,Premium Tatkal,SC,PNBE,2068-01-24,RAC,4,Senior Citizen,IRCTC Website,152,17,4,Rajdhani,216,Defense Quota,No,,Confirmed
+PNR0000002208,95159,2030-09-18,3AC,General,BSB,HWH,2030-01-17,Waitlisted,4,Senior Citizen,IRCTC Website,1931,4,46,Express,45,,No,WL072,Not Confirmed
+PNR0000018840,49423,2076-04-01,Sleeper,General,LKO,SC,2075-08-01,Confirmed,2,Adult,IRCTC Website,893,11,15,Shatabdi,101,,Yes,,Confirmed
+PNR0000028272,97418,2102-01-28,1AC,General,GKP,BBS,2101-05-29,RAC,5,Child,Counter,1907,3,38,Shatabdi,11,Defense Quota,Yes,,Confirmed
+PNR0000022372,77504,2085-12-02,Sleeper,Premium Tatkal,ADI,HWH,2085-04-02,Confirmed,5,Adult,Mobile App,1698,12,3,Express,424,Senior Citizen,No,,Confirmed
+PNR0000002266,34984,2030-11-15,Sleeper,Ladies,GKP,HWH,2030-03-16,Waitlisted,2,Adult,IRCTC Website,854,5,31,Shatabdi,490,Defense Quota,No,WL095,Not Confirmed
+PNR0000005226,27601,2038-12-23,Sleeper,Premium Tatkal,MMCT,CNB,2038-04-23,Confirmed,4,Child,Mobile App,315,6,10,Express,458,Senior Citizen,No,,Confirmed
+PNR0000028301,36770,2102-02-26,1AC,Premium Tatkal,JU,CNB,2101-06-27,RAC,5,Child,IRCTC Website,787,2,25,Rajdhani,256,,No,,Confirmed
+PNR0000021578,80205,2083-09-30,2AC,Premium Tatkal,SBC,JHS,2083-01-29,RAC,4,Senior Citizen,IRCTC Website,1334,2,12,Rajdhani,480,,Yes,,Confirmed
+PNR0000020122,44635,2079-10-05,2AC,Ladies,LKO,NJP,2079-02-03,Waitlisted,3,Child,IRCTC Website,1769,18,23,Express,474,,Yes,WL112,Not Confirmed
+PNR0000017892,95223,2073-08-27,Sleeper,General,PNBE,CNB,2072-12-26,Confirmed,4,Adult,IRCTC Website,662,14,30,Shatabdi,150,Senior Citizen,No,,Confirmed
+PNR0000020927,50868,2081-12-18,Sleeper,General,JHS,JP,2081-04-18,RAC,2,Adult,IRCTC Website,1112,2,45,Rajdhani,169,,Yes,,Confirmed
+PNR0000013022,87880,2060-04-27,Sleeper,General,JHS,JP,2059-08-27,Confirmed,1,Child,IRCTC Website,1958,18,24,Express,276,Senior Citizen,Yes,,Confirmed
+PNR0000020736,21453,2081-06-10,Sleeper,Ladies,ADI,NJP,2080-10-09,RAC,4,Senior Citizen,Mobile App,1505,2,47,Rajdhani,332,,Yes,,Confirmed
+PNR0000027366,61209,2099-08-05,1AC,Ladies,NDLS,CSMT,2098-12-04,Confirmed,4,Adult,Mobile App,1127,10,4,Express,264,,Yes,,Confirmed
+PNR0000011740,43701,2056-10-23,3AC,Premium Tatkal,ASR,LTT,2056-02-22,Waitlisted,2,Senior Citizen,Counter,378,10,33,Shatabdi,432,,No,WL024,Not Confirmed
+PNR0000006547,61703,2042-08-05,1AC,Premium Tatkal,GKP,JP,2041-12-04,Confirmed,5,Adult,Counter,1060,15,6,Rajdhani,446,Defense Quota,Yes,,Confirmed
+PNR0000003282,73466,2033-08-27,2AC,Ladies,KOAA,LTT,2032-12-26,Confirmed,5,Child,Mobile App,757,7,32,Express,498,,No,,Confirmed
+PNR0000015614,17310,2067-06-02,3AC,Tatkal,BCT,JHS,2066-10-01,RAC,5,Child,Mobile App,919,12,24,Rajdhani,397,,No,,Confirmed
+PNR0000023661,54358,2089-06-13,3AC,General,KOAA,MMCT,2088-10-12,Waitlisted,5,Senior Citizen,Mobile App,675,11,30,Rajdhani,102,Senior Citizen,No,WL138,Not Confirmed
+PNR0000002276,33578,2030-11-25,1AC,Premium Tatkal,LKO,SC,2030-03-26,Waitlisted,3,Child,Mobile App,1892,15,8,Superfast,229,,No,WL044,Not Confirmed
+PNR0000026050,73558,2095-12-28,Sleeper,Premium Tatkal,MMCT,MAS,2095-04-28,Confirmed,2,Adult,IRCTC Website,1617,6,37,Shatabdi,493,Defense Quota,No,,Confirmed
+PNR0000012354,28127,2058-06-29,Sleeper,Tatkal,CSMT,JP,2057-10-28,Waitlisted,4,Senior Citizen,Mobile App,1795,19,47,Express,33,Defense Quota,No,WL038,Not Confirmed
+PNR0000016485,20934,2069-10-20,2AC,Ladies,PNBE,ADI,2069-02-18,Waitlisted,2,Adult,IRCTC Website,337,17,44,Shatabdi,147,Senior Citizen,No,WL200,Not Confirmed
+PNR0000019535,46892,2078-02-25,2AC,Premium Tatkal,JHS,BSB,2077-06-26,Confirmed,3,Child,Counter,1790,17,14,Shatabdi,83,Defense Quota,Yes,,Confirmed
+PNR0000018673,91779,2075-10-17,2AC,General,BCT,JHS,2075-02-15,Waitlisted,1,Senior Citizen,Counter,1358,15,46,Rajdhani,263,Defense Quota,No,WL195,Not Confirmed
+PNR0000008696,88128,2048-06-23,3AC,Tatkal,ADI,ADI,2047-10-23,Confirmed,2,Adult,Counter,518,3,26,Superfast,114,Defense Quota,Yes,,Confirmed
+PNR0000022564,23716,2086-06-12,2AC,Tatkal,SBC,JHS,2085-10-11,Confirmed,3,Adult,Mobile App,874,14,42,Shatabdi,289,Defense Quota,No,,Confirmed
+PNR0000016379,62173,2069-07-06,2AC,Ladies,NDLS,KOAA,2068-11-04,RAC,3,Adult,IRCTC Website,1092,17,37,Rajdhani,375,,Yes,,Confirmed
+PNR0000025294,78342,2093-12-02,3AC,General,NDLS,ASR,2093-04-02,Confirmed,2,Child,IRCTC Website,699,14,31,Superfast,225,Senior Citizen,No,,Confirmed
+PNR0000028680,50478,2103-03-12,1AC,Premium Tatkal,JP,PNBE,2102-07-11,Waitlisted,4,Child,Counter,1962,2,37,Rajdhani,230,Senior Citizen,Yes,WL056,Not Confirmed
+PNR0000024991,48435,2093-02-02,3AC,Premium Tatkal,UMB,JU,2092-06-03,RAC,2,Child,IRCTC Website,667,19,32,Superfast,256,Defense Quota,No,,Confirmed
+PNR0000029669,88038,2105-11-25,3AC,Tatkal,UMB,BSB,2105-03-26,RAC,2,Adult,Counter,1419,9,16,Superfast,110,Senior Citizen,Yes,,Confirmed
+PNR0000005836,62545,2040-08-24,1AC,Premium Tatkal,SC,BCT,2039-12-24,Confirmed,1,Adult,Counter,1688,8,2,Rajdhani,83,Defense Quota,Yes,,Confirmed
+PNR0000010235,76110,2052-09-09,2AC,Tatkal,LTT,ADI,2052-01-09,Waitlisted,5,Adult,Counter,1338,16,27,Superfast,98,Senior Citizen,No,WL152,Not Confirmed
+PNR0000022824,55689,2087-02-27,3AC,Tatkal,JHS,HWH,2086-06-28,RAC,2,Adult,IRCTC Website,346,7,14,Shatabdi,124,Defense Quota,No,,Confirmed
+PNR0000000279,92950,2025-06-07,Sleeper,Ladies,LKO,ADI,2024-10-06,Waitlisted,4,Adult,Counter,777,4,17,Express,182,,Yes,WL041,Not Confirmed
+PNR0000022376,39141,2085-12-06,Sleeper,Ladies,SC,NDLS,2085-04-06,RAC,2,Child,Mobile App,1460,3,3,Shatabdi,348,Defense Quota,Yes,,Confirmed
+PNR0000025273,27685,2093-11-11,Sleeper,General,JP,NDLS,2093-03-12,Confirmed,3,Senior Citizen,Mobile App,832,17,5,Superfast,241,Senior Citizen,No,,Confirmed
+PNR0000005160,43053,2038-10-18,Sleeper,General,BCT,ASR,2038-02-16,Confirmed,1,Adult,IRCTC Website,65,9,7,Superfast,455,,No,,Confirmed
+PNR0000029752,29750,2106-02-16,1AC,Ladies,ASR,LKO,2105-06-17,Confirmed,4,Child,Counter,1112,16,24,Express,81,,No,,Confirmed
+PNR0000003690,83310,2034-10-09,Sleeper,Ladies,JU,NDLS,2034-02-07,Confirmed,1,Adult,IRCTC Website,303,12,38,Shatabdi,316,Defense Quota,Yes,,Confirmed
+PNR0000005915,48770,2040-11-11,2AC,General,LKO,JHS,2040-03-12,Waitlisted,1,Senior Citizen,Counter,619,15,7,Superfast,270,Defense Quota,Yes,WL131,Not Confirmed
+PNR0000011578,50718,2056-05-14,2AC,Ladies,BCT,GKP,2055-09-13,Waitlisted,2,Senior Citizen,Counter,1548,5,46,Express,482,Defense Quota,Yes,WL098,Not Confirmed
+PNR0000018078,30403,2074-03-01,2AC,Ladies,CNB,SC,2073-06-30,Confirmed,3,Senior Citizen,Counter,944,15,21,Express,87,,No,,Confirmed
+PNR0000019536,30739,2078-02-26,3AC,Tatkal,BBS,LTT,2077-06-27,Waitlisted,5,Child,Counter,1096,17,9,Rajdhani,56,,No,WL175,Not Confirmed
+PNR0000026023,75284,2095-12-01,2AC,Ladies,BBS,CNB,2095-04-01,Confirmed,5,Child,Mobile App,1458,10,41,Shatabdi,14,Defense Quota,Yes,,Confirmed
+PNR0000029719,62324,2106-01-14,1AC,Ladies,GKP,MAS,2105-05-15,RAC,5,Adult,IRCTC Website,1215,8,36,Express,324,,No,,Confirmed
+PNR0000021739,62536,2084-03-09,3AC,Ladies,ADI,PNBE,2083-07-09,RAC,2,Senior Citizen,IRCTC Website,1828,5,12,Shatabdi,325,,Yes,,Confirmed
+PNR0000025743,55666,2095-02-24,3AC,Ladies,NJP,PNBE,2094-06-25,Confirmed,3,Adult,Counter,1667,8,20,Rajdhani,33,Defense Quota,No,,Confirmed
+PNR0000020552,45976,2080-12-08,2AC,General,BSB,LKO,2080-04-08,Confirmed,3,Child,Counter,215,3,38,Shatabdi,216,Defense Quota,No,,Confirmed
+PNR0000011702,33482,2056-09-15,1AC,Tatkal,SBC,JU,2056-01-15,RAC,4,Child,Mobile App,149,3,27,Rajdhani,401,,Yes,,Confirmed
+PNR0000011514,73044,2056-03-11,Sleeper,Premium Tatkal,BCT,UMB,2055-07-11,RAC,2,Adult,IRCTC Website,445,13,13,Rajdhani,17,Defense Quota,Yes,,Confirmed
+PNR0000009006,71262,2049-04-29,3AC,Premium Tatkal,ASR,SBC,2048-08-28,Waitlisted,5,Senior Citizen,Counter,1466,15,15,Rajdhani,463,,Yes,WL199,Not Confirmed
+PNR0000011742,30730,2056-10-25,Sleeper,Premium Tatkal,GKP,SC,2056-02-24,Confirmed,4,Adult,IRCTC Website,1560,8,14,Express,188,Senior Citizen,Yes,,Confirmed
+PNR0000028261,67267,2102-01-17,1AC,General,MMCT,BSB,2101-05-18,Waitlisted,5,Senior Citizen,Counter,605,8,32,Rajdhani,486,Defense Quota,No,WL036,Not Confirmed
+PNR0000016469,35182,2069-10-04,Sleeper,Premium Tatkal,UMB,JU,2069-02-02,Waitlisted,2,Child,Mobile App,161,19,43,Shatabdi,327,Senior Citizen,No,WL155,Not Confirmed
+PNR0000013676,83861,2062-02-10,Sleeper,Premium Tatkal,CNB,PNBE,2061-06-11,Confirmed,4,Adult,IRCTC Website,490,4,40,Express,133,Defense Quota,Yes,,Confirmed
+PNR0000020163,53952,2079-11-15,3AC,General,NDLS,ASR,2079-03-16,Confirmed,3,Adult,Counter,394,12,18,Express,345,Senior Citizen,No,,Confirmed
+PNR0000016785,97877,2070-08-16,1AC,Premium Tatkal,JP,NDLS,2069-12-15,Waitlisted,2,Child,Counter,1357,5,38,Shatabdi,95,Defense Quota,Yes,WL192,Not Confirmed
+PNR0000029322,79747,2104-12-13,Sleeper,General,PNBE,GKP,2104-04-13,Waitlisted,5,Child,Counter,263,11,2,Express,454,Senior Citizen,No,WL163,Not Confirmed
+PNR0000015693,52081,2067-08-20,1AC,Ladies,JP,JP,2066-12-19,Confirmed,4,Senior Citizen,Mobile App,585,2,14,Rajdhani,44,Senior Citizen,Yes,,Confirmed
+PNR0000017335,82018,2072-02-17,3AC,Premium Tatkal,MAS,BSB,2071-06-18,Confirmed,2,Child,Mobile App,1889,3,37,Rajdhani,304,,No,,Confirmed
+PNR0000003735,41529,2034-11-23,Sleeper,Tatkal,ASR,JU,2034-03-24,RAC,5,Senior Citizen,Counter,229,2,4,Shatabdi,166,Senior Citizen,Yes,,Confirmed
+PNR0000025484,37513,2094-06-10,1AC,Premium Tatkal,KOAA,HWH,2093-10-09,Waitlisted,2,Child,Mobile App,558,7,10,Superfast,406,Senior Citizen,Yes,WL180,Not Confirmed
+PNR0000003643,40560,2034-08-23,2AC,Ladies,SBC,UMB,2033-12-22,Confirmed,4,Senior Citizen,IRCTC Website,1881,9,27,Superfast,423,Senior Citizen,No,,Confirmed
+PNR0000007198,50770,2044-05-17,2AC,Ladies,HWH,PNBE,2043-09-16,Waitlisted,4,Adult,IRCTC Website,1637,4,3,Express,32,Senior Citizen,Yes,WL006,Not Confirmed
+PNR0000025365,36545,2094-02-11,2AC,Tatkal,MAS,SBC,2093-06-12,RAC,1,Senior Citizen,IRCTC Website,1346,10,32,Rajdhani,276,Defense Quota,Yes,,Confirmed
+PNR0000024936,34190,2092-12-09,1AC,Ladies,CNB,ADI,2092-04-09,Waitlisted,5,Senior Citizen,IRCTC Website,1434,16,11,Shatabdi,421,,No,WL064,Not Confirmed
+PNR0000021305,10655,2082-12-31,Sleeper,Premium Tatkal,BCT,JU,2082-05-01,Waitlisted,3,Child,IRCTC Website,1504,12,13,Rajdhani,147,,Yes,WL080,Not Confirmed
+PNR0000029365,63993,2105-01-25,3AC,Ladies,ASR,ASR,2104-05-26,Confirmed,2,Senior Citizen,IRCTC Website,199,19,21,Superfast,93,Senior Citizen,No,,Confirmed
+PNR0000021523,64933,2083-08-06,1AC,Tatkal,GKP,JU,2082-12-05,RAC,5,Adult,IRCTC Website,769,8,6,Rajdhani,468,Senior Citizen,No,,Confirmed
+PNR0000021718,80304,2084-02-17,Sleeper,Tatkal,NJP,MAS,2083-06-18,Confirmed,1,Adult,IRCTC Website,679,4,16,Express,174,Senior Citizen,No,,Confirmed
+PNR0000001837,95597,2029-09-12,3AC,Tatkal,NDLS,NJP,2029-01-11,Confirmed,5,Senior Citizen,Counter,1975,13,40,Rajdhani,223,Defense Quota,No,,Confirmed
+PNR0000029915,30125,2106-07-29,2AC,Tatkal,CSMT,GKP,2105-11-27,Waitlisted,2,Child,IRCTC Website,1740,17,43,Express,31,,Yes,WL170,Not Confirmed
+PNR0000010984,64899,2054-09-28,1AC,Ladies,BBS,SC,2054-01-27,Confirmed,1,Senior Citizen,Mobile App,1680,14,42,Express,376,Defense Quota,No,,Confirmed
+PNR0000009303,88490,2050-02-20,1AC,General,JU,UMB,2049-06-21,Waitlisted,5,Child,Counter,865,18,21,Express,459,Senior Citizen,No,WL146,Not Confirmed
+PNR0000012799,45268,2059-09-17,3AC,General,PNBE,LTT,2059-01-16,RAC,2,Child,IRCTC Website,1936,6,4,Superfast,303,,Yes,,Confirmed
+PNR0000001457,56874,2028-08-28,2AC,General,LKO,KOAA,2027-12-28,RAC,2,Senior Citizen,Mobile App,369,7,14,Shatabdi,167,Senior Citizen,Yes,,Confirmed
+PNR0000001092,92182,2027-08-29,2AC,Ladies,CNB,NJP,2026-12-28,RAC,1,Child,Counter,625,10,45,Superfast,208,Senior Citizen,Yes,,Confirmed
+PNR0000004149,69267,2036-01-11,2AC,Tatkal,BBS,HWH,2035-05-12,Confirmed,4,Adult,IRCTC Website,1925,15,12,Rajdhani,198,Senior Citizen,No,,Confirmed
+PNR0000011008,99412,2054-10-22,2AC,Premium Tatkal,CNB,ADI,2054-02-20,Confirmed,3,Senior Citizen,IRCTC Website,1651,12,10,Shatabdi,443,Senior Citizen,Yes,,Confirmed
+PNR0000027068,79844,2098-10-11,1AC,Ladies,MMCT,GKP,2098-02-09,RAC,1,Adult,Counter,1259,13,30,Shatabdi,493,Senior Citizen,No,,Confirmed
+PNR0000009189,23946,2049-10-29,1AC,Ladies,BBS,HWH,2049-02-27,Confirmed,5,Child,IRCTC Website,1598,11,21,Superfast,219,,Yes,,Confirmed
+PNR0000004932,12466,2038-03-04,1AC,Tatkal,JHS,ASR,2037-07-03,Confirmed,4,Senior Citizen,Mobile App,1223,12,18,Shatabdi,382,Senior Citizen,Yes,,Confirmed
+PNR0000014465,88611,2064-04-09,2AC,General,JU,JHS,2063-08-09,Confirmed,5,Child,Mobile App,278,9,7,Express,339,Senior Citizen,Yes,,Confirmed
+PNR0000004556,98961,2037-02-21,2AC,General,KOAA,MMCT,2036-06-22,Waitlisted,1,Child,Mobile App,1839,2,4,Shatabdi,350,Senior Citizen,No,WL192,Not Confirmed
+PNR0000011488,32162,2056-02-14,1AC,Ladies,BBS,JP,2055-06-15,Waitlisted,4,Senior Citizen,Counter,802,17,15,Shatabdi,144,Senior Citizen,Yes,WL068,Not Confirmed
+PNR0000012074,83013,2057-09-22,2AC,Tatkal,JP,MMCT,2057-01-21,Confirmed,4,Senior Citizen,IRCTC Website,1046,14,13,Express,368,Senior Citizen,Yes,,Confirmed
+PNR0000025101,45365,2093-05-23,2AC,Tatkal,BBS,BCT,2092-09-21,Confirmed,5,Senior Citizen,IRCTC Website,381,8,30,Express,281,,Yes,,Confirmed
+PNR0000016797,47830,2070-08-28,3AC,Ladies,BSB,ADI,2069-12-27,Confirmed,1,Adult,IRCTC Website,661,18,2,Express,446,Senior Citizen,No,,Confirmed
+PNR0000020070,14781,2079-08-14,1AC,Ladies,JP,BSB,2078-12-13,Waitlisted,1,Adult,Mobile App,875,9,5,Express,283,,Yes,WL059,Not Confirmed
+PNR0000014418,91556,2064-02-22,3AC,General,UMB,NDLS,2063-06-23,RAC,4,Child,Counter,712,16,28,Shatabdi,445,Senior Citizen,Yes,,Confirmed
+PNR0000028245,58846,2102-01-01,1AC,Premium Tatkal,LTT,ADI,2101-05-02,RAC,2,Adult,IRCTC Website,409,13,24,Shatabdi,393,,No,,Confirmed
+PNR0000025389,72337,2094-03-07,Sleeper,Premium Tatkal,ADI,ADI,2093-07-06,Waitlisted,1,Adult,Counter,1674,13,34,Shatabdi,401,,No,WL071,Not Confirmed
+PNR0000024996,97063,2093-02-07,3AC,General,SC,KOAA,2092-06-08,Confirmed,4,Child,Counter,321,13,44,Express,180,,No,,Confirmed
+PNR0000017278,29141,2071-12-22,1AC,General,JP,HWH,2071-04-22,Confirmed,4,Adult,IRCTC Website,1452,12,24,Rajdhani,365,Senior Citizen,No,,Confirmed
+PNR0000006481,36287,2042-05-31,Sleeper,General,MAS,UMB,2041-09-29,RAC,2,Adult,Mobile App,1954,17,9,Superfast,109,Defense Quota,No,,Confirmed
+PNR0000008020,24852,2046-08-17,2AC,Tatkal,BCT,JHS,2045-12-16,RAC,2,Adult,Mobile App,1705,14,35,Rajdhani,103,,No,,Confirmed
+PNR0000009100,59897,2049-08-01,1AC,Premium Tatkal,MAS,LKO,2048-11-30,Waitlisted,5,Senior Citizen,Mobile App,1355,12,30,Rajdhani,466,Senior Citizen,Yes,WL124,Not Confirmed
+PNR0000017476,88674,2072-07-07,Sleeper,Premium Tatkal,KOAA,NDLS,2071-11-06,RAC,1,Adult,IRCTC Website,1340,7,11,Rajdhani,61,,Yes,,Confirmed
+PNR0000008589,25175,2048-03-08,Sleeper,Ladies,MMCT,JHS,2047-07-08,Confirmed,3,Adult,IRCTC Website,1995,7,21,Superfast,59,Senior Citizen,No,,Confirmed
+PNR0000029161,25401,2104-07-05,3AC,Premium Tatkal,BCT,PNBE,2103-11-04,RAC,3,Child,IRCTC Website,882,4,26,Superfast,393,Defense Quota,Yes,,Confirmed
+PNR0000024515,38285,2091-10-15,2AC,Tatkal,UMB,SC,2091-02-13,RAC,4,Child,IRCTC Website,109,5,16,Express,277,Defense Quota,Yes,,Confirmed
+PNR0000027274,22350,2099-05-05,1AC,Premium Tatkal,BBS,UMB,2098-09-03,Waitlisted,5,Senior Citizen,IRCTC Website,1677,10,38,Shatabdi,256,Senior Citizen,Yes,WL200,Not Confirmed
+PNR0000023872,96026,2090-01-10,3AC,Premium Tatkal,BSB,SC,2089-05-11,Waitlisted,1,Child,Counter,181,4,4,Rajdhani,62,Defense Quota,Yes,WL148,Not Confirmed
+PNR0000029363,46157,2105-01-23,1AC,Tatkal,MMCT,UMB,2104-05-24,RAC,3,Senior Citizen,Mobile App,1649,13,39,Shatabdi,288,Senior Citizen,No,,Confirmed
+PNR0000001503,42657,2028-10-13,2AC,Premium Tatkal,HWH,PNBE,2028-02-12,Waitlisted,3,Adult,Counter,280,18,35,Rajdhani,56,Senior Citizen,Yes,WL165,Not Confirmed
+PNR0000009936,32623,2051-11-15,Sleeper,General,NDLS,NDLS,2051-03-16,Waitlisted,5,Adult,Mobile App,313,9,39,Shatabdi,147,,Yes,WL132,Not Confirmed
+PNR0000010939,97377,2054-08-14,Sleeper,Ladies,BCT,HWH,2053-12-13,Confirmed,3,Adult,IRCTC Website,1857,10,39,Express,462,Defense Quota,Yes,,Confirmed
+PNR0000020294,40968,2080-03-25,2AC,Ladies,ADI,CNB,2079-07-25,Confirmed,3,Child,IRCTC Website,1141,4,20,Rajdhani,204,Defense Quota,No,,Confirmed
+PNR0000003949,81583,2035-06-25,2AC,Premium Tatkal,MMCT,SC,2034-10-24,Waitlisted,5,Senior Citizen,Counter,1407,19,25,Express,322,Senior Citizen,Yes,WL109,Not Confirmed
+PNR0000006438,72061,2042-04-18,Sleeper,Tatkal,HWH,SC,2041-08-17,Waitlisted,3,Senior Citizen,Counter,1030,11,8,Express,123,,No,WL134,Not Confirmed
+PNR0000013619,45227,2061-12-15,2AC,Tatkal,PNBE,JP,2061-04-15,Confirmed,2,Child,IRCTC Website,463,17,4,Shatabdi,299,Senior Citizen,No,,Confirmed
+PNR0000014303,37019,2063-10-30,Sleeper,General,MAS,SBC,2063-02-28,Confirmed,2,Senior Citizen,Counter,996,12,41,Express,481,,No,,Confirmed
+PNR0000022093,10508,2085-02-26,2AC,Tatkal,KOAA,ADI,2084-06-27,Confirmed,1,Adult,Counter,971,15,28,Express,417,,No,,Confirmed
+PNR0000015948,79568,2068-05-01,2AC,Premium Tatkal,BSB,ADI,2067-08-31,Confirmed,2,Senior Citizen,IRCTC Website,1813,10,38,Shatabdi,170,,Yes,,Confirmed
+PNR0000028189,16751,2101-11-06,3AC,Tatkal,KOAA,MAS,2101-03-07,RAC,3,Senior Citizen,IRCTC Website,637,5,25,Shatabdi,171,,Yes,,Confirmed
+PNR0000013064,81320,2060-06-08,2AC,General,JU,LKO,2059-10-08,RAC,2,Senior Citizen,IRCTC Website,1038,17,24,Superfast,399,Senior Citizen,Yes,,Confirmed
+PNR0000013250,91387,2060-12-11,3AC,General,BCT,BSB,2060-04-11,Confirmed,2,Adult,Mobile App,204,4,25,Rajdhani,122,,No,,Confirmed
+PNR0000029166,71955,2104-07-10,Sleeper,Ladies,JU,JP,2103-11-09,RAC,4,Adult,IRCTC Website,1552,17,45,Rajdhani,379,Defense Quota,Yes,,Confirmed
+PNR0000007743,81479,2045-11-13,3AC,General,MMCT,NJP,2045-03-14,RAC,5,Child,Counter,733,15,28,Shatabdi,389,Defense Quota,Yes,,Confirmed
+PNR0000026226,46985,2096-06-21,Sleeper,General,CSMT,UMB,2095-10-21,Waitlisted,3,Adult,Counter,879,6,37,Superfast,87,Defense Quota,No,WL173,Not Confirmed
+PNR0000007755,24545,2045-11-25,1AC,General,JP,GKP,2045-03-26,Confirmed,3,Adult,IRCTC Website,1347,16,15,Express,350,Defense Quota,Yes,,Confirmed
+PNR0000001412,58840,2028-07-14,3AC,Tatkal,MAS,BSB,2027-11-13,Confirmed,5,Adult,IRCTC Website,894,9,17,Superfast,397,Defense Quota,No,,Confirmed
+PNR0000006528,69309,2042-07-17,Sleeper,Ladies,SBC,ADI,2041-11-15,RAC,2,Senior Citizen,IRCTC Website,1766,4,26,Shatabdi,255,Senior Citizen,No,,Confirmed
+PNR0000001122,54475,2027-09-28,2AC,Ladies,UMB,CSMT,2027-01-27,RAC,4,Senior Citizen,Mobile App,1908,3,14,Rajdhani,406,,Yes,,Confirmed
+PNR0000016333,49989,2069-05-21,3AC,Premium Tatkal,BBS,CNB,2068-09-19,Confirmed,5,Senior Citizen,Mobile App,1157,19,14,Express,155,Senior Citizen,Yes,,Confirmed
+PNR0000005245,67517,2039-01-11,Sleeper,Premium Tatkal,MAS,NJP,2038-05-12,Confirmed,3,Adult,IRCTC Website,998,15,30,Shatabdi,444,Senior Citizen,No,,Confirmed
+PNR0000012152,28802,2057-12-09,Sleeper,Ladies,CSMT,HWH,2057-04-09,RAC,1,Child,IRCTC Website,1762,4,45,Express,353,,No,,Confirmed
+PNR0000019640,83108,2078-06-10,1AC,Tatkal,NDLS,LTT,2077-10-09,Confirmed,3,Child,IRCTC Website,1326,8,17,Express,159,Defense Quota,No,,Confirmed
+PNR0000025207,58362,2093-09-06,Sleeper,Premium Tatkal,JU,UMB,2093-01-05,Waitlisted,1,Child,Mobile App,1753,2,10,Shatabdi,39,Defense Quota,Yes,WL024,Not Confirmed
+PNR0000009433,67530,2050-06-30,2AC,Tatkal,BSB,CNB,2049-10-29,RAC,5,Senior Citizen,IRCTC Website,499,6,30,Superfast,346,,No,,Confirmed
+PNR0000007468,11606,2045-02-11,Sleeper,Ladies,BBS,SBC,2044-06-12,RAC,3,Child,Counter,1124,14,24,Shatabdi,145,,Yes,,Confirmed
+PNR0000029011,63899,2104-02-06,1AC,Premium Tatkal,NDLS,JHS,2103-06-07,Waitlisted,5,Adult,Counter,1924,17,26,Superfast,456,,No,WL143,Not Confirmed
+PNR0000011031,43280,2054-11-14,1AC,Ladies,GKP,SC,2054-03-15,RAC,2,Adult,Counter,732,19,17,Superfast,47,,No,,Confirmed
+PNR0000029442,62780,2105-04-12,2AC,General,JU,MMCT,2104-08-11,Confirmed,1,Child,IRCTC Website,976,3,40,Superfast,312,,No,,Confirmed
+PNR0000007293,58442,2044-08-20,3AC,Premium Tatkal,BCT,NJP,2043-12-20,Waitlisted,2,Adult,Counter,747,10,37,Shatabdi,431,Defense Quota,No,WL125,Not Confirmed
+PNR0000012971,48545,2060-03-07,1AC,Premium Tatkal,SBC,BSB,2059-07-07,RAC,5,Adult,IRCTC Website,1332,2,38,Express,406,,Yes,,Confirmed
+PNR0000005346,92013,2039-04-22,Sleeper,General,JP,LTT,2038-08-21,RAC,5,Senior Citizen,Mobile App,160,3,39,Superfast,169,Defense Quota,No,,Confirmed
+PNR0000014470,55244,2064-04-14,Sleeper,Tatkal,SBC,NJP,2063-08-14,Confirmed,1,Child,Mobile App,1956,9,20,Shatabdi,104,Senior Citizen,Yes,,Confirmed
+PNR0000028811,10706,2103-07-21,1AC,Ladies,BSB,BBS,2102-11-19,RAC,2,Senior Citizen,IRCTC Website,1453,11,16,Express,154,Defense Quota,No,,Confirmed
+PNR0000015962,96824,2068-05-15,1AC,Tatkal,JP,MAS,2067-09-14,Waitlisted,2,Child,Counter,1946,14,34,Express,395,,No,WL031,Not Confirmed
+PNR0000024274,67018,2091-02-16,Sleeper,Premium Tatkal,SBC,NJP,2090-06-17,Confirmed,5,Child,IRCTC Website,1046,18,14,Shatabdi,74,Senior Citizen,No,,Confirmed
+PNR0000021149,84994,2082-07-28,Sleeper,Premium Tatkal,MMCT,MMCT,2081-11-26,Confirmed,3,Child,IRCTC Website,1628,6,28,Shatabdi,473,Senior Citizen,No,,Confirmed
+PNR0000010863,77521,2054-05-30,Sleeper,Premium Tatkal,HWH,BBS,2053-09-28,RAC,1,Senior Citizen,IRCTC Website,1945,18,2,Shatabdi,324,Senior Citizen,No,,Confirmed
+PNR0000017754,21188,2073-04-11,3AC,General,PNBE,JHS,2072-08-10,Waitlisted,1,Child,Counter,1741,11,13,Superfast,414,,Yes,WL096,Not Confirmed
+PNR0000004484,89143,2036-12-11,Sleeper,Premium Tatkal,JP,NDLS,2036-04-11,Confirmed,5,Senior Citizen,Counter,257,19,24,Express,6,,No,,Confirmed
+PNR0000010560,95931,2053-07-31,Sleeper,Ladies,MMCT,BBS,2052-11-29,Waitlisted,2,Senior Citizen,Counter,812,5,19,Rajdhani,89,Senior Citizen,Yes,WL010,Not Confirmed
+PNR0000024577,26479,2091-12-16,2AC,General,GKP,LTT,2091-04-16,RAC,3,Senior Citizen,Counter,390,15,40,Express,221,,Yes,,Confirmed
+PNR0000020326,11080,2080-04-26,2AC,Ladies,NDLS,LKO,2079-08-26,RAC,5,Senior Citizen,Counter,615,9,2,Express,439,Defense Quota,No,,Confirmed
+PNR0000021716,61916,2084-02-15,1AC,Tatkal,JP,ASR,2083-06-16,Waitlisted,4,Child,IRCTC Website,1713,7,31,Shatabdi,379,Defense Quota,Yes,WL049,Not Confirmed
+PNR0000010598,45622,2053-09-07,2AC,Premium Tatkal,ADI,JP,2053-01-06,Confirmed,2,Child,Counter,1978,8,25,Superfast,374,Defense Quota,No,,Confirmed
+PNR0000001433,22571,2028-08-04,3AC,General,ADI,PNBE,2027-12-04,Confirmed,3,Child,IRCTC Website,372,14,2,Rajdhani,361,,No,,Confirmed
+PNR0000005860,98851,2040-09-17,1AC,Premium Tatkal,SBC,BCT,2040-01-17,Confirmed,4,Adult,Counter,348,8,40,Superfast,373,Defense Quota,Yes,,Confirmed
+PNR0000012426,95762,2058-09-09,3AC,Premium Tatkal,MMCT,CSMT,2058-01-08,RAC,3,Senior Citizen,Mobile App,1425,5,35,Express,119,Defense Quota,Yes,,Confirmed
+PNR0000010980,27350,2054-09-24,Sleeper,Premium Tatkal,JHS,UMB,2054-01-23,Confirmed,4,Senior Citizen,IRCTC Website,244,8,33,Rajdhani,411,Defense Quota,No,,Confirmed
+PNR0000022044,29277,2085-01-08,2AC,Tatkal,BSB,LKO,2084-05-09,Confirmed,4,Child,Mobile App,128,4,16,Shatabdi,397,Senior Citizen,Yes,,Confirmed
+PNR0000027830,29678,2100-11-12,3AC,Tatkal,JHS,NJP,2100-03-13,Confirmed,3,Adult,IRCTC Website,1337,8,42,Shatabdi,28,,No,,Confirmed
+PNR0000023077,57558,2087-11-07,1AC,Ladies,SC,BBS,2087-03-08,RAC,1,Adult,IRCTC Website,609,6,38,Shatabdi,7,Senior Citizen,Yes,,Confirmed
+PNR0000026376,32839,2096-11-18,1AC,Premium Tatkal,UMB,JP,2096-03-19,Confirmed,5,Adult,IRCTC Website,1016,14,17,Shatabdi,6,,No,,Confirmed
+PNR0000010406,45723,2053-02-27,2AC,Ladies,ASR,ADI,2052-06-28,RAC,1,Senior Citizen,Mobile App,828,5,4,Superfast,264,Defense Quota,No,,Confirmed
+PNR0000023490,46662,2088-12-24,2AC,Ladies,JP,ASR,2088-04-24,Waitlisted,5,Adult,IRCTC Website,149,9,3,Superfast,198,Senior Citizen,Yes,WL122,Not Confirmed
+PNR0000019566,46644,2078-03-28,3AC,Tatkal,BBS,SC,2077-07-27,RAC,4,Child,Mobile App,583,6,5,Express,29,Senior Citizen,Yes,,Confirmed
+PNR0000011472,15438,2056-01-29,1AC,Ladies,PNBE,BSB,2055-05-30,Confirmed,1,Senior Citizen,Mobile App,1916,3,4,Shatabdi,240,Defense Quota,No,,Confirmed
+PNR0000012063,36128,2057-09-11,2AC,General,NJP,KOAA,2057-01-10,RAC,5,Child,Mobile App,692,4,15,Rajdhani,272,Defense Quota,Yes,,Confirmed
+PNR0000008931,76747,2049-02-13,1AC,General,BSB,LTT,2048-06-14,Confirmed,3,Child,IRCTC Website,1399,2,36,Express,432,,No,,Confirmed
+PNR0000010968,64305,2054-09-12,3AC,Tatkal,JP,LKO,2054-01-11,RAC,4,Senior Citizen,Counter,771,14,47,Express,47,Senior Citizen,Yes,,Confirmed
+PNR0000027755,24830,2100-08-29,Sleeper,Ladies,SBC,ASR,2099-12-28,Waitlisted,3,Adult,Mobile App,1247,17,5,Superfast,328,Defense Quota,No,WL112,Not Confirmed
+PNR0000026847,71245,2098-03-04,2AC,Tatkal,JP,PNBE,2097-07-03,Waitlisted,5,Child,IRCTC Website,717,12,20,Superfast,471,Senior Citizen,No,WL049,Not Confirmed
+PNR0000001610,60744,2029-01-28,3AC,Premium Tatkal,BCT,MMCT,2028-05-29,RAC,3,Adult,Counter,268,10,26,Superfast,236,Senior Citizen,No,,Confirmed
+PNR0000029236,79641,2104-09-18,3AC,Tatkal,BBS,NJP,2104-01-18,RAC,4,Senior Citizen,IRCTC Website,1922,3,7,Rajdhani,310,Senior Citizen,Yes,,Confirmed
+PNR0000016266,45955,2069-03-15,Sleeper,General,GKP,ADI,2068-07-14,Confirmed,5,Child,Mobile App,1105,12,35,Rajdhani,386,,Yes,,Confirmed
+PNR0000012393,30226,2058-08-07,Sleeper,Tatkal,SBC,CNB,2057-12-06,RAC,1,Child,Counter,1081,14,45,Superfast,336,Defense Quota,Yes,,Confirmed
+PNR0000026839,15586,2098-02-24,2AC,Tatkal,LKO,GKP,2097-06-25,Confirmed,2,Child,Mobile App,934,14,10,Express,392,Senior Citizen,No,,Confirmed
+PNR0000002767,16066,2032-03-30,1AC,Tatkal,UMB,UMB,2031-07-30,Confirmed,4,Senior Citizen,Counter,1889,3,24,Express,74,Defense Quota,No,,Confirmed
+PNR0000012776,73181,2059-08-25,3AC,General,NDLS,KOAA,2058-12-24,RAC,3,Child,Counter,1066,11,15,Shatabdi,221,Defense Quota,Yes,,Confirmed
+PNR0000023176,71978,2088-02-14,3AC,General,ASR,SC,2087-06-15,RAC,3,Child,Counter,1488,8,46,Rajdhani,277,Defense Quota,Yes,,Confirmed
+PNR0000000216,34769,2025-04-05,1AC,Ladies,BCT,GKP,2024-08-04,RAC,2,Child,Mobile App,137,18,24,Rajdhani,387,,Yes,,Confirmed
+PNR0000024876,59131,2092-10-10,Sleeper,Premium Tatkal,MMCT,JU,2092-02-09,Confirmed,2,Adult,Counter,1211,17,26,Shatabdi,440,Senior Citizen,Yes,,Confirmed
+PNR0000006165,28811,2041-07-19,1AC,General,KOAA,MMCT,2040-11-17,RAC,2,Child,IRCTC Website,439,15,7,Superfast,496,Senior Citizen,Yes,,Confirmed
+PNR0000003901,83760,2035-05-08,2AC,Ladies,UMB,LTT,2034-09-06,Confirmed,2,Child,Mobile App,1079,7,38,Superfast,384,Defense Quota,No,,Confirmed
+PNR0000021231,19709,2082-10-18,3AC,General,HWH,LTT,2082-02-16,Waitlisted,3,Adult,IRCTC Website,608,14,26,Express,202,Defense Quota,Yes,WL047,Not Confirmed
+PNR0000024636,72447,2092-02-13,3AC,Tatkal,KOAA,PNBE,2091-06-14,RAC,4,Child,Mobile App,581,17,9,Rajdhani,105,Senior Citizen,Yes,,Confirmed
+PNR0000009999,54645,2052-01-17,2AC,General,NJP,ADI,2051-05-18,Confirmed,5,Senior Citizen,Counter,985,9,6,Express,482,Defense Quota,Yes,,Confirmed
+PNR0000014797,84076,2065-03-07,3AC,Tatkal,CNB,JP,2064-07-06,Waitlisted,2,Adult,Mobile App,978,15,24,Rajdhani,197,Defense Quota,Yes,WL168,Not Confirmed
+PNR0000006087,82224,2041-05-02,1AC,Ladies,SBC,SBC,2040-08-31,Waitlisted,3,Child,Counter,261,9,21,Superfast,43,Senior Citizen,No,WL016,Not Confirmed
+PNR0000014459,83922,2064-04-03,1AC,Tatkal,JU,UMB,2063-08-03,Waitlisted,1,Child,Mobile App,1336,14,12,Superfast,293,,Yes,WL002,Not Confirmed
+PNR0000002856,93340,2032-06-27,1AC,General,BBS,ASR,2031-10-27,Waitlisted,4,Child,Mobile App,191,16,2,Shatabdi,228,Defense Quota,Yes,WL010,Not Confirmed
+PNR0000018217,65960,2074-07-18,2AC,Tatkal,BCT,JU,2073-11-16,Waitlisted,3,Child,Counter,729,7,26,Shatabdi,388,,No,WL044,Not Confirmed
+PNR0000017041,51697,2071-04-29,2AC,Ladies,SC,CNB,2070-08-28,Waitlisted,4,Senior Citizen,Counter,721,14,28,Rajdhani,188,,Yes,WL172,Not Confirmed
+PNR0000012414,70657,2058-08-28,Sleeper,Tatkal,HWH,CSMT,2057-12-27,Waitlisted,5,Senior Citizen,Mobile App,134,19,24,Rajdhani,417,Senior Citizen,No,WL021,Not Confirmed
+PNR0000009672,18355,2051-02-24,Sleeper,Ladies,CSMT,MAS,2050-06-25,RAC,2,Adult,Mobile App,234,11,30,Express,443,Defense Quota,Yes,,Confirmed
+PNR0000000516,43918,2026-01-30,1AC,Premium Tatkal,ASR,ASR,2025-05-31,Confirmed,5,Child,Counter,1570,10,28,Shatabdi,161,,Yes,,Confirmed
+PNR0000011623,22667,2056-06-28,2AC,General,BSB,SC,2055-10-28,Confirmed,4,Child,IRCTC Website,1044,3,46,Express,276,Defense Quota,No,,Confirmed
+PNR0000008281,67144,2047-05-05,3AC,Tatkal,KOAA,ADI,2046-09-03,Confirmed,2,Child,IRCTC Website,1839,16,45,Rajdhani,178,Defense Quota,No,,Confirmed
+PNR0000020256,28530,2080-02-16,3AC,General,LTT,MAS,2079-06-17,Waitlisted,2,Senior Citizen,Counter,519,4,41,Rajdhani,352,Senior Citizen,Yes,WL010,Not Confirmed
+PNR0000012078,60619,2057-09-26,3AC,Ladies,MMCT,ASR,2057-01-25,Confirmed,2,Child,Counter,120,10,20,Express,159,Defense Quota,Yes,,Confirmed
+PNR0000017734,15000,2073-03-22,3AC,Ladies,BBS,UMB,2072-07-21,Confirmed,2,Adult,Counter,1063,4,40,Superfast,366,,Yes,,Confirmed
+PNR0000002157,29180,2030-07-29,3AC,General,JU,ADI,2029-11-27,RAC,3,Adult,Counter,1610,9,3,Express,382,Defense Quota,Yes,,Confirmed
+PNR0000028081,52166,2101-07-21,Sleeper,Ladies,NDLS,NJP,2100-11-19,Waitlisted,4,Senior Citizen,Counter,650,3,5,Rajdhani,232,Senior Citizen,No,WL021,Not Confirmed
+PNR0000010726,86041,2054-01-13,1AC,Tatkal,LTT,JU,2053-05-14,Waitlisted,3,Child,IRCTC Website,77,15,2,Express,392,Defense Quota,No,WL086,Not Confirmed
+PNR0000029030,59400,2104-02-25,1AC,Premium Tatkal,PNBE,JU,2103-06-26,Waitlisted,3,Adult,Counter,187,14,22,Express,69,Senior Citizen,No,WL042,Not Confirmed
+PNR0000003096,84527,2033-02-22,2AC,Premium Tatkal,LTT,MAS,2032-06-23,RAC,2,Adult,Counter,1754,17,21,Express,468,,No,,Confirmed
+PNR0000022753,65447,2086-12-18,3AC,Premium Tatkal,CNB,HWH,2086-04-18,Waitlisted,2,Adult,Mobile App,331,13,2,Rajdhani,160,Defense Quota,Yes,WL117,Not Confirmed
+PNR0000003108,65198,2033-03-06,Sleeper,Tatkal,MMCT,SC,2032-07-05,Confirmed,2,Child,IRCTC Website,589,19,34,Superfast,484,Senior Citizen,No,,Confirmed
+PNR0000010276,54690,2052-10-20,3AC,Premium Tatkal,LTT,CSMT,2052-02-19,RAC,5,Senior Citizen,IRCTC Website,355,11,46,Superfast,151,,Yes,,Confirmed
+PNR0000021881,13440,2084-07-29,Sleeper,Ladies,SC,NJP,2083-11-28,Waitlisted,5,Senior Citizen,Counter,1397,17,40,Express,11,Defense Quota,Yes,WL194,Not Confirmed
+PNR0000006427,57581,2042-04-07,Sleeper,Tatkal,SBC,CSMT,2041-08-06,Waitlisted,3,Senior Citizen,Counter,709,3,16,Rajdhani,456,,No,WL075,Not Confirmed
+PNR0000009252,63481,2049-12-31,1AC,General,JU,JHS,2049-05-01,RAC,4,Adult,Counter,1415,2,2,Rajdhani,299,Defense Quota,Yes,,Confirmed
+PNR0000002406,56099,2031-04-04,1AC,General,UMB,NJP,2030-08-03,Waitlisted,3,Senior Citizen,Counter,1489,8,24,Rajdhani,152,Senior Citizen,No,WL178,Not Confirmed
+PNR0000025038,10359,2093-03-21,Sleeper,Premium Tatkal,ASR,NJP,2092-07-20,RAC,3,Adult,Mobile App,96,10,44,Rajdhani,450,Senior Citizen,Yes,,Confirmed
+PNR0000014642,36501,2064-10-03,2AC,Ladies,SC,JP,2064-02-02,RAC,5,Senior Citizen,IRCTC Website,1452,12,3,Express,462,Defense Quota,No,,Confirmed
+PNR0000024743,56129,2092-05-30,2AC,Ladies,JP,KOAA,2091-09-29,Waitlisted,5,Child,Counter,1310,3,22,Express,190,Senior Citizen,Yes,WL094,Not Confirmed
+PNR0000018524,36464,2075-05-21,2AC,Ladies,KOAA,BBS,2074-09-19,Confirmed,5,Adult,IRCTC Website,894,15,41,Express,79,Defense Quota,Yes,,Confirmed
+PNR0000013420,75629,2061-05-30,3AC,Premium Tatkal,JHS,LTT,2060-09-28,RAC,5,Adult,IRCTC Website,416,19,33,Shatabdi,230,Senior Citizen,Yes,,Confirmed
+PNR0000003398,10991,2033-12-21,Sleeper,Premium Tatkal,KOAA,CNB,2033-04-21,RAC,3,Senior Citizen,Counter,1658,9,7,Express,261,,No,,Confirmed
+PNR0000008943,44455,2049-02-25,Sleeper,Ladies,HWH,SC,2048-06-26,Confirmed,5,Senior Citizen,Counter,1133,8,42,Superfast,487,Defense Quota,No,,Confirmed
+PNR0000027172,31376,2099-01-23,Sleeper,Ladies,CNB,NDLS,2098-05-24,Confirmed,1,Senior Citizen,Mobile App,1066,10,29,Express,350,Defense Quota,Yes,,Confirmed
+PNR0000006939,25928,2043-09-01,Sleeper,Ladies,BBS,JU,2042-12-31,RAC,5,Child,IRCTC Website,1604,19,42,Shatabdi,293,Defense Quota,No,,Confirmed
+PNR0000027315,38748,2099-06-15,2AC,Ladies,UMB,BCT,2098-10-14,Confirmed,3,Adult,Counter,523,13,32,Rajdhani,420,Defense Quota,No,,Confirmed
+PNR0000028314,21084,2102-03-11,2AC,Premium Tatkal,NJP,GKP,2101-07-10,RAC,3,Child,Mobile App,1100,12,31,Express,414,Senior Citizen,No,,Confirmed
+PNR0000027774,89415,2100-09-17,Sleeper,General,JU,GKP,2100-01-16,Waitlisted,2,Adult,IRCTC Website,272,8,28,Express,140,,Yes,WL041,Not Confirmed
+PNR0000009816,75986,2051-07-18,Sleeper,Tatkal,LKO,KOAA,2050-11-16,RAC,5,Adult,Mobile App,1042,12,39,Rajdhani,360,Senior Citizen,No,,Confirmed
+PNR0000016139,30799,2068-11-08,2AC,Ladies,LKO,NDLS,2068-03-09,RAC,5,Senior Citizen,IRCTC Website,1826,2,28,Superfast,51,Defense Quota,Yes,,Confirmed
+PNR0000009418,30704,2050-06-15,Sleeper,Tatkal,MMCT,LTT,2049-10-14,Confirmed,3,Adult,Counter,1740,5,44,Rajdhani,497,Senior Citizen,No,,Confirmed
+PNR0000012315,38075,2058-05-21,Sleeper,Premium Tatkal,CSMT,BSB,2057-09-19,Confirmed,3,Senior Citizen,Counter,1852,18,43,Shatabdi,124,Senior Citizen,No,,Confirmed
+PNR0000002518,58805,2031-07-25,1AC,Ladies,SC,BBS,2030-11-23,Waitlisted,3,Child,Counter,939,8,28,Express,45,Defense Quota,Yes,WL148,Not Confirmed
+PNR0000029751,40586,2106-02-15,1AC,Premium Tatkal,KOAA,MMCT,2105-06-16,Waitlisted,4,Senior Citizen,Mobile App,300,15,34,Superfast,344,Defense Quota,No,WL160,Not Confirmed
+PNR0000016601,38659,2070-02-13,2AC,General,NJP,NDLS,2069-06-14,Confirmed,4,Senior Citizen,Counter,1658,3,9,Shatabdi,177,,No,,Confirmed
+PNR0000017592,65136,2072-10-31,3AC,Tatkal,MMCT,BBS,2072-03-01,RAC,3,Adult,Mobile App,1927,9,19,Rajdhani,277,Defense Quota,No,,Confirmed
+PNR0000005100,14218,2038-08-19,Sleeper,Premium Tatkal,BCT,NDLS,2037-12-18,RAC,2,Child,IRCTC Website,542,5,5,Superfast,243,,No,,Confirmed
+PNR0000009842,69345,2051-08-13,Sleeper,General,GKP,PNBE,2050-12-12,Confirmed,5,Child,IRCTC Website,84,19,11,Express,209,,No,,Confirmed
+PNR0000017187,89226,2071-09-22,2AC,Ladies,SBC,UMB,2071-01-21,Confirmed,2,Adult,Mobile App,1326,10,43,Superfast,55,Defense Quota,Yes,,Confirmed
+PNR0000007277,58367,2044-08-04,Sleeper,General,BCT,UMB,2043-12-04,RAC,2,Senior Citizen,IRCTC Website,1635,5,40,Shatabdi,109,Senior Citizen,No,,Confirmed
+PNR0000018772,43867,2076-01-24,1AC,Ladies,ASR,LKO,2075-05-25,Confirmed,1,Senior Citizen,Mobile App,210,14,25,Rajdhani,6,Senior Citizen,No,,Confirmed
+PNR0000010078,45992,2052-04-05,1AC,Ladies,JHS,BSB,2051-08-05,RAC,2,Adult,IRCTC Website,1666,15,42,Superfast,380,Defense Quota,No,,Confirmed
+PNR0000021770,22920,2084-04-09,1AC,General,NJP,SC,2083-08-09,RAC,1,Adult,Mobile App,653,14,28,Rajdhani,60,Senior Citizen,Yes,,Confirmed
+PNR0000026443,89344,2097-01-24,1AC,Tatkal,SC,LKO,2096-05-25,Waitlisted,5,Senior Citizen,IRCTC Website,1987,13,23,Express,72,Senior Citizen,Yes,WL055,Not Confirmed
+PNR0000009892,77808,2051-10-02,2AC,Tatkal,MAS,PNBE,2051-01-31,RAC,3,Senior Citizen,IRCTC Website,209,5,29,Shatabdi,459,,Yes,,Confirmed
+PNR0000006328,25824,2041-12-29,3AC,Tatkal,ADI,CSMT,2041-04-29,Waitlisted,1,Senior Citizen,Mobile App,194,8,42,Express,52,,No,WL026,Not Confirmed
+PNR0000010045,99014,2052-03-03,3AC,Ladies,LKO,JP,2051-07-03,Waitlisted,2,Senior Citizen,Counter,1356,15,39,Superfast,291,Senior Citizen,No,WL109,Not Confirmed
+PNR0000026119,89995,2096-03-06,2AC,Ladies,JU,ASR,2095-07-06,Confirmed,1,Adult,Counter,1164,5,27,Superfast,492,Senior Citizen,Yes,,Confirmed
+PNR0000014329,47023,2063-11-25,1AC,General,CNB,MMCT,2063-03-26,Confirmed,3,Adult,IRCTC Website,1866,19,11,Shatabdi,426,,No,,Confirmed
+PNR0000026755,46562,2097-12-02,1AC,Premium Tatkal,KOAA,HWH,2097-04-02,Confirmed,3,Child,Counter,1483,14,19,Superfast,242,Defense Quota,No,,Confirmed
+PNR0000011846,29835,2057-02-06,Sleeper,Tatkal,NDLS,CSMT,2056-06-07,RAC,1,Senior Citizen,Counter,1360,10,2,Shatabdi,254,Defense Quota,Yes,,Confirmed
+PNR0000016586,64489,2070-01-29,1AC,Ladies,MMCT,LKO,2069-05-30,RAC,3,Senior Citizen,Counter,890,9,32,Rajdhani,327,Senior Citizen,No,,Confirmed
+PNR0000017550,43370,2072-09-19,Sleeper,Tatkal,ASR,GKP,2072-01-19,Waitlisted,1,Adult,Mobile App,1687,18,8,Express,174,,Yes,WL022,Not Confirmed
+PNR0000021264,34427,2082-11-20,3AC,Ladies,NDLS,GKP,2082-03-21,Waitlisted,3,Senior Citizen,Mobile App,640,6,22,Shatabdi,154,Senior Citizen,Yes,WL018,Not Confirmed
+PNR0000015091,51565,2065-12-26,1AC,Premium Tatkal,CNB,BSB,2065-04-26,Confirmed,3,Senior Citizen,Counter,306,5,41,Express,241,Defense Quota,Yes,,Confirmed
+PNR0000023480,76765,2088-12-14,Sleeper,Ladies,PNBE,NDLS,2088-04-14,RAC,5,Adult,IRCTC Website,634,18,8,Superfast,133,Senior Citizen,Yes,,Confirmed
+PNR0000018393,50028,2075-01-10,3AC,General,GKP,MAS,2074-05-11,Waitlisted,4,Adult,Counter,563,16,40,Shatabdi,23,Senior Citizen,Yes,WL167,Not Confirmed
+PNR0000022276,72671,2085-08-28,3AC,Ladies,ASR,JP,2084-12-27,Confirmed,3,Child,Counter,1811,18,38,Shatabdi,36,Defense Quota,No,,Confirmed
+PNR0000010399,68491,2053-02-20,1AC,Tatkal,CNB,ADI,2052-06-21,Confirmed,5,Adult,Counter,840,12,31,Shatabdi,428,,Yes,,Confirmed
+PNR0000008164,39004,2047-01-08,2AC,Premium Tatkal,NJP,LKO,2046-05-09,Confirmed,3,Senior Citizen,Mobile App,1231,14,8,Shatabdi,352,,No,,Confirmed
+PNR0000022500,97639,2086-04-09,Sleeper,Tatkal,JHS,BBS,2085-08-08,RAC,2,Adult,Mobile App,1414,13,10,Rajdhani,408,Defense Quota,No,,Confirmed
+PNR0000010883,47855,2054-06-19,2AC,Premium Tatkal,JP,PNBE,2053-10-18,Confirmed,2,Adult,IRCTC Website,333,4,39,Shatabdi,305,Defense Quota,Yes,,Confirmed
+PNR0000023086,29596,2087-11-16,2AC,Ladies,MAS,BCT,2087-03-17,Confirmed,4,Adult,IRCTC Website,149,8,26,Express,263,Senior Citizen,Yes,,Confirmed
+PNR0000024672,16943,2092-03-20,2AC,Premium Tatkal,MMCT,KOAA,2091-07-20,Waitlisted,1,Senior Citizen,Counter,375,17,21,Shatabdi,348,Defense Quota,No,WL011,Not Confirmed
+PNR0000013720,45935,2062-03-26,2AC,Premium Tatkal,JP,KOAA,2061-07-25,Waitlisted,5,Senior Citizen,Mobile App,958,9,13,Shatabdi,350,Senior Citizen,Yes,WL060,Not Confirmed
+PNR0000017846,51688,2073-07-12,Sleeper,Premium Tatkal,BCT,SC,2072-11-10,RAC,5,Child,Mobile App,1093,8,25,Shatabdi,157,Defense Quota,Yes,,Confirmed
+PNR0000003382,17672,2033-12-05,2AC,Ladies,ASR,GKP,2033-04-05,Confirmed,4,Child,Mobile App,791,5,38,Shatabdi,273,Defense Quota,No,,Confirmed
+PNR0000009845,37684,2051-08-16,1AC,Tatkal,LKO,CSMT,2050-12-15,RAC,1,Adult,Mobile App,492,3,4,Express,352,,Yes,,Confirmed
+PNR0000018832,81992,2076-03-24,1AC,Premium Tatkal,SBC,JU,2075-07-24,Confirmed,1,Senior Citizen,Counter,1366,18,28,Rajdhani,275,Senior Citizen,Yes,,Confirmed
+PNR0000019340,83382,2077-08-14,Sleeper,Tatkal,NDLS,NDLS,2076-12-13,Waitlisted,3,Senior Citizen,Mobile App,158,2,5,Shatabdi,179,Defense Quota,No,WL091,Not Confirmed
+PNR0000007339,57318,2044-10-05,Sleeper,General,MAS,NDLS,2044-02-04,RAC,3,Adult,IRCTC Website,242,15,23,Shatabdi,255,,Yes,,Confirmed
+PNR0000014368,24815,2064-01-03,Sleeper,Ladies,LTT,SBC,2063-05-04,Confirmed,1,Child,Counter,1119,18,13,Shatabdi,417,Defense Quota,Yes,,Confirmed
+PNR0000014659,72663,2064-10-20,Sleeper,Premium Tatkal,ASR,ADI,2064-02-19,RAC,4,Senior Citizen,Mobile App,1973,8,44,Superfast,468,,Yes,,Confirmed
