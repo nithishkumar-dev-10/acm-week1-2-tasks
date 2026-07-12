@@ -5,3 +5,5 @@ venv/
 .vscode
 .ipynb_checkpoints/
 .jupyter/
+.DS_Store
+**/.DS_Store
