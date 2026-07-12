@@ -3,12 +3,7 @@ import pandas as pd
 import numpy as np
 import joblib
 from pathlib import Path
-from sklearn.model_selection import (
-    train_test_split,
-    StratifiedKFold,
-    RandomizedSearchCV,
-    cross_val_score,
-)
+from sklearn.model_selection import (train_test_split,StratifiedKFold,RandomizedSearchCV,cross_val_score,)
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
@@ -21,7 +16,7 @@ from utils import log_experiment
 
 AAA_LOW_AUC_THRESHOLD = 0.55  # below this, we flag rather than declare victory
 
-
+#loading the dataset created by the feature engneering 
 def load_featured_data(cfg: dict) -> pd.DataFrame:
     path = Path(get_path(cfg, "data", "featured"))
     if not path.exists():
@@ -30,7 +25,7 @@ def load_featured_data(cfg: dict) -> pd.DataFrame:
     print(f"Loaded featured data: {df.shape[0]} rows, {df.shape[1]} columns")
     return df
 
-
+#appyling Train_Test_Split in the ratio of 80% for training and 20% for testing ,and saving them into respective file to ensure no data leakage 
 def split_and_save_stage1(df: pd.DataFrame, cfg: dict):
    
     target_col = cfg["target"]["stage1"]
@@ -41,9 +36,7 @@ def split_and_save_stage1(df: pd.DataFrame, cfg: dict):
     X = df[feature_cols]
     y = df[target_col]
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, stratify=y, random_state=cfg["random_seed"]
-    )
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=cfg["random_seed"])
 
     splits_dir = Path(cfg["data"]["splits_dir"])
     splits_dir.mkdir(parents=True, exist_ok=True)
@@ -57,9 +50,8 @@ def split_and_save_stage1(df: pd.DataFrame, cfg: dict):
           f"(train class balance: {y_train.mean():.3f} confirmed)")
     return X_train, X_test, y_train, y_test
 
-
+#loading the splits from the respective file
 def load_stage1_splits(cfg: dict):
-    """Re-load the persisted splits (used when resuming straight into tuning)."""
     splits_dir = Path(cfg["data"]["splits_dir"])
     X_train = pd.read_csv(splits_dir / "stage1_X_train.csv")
     X_test = pd.read_csv(splits_dir / "stage1_X_test.csv")
@@ -69,7 +61,7 @@ def load_stage1_splits(cfg: dict):
     return X_train, X_test, y_train, y_test
 
 
-
+#comparing Xgboost ,Random_forest and Logisitic_Regression using 5-fold Cross_validation 
 def compare_models(X_train, y_train, cfg: dict) -> dict:
     
     neg = (y_train == 0).sum()
@@ -112,7 +104,7 @@ def compare_models(X_train, y_train, cfg: dict) -> dict:
 
     return results
 
-
+#choosing the best baseline model from the comparision done above !
 def pick_best_baseline_model(results: dict) -> str:
     best_name = max(results, key=lambda name: results[name]["f1_mean"])
     print(f"Best model by mean CV F1: {best_name} (F1={results[best_name]['f1_mean']:.4f})")
@@ -120,7 +112,7 @@ def pick_best_baseline_model(results: dict) -> str:
 
 
 
-
+#defining all hyperparameter combination's for RandomSearchCV
 def get_search_spaces(cfg: dict, y_train: pd.Series) -> dict:
 
     neg = (y_train == 0).sum()
@@ -165,7 +157,7 @@ def get_search_spaces(cfg: dict, y_train: pd.Series) -> dict:
     }
     return spaces
 
-
+#Hyper_parameter_Tunning all the models using RandomSearchCV
 def tune_all_models(X_train, y_train, cfg: dict) -> dict:
     skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=cfg["random_seed"])
     spaces = get_search_spaces(cfg, y_train)
@@ -191,8 +183,7 @@ def tune_all_models(X_train, y_train, cfg: dict) -> dict:
         cv_auc_mean = search.best_score_
         cv_auc_std = search.cv_results_["std_test_score"][search.best_index_]
 
-        # Also report F1 for the same tuned config, for transparency —
-        # NOT used for selection (see module docstring on the F1 trap).
+        
         f1_scores = cross_val_score(best_pipe, X_train, y_train, cv=skf, scoring="f1")
 
         log_experiment(
@@ -221,7 +212,7 @@ def tune_all_models(X_train, y_train, cfg: dict) -> dict:
 
     return results
 
-
+#choosing the best tuned model
 def pick_best_tuned_model(results: dict) -> str:
     best_name = max(results, key=lambda name: results[name]["cv_auc_mean"])
     print(f"\nBest tuned model by mean CV AUC: {best_name} "
@@ -229,7 +220,7 @@ def pick_best_tuned_model(results: dict) -> str:
     return best_name
 
 
-
+#Evaluating the best tuned model on the Unseen Data (X_test)
 def evaluate_on_test(best_pipe, X_test, y_test, model_name: str):
     y_pred = best_pipe.predict(X_test)
     y_proba = best_pipe.predict_proba(X_test)[:, 1]
@@ -253,22 +244,11 @@ def evaluate_on_test(best_pipe, X_test, y_test, model_name: str):
         test_metric_name="f1", test_metric_value=test_f1,
     )
 
-    if test_auc < AAA_LOW_AUC_THRESHOLD:
-        print(
-            "\n" + "!" * 78 +
-            f"\nDIAGNOSTIC: test AUC ({test_auc:.4f}) is at/near random chance (0.50).\n"
-            "This matches the raw-data audit: no available feature is statistically\n"
-            "related to Confirmation Status. Tuning cannot manufacture signal that\n"
-            "isn't in the data. This is a DATASET finding, not a modeling failure —\n"
-            "document it as such rather than continuing to tune Stage 1 further.\n"
-            "Recommended next step: revisit the raw data source (or discuss with\n"
-            "your mentor whether this dataset is fit for a Stage 1 classifier at all)\n"
-            "before sinking more time into Step 12+.\n" + "!" * 78
-        )
+
 
     return test_f1, test_auc
 
-
+#saving the model in artifact/
 def save_artifacts(best_pipe, cfg: dict):
     prep_path = Path(cfg["artifacts"]["preprocessor_stage1"])
     model_path = Path(cfg["artifacts"]["model_stage1"])
@@ -282,18 +262,18 @@ def save_artifacts(best_pipe, cfg: dict):
 
 
 
-
+#main function
 def main():
     cfg = load_config()
 
-    # Step 10: load data, split, baseline model comparison
+    
     df = load_featured_data(cfg)
     X_train, X_test, y_train, y_test = split_and_save_stage1(df, cfg)
     baseline_results = compare_models(X_train, y_train, cfg)
     baseline_best_name = pick_best_baseline_model(baseline_results)
     print(f"\nStage 1 model comparison complete. '{baseline_best_name}' will be tuned next.")
 
-    # Step 11: hyperparameter tuning, selected on CV AUC (not F1 — see module docstring)
+    
     tuning_results = tune_all_models(X_train, y_train, cfg)
     best_name = pick_best_tuned_model(tuning_results)
     best_pipe = tuning_results[best_name]["pipeline"]

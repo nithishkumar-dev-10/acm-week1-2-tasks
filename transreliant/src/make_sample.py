@@ -1,22 +1,11 @@
-# src/make_sample.py
-#
-# Generates the small "sample" raw CSV (safe to commit to GitHub) from the
-# full raw CSV (kept local only, gitignored). Run this once whenever the
-# full dataset changes, so the committed sample stays in sync.
-#
-# Usage:
-#   python make_sample.py
+
 
 import pandas as pd
 from pathlib import Path
 from config_loader import load_config
 
-
+#creating the sample data set with the full data set and teh sample_size given in config.yaml 
 def make_sample(cfg: dict) -> None:
-    # NOTE: intentionally reading cfg["data"]["raw"]["full"] / ["sample"]
-    # directly here instead of via get_path() — this script's whole job is
-    # to bridge full -> sample, so it needs both paths regardless of
-    # whatever `mode` happens to be set to.
     full_path = Path(cfg["data"]["raw"]["full"])
     sample_path = Path(cfg["data"]["raw"]["sample"])
     sample_size = cfg.get("sample_size", 500)

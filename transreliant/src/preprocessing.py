@@ -1,18 +1,18 @@
-# src/preprocessing.py
+
 import pandas as pd
 from pathlib import Path
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from config_loader import load_config, get_path
 
-
+#loading the numerical coloums and categorical coloumns from the config.yaml
 def get_feature_lists(cfg: dict) -> tuple[list, list]:
     
     numeric_cols = cfg["features"]["numerical"]
     categorical_cols = cfg["features"]["categorical"]
     return numeric_cols, categorical_cols
 
-
+#applying standardscaler for numercial coloumns and onehotencoding fot categorical coloumns 
 def build_preprocessor(numeric_cols: list, categorical_cols: list) -> ColumnTransformer:
     
     return ColumnTransformer(
@@ -23,21 +23,21 @@ def build_preprocessor(numeric_cols: list, categorical_cols: list) -> ColumnTran
         remainder="drop",  # anything not explicitly listed gets dropped, not silently passed through
     )
 
-
+#applying the build_preprocessor to the stage1 model (xgb_classifier)
 def build_stage1_preprocessor(cfg: dict) -> ColumnTransformer:
     
     numeric_cols, categorical_cols = get_feature_lists(cfg)
     print(f"Stage 1 preprocessor: {len(numeric_cols)} numeric, {len(categorical_cols)} categorical cols.")
     return build_preprocessor(numeric_cols, categorical_cols)
 
-
+#applying the build_preprocessor to the stage2 model (Ridge_Regressor)
 def build_stage2_preprocessor(cfg: dict) -> ColumnTransformer:
    
     numeric_cols, categorical_cols = get_feature_lists(cfg)
     print(f"Stage 2 preprocessor: {len(numeric_cols)} numeric, {len(categorical_cols)} categorical cols.")
     return build_preprocessor(numeric_cols, categorical_cols)
 
-
+#verifying all the features mentioned in config.yaml does really exists in data
 def sanity_check_columns(cfg: dict) -> None:
  
     featured_path = Path(get_path(cfg, "data", "featured"))
@@ -52,7 +52,7 @@ def sanity_check_columns(cfg: dict) -> None:
     assert not missing, f"config.yaml expects these columns but featured.csv doesn't have them: {missing}"
     print(f"All {len(expected)} configured feature columns present in featured.csv.")
 
-
+#main function 
 def main():
     cfg = load_config()
     sanity_check_columns(cfg)

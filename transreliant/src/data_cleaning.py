@@ -3,7 +3,7 @@ import numpy as np
 from pathlib import Path
 from config_loader import load_config, get_path
 
-
+#loading_the_data and storing into the variable named 'df'
 def load_raw_data(cfg: dict) -> pd.DataFrame:
     
     raw_path = Path(get_path(cfg, "data", "raw"))
@@ -15,6 +15,7 @@ def load_raw_data(cfg: dict) -> pd.DataFrame:
     return df
 
 
+#dropping unwanted columns, loading the unwanted features from config.yaml and dropping it 
 def drop_leak_and_id_columns(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
    
     cols_to_drop = [c for c in cfg["drop_columns"] if c in df.columns]
@@ -26,7 +27,7 @@ def drop_leak_and_id_columns(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     print(f"Dropped columns: {cols_to_drop}")
     return df
 
-
+#temproal feature engneering,deriving the 3 features from the date feature 
 def derive_date_features(df: pd.DataFrame) -> pd.DataFrame:
   
     if "Date of Journey" not in df.columns or "Booking Date" not in df.columns:
@@ -50,7 +51,7 @@ def derive_date_features(df: pd.DataFrame) -> pd.DataFrame:
     print("Derived journey_month, journey_dayofweek, days_before_journey; dropped raw date columns.")
     return df
 
-
+#encoding the target coloumn's 
 def encode_targets(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
 
     status_col = cfg["target"]["stage1"]   # "Confirmation Status"
@@ -82,7 +83,7 @@ def encode_targets(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     print(f"Encoded targets: {status_col} -> {{0,1}}, {wl_col} -> numeric.")
     return df
 
-
+#handling null values
 def check_and_handle_nulls(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
   
     null_counts = df.isnull().sum()
@@ -110,7 +111,7 @@ def check_and_handle_nulls(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
 
     return df
 
-
+#checking and removing duplicate
 def check_duplicates(df: pd.DataFrame) -> pd.DataFrame:
    
     dupe_count = df.duplicated().sum()
@@ -121,7 +122,7 @@ def check_duplicates(df: pd.DataFrame) -> pd.DataFrame:
         print("No duplicate rows found.")
     return df
 
-
+#data_validation before model training 
 def run_leakage_guardrails(df: pd.DataFrame, cfg: dict) -> None:
     
     status_col = cfg["target"]["stage1"]
@@ -133,7 +134,7 @@ def run_leakage_guardrails(df: pd.DataFrame, cfg: dict) -> None:
     assert df[wl_col].notna().all(), "Waitlist Position still has NaNs after cleaning"
     print("Leakage guardrail asserts passed.")
 
-
+#saving the clean data
 def save_cleaned_data(df: pd.DataFrame, cfg: dict) -> None:
     """Save cleaned dataframe to the processed data path."""
     out_path = Path(get_path(cfg, "data", "cleaned"))
@@ -141,7 +142,7 @@ def save_cleaned_data(df: pd.DataFrame, cfg: dict) -> None:
     df.to_csv(out_path, index=False)
     print(f"Saved cleaned data to {out_path} — final shape: {df.shape}")
 
-
+#main function 
 def main():
     cfg = load_config()
     df = load_raw_data(cfg)

@@ -9,10 +9,7 @@ import yaml
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from sklearn.metrics import (
-    precision_score,
-    recall_score,
-    roc_curve,
+from sklearn.metrics import (precision_score,recall_score,roc_curve,
     roc_auc_score,
     confusion_matrix,
     classification_report,
@@ -326,10 +323,6 @@ def evaluate_stage1(cfg: dict):
 
     return chosen_threshold
 
-
-# ---------------------------------------------------------------------------
-# Step 16 — Stage 2 evaluation
-# ---------------------------------------------------------------------------
 
 def load_stage2_test_split(cfg: dict):
     splits_dir = Path(cfg["data"]["splits_dir"])
