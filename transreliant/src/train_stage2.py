@@ -17,7 +17,7 @@ from utils import log_experiment
 AAA_LOW_R2_THRESHOLD = 0.05  # below this, we flag rather than declare victory
 
 
-
+#loading the data from the feature_engneered data 
 def load_featured_data(cfg: dict) -> pd.DataFrame:
     path = Path(get_path(cfg, "data", "featured"))
     if not path.exists():
@@ -26,7 +26,7 @@ def load_featured_data(cfg: dict) -> pd.DataFrame:
     print(f"Loaded featured data: {df.shape[0]} rows, {df.shape[1]} columns")
     return df
 
-
+#taking only the "Not_Confirmed" data from data_set
 def build_stage2_subset(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     
     status_col = cfg["target"]["stage1"]  # "Confirmation Status"
@@ -35,7 +35,7 @@ def build_stage2_subset(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
           f"(out of {df.shape[0]} total).")
     return stage2_df
 
-
+#Applying train_test_split in the 80:20 ratio and saving in the respective files 
 def split_and_save_stage2(stage2_df: pd.DataFrame, cfg: dict):
     
     target_col = cfg["target"]["stage2"]  # "Waitlist Position"
@@ -46,9 +46,7 @@ def split_and_save_stage2(stage2_df: pd.DataFrame, cfg: dict):
     X = stage2_df[feature_cols]
     y = stage2_df[target_col]
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=cfg["random_seed"]
-    )
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=cfg["random_seed"])
 
     splits_dir = Path(cfg["data"]["splits_dir"])
     splits_dir.mkdir(parents=True, exist_ok=True)
@@ -62,9 +60,9 @@ def split_and_save_stage2(stage2_df: pd.DataFrame, cfg: dict):
           f"(target range: {y.min():.0f}-{y.max():.0f}, mean={y.mean():.1f})")
     return X_train, X_test, y_train, y_test
 
-
+#loading the Splits from the respective file 
 def load_stage2_splits(cfg: dict):
-    """Re-load the persisted Stage 2 splits (used when resuming without re-deriving them)."""
+    
     splits_dir = Path(cfg["data"]["splits_dir"])
     X_train = pd.read_csv(splits_dir / "stage2_X_train.csv")
     X_test = pd.read_csv(splits_dir / "stage2_X_test.csv")
@@ -75,7 +73,7 @@ def load_stage2_splits(cfg: dict):
 
 
 
-
+#comparing Ridge,Random_forest_regressor and XGBregressor along with Kfold cross validation
 def compare_models(X_train, y_train, cfg: dict) -> dict:
     
     models = {
@@ -106,14 +104,14 @@ def compare_models(X_train, y_train, cfg: dict) -> dict:
 
     return results
 
-
+#picking the best baseline model
 def pick_best_baseline_model(results: dict) -> str:
     best_name = min(results, key=lambda name: results[name]["rmse_mean"])
     print(f"Best model by mean CV RMSE: {best_name} (RMSE={results[best_name]['rmse_mean']:.4f})")
     return best_name
 
 
-
+#defining all the parameter combinations for GridSearchCV
 def get_search_space(model_name: str, cfg: dict) -> dict:
     
     spaces = {
@@ -142,7 +140,7 @@ def get_search_space(model_name: str, cfg: dict) -> dict:
     }
     return spaces[model_name]
 
-
+#Hyperparameter tunning using GridSearchCv and selecting the best tuned model
 def tune_winner(winner_name: str, X_train, y_train, cfg: dict):
     kf = KFold(n_splits=5, shuffle=True, random_state=cfg["random_seed"])
     spec = get_search_space(winner_name, cfg)
@@ -176,7 +174,7 @@ def tune_winner(winner_name: str, X_train, y_train, cfg: dict):
     return best_pipe, cv_rmse_mean, cv_rmse_std, search.best_params_
 
 
-
+#evaluating the best tuned model 
 def evaluate_on_test(best_pipe, X_test, y_test, model_name: str):
     y_pred = best_pipe.predict(X_test)
 
@@ -202,22 +200,11 @@ def evaluate_on_test(best_pipe, X_test, y_test, model_name: str):
         test_metric_name="r2", test_metric_value=test_r2,
     )
 
-    if test_r2 < AAA_LOW_R2_THRESHOLD:
-        print(
-            "\n" + "!" * 78 +
-            f"\nDIAGNOSTIC: test R2 ({test_r2:.4f}) is at/near zero — the model explains "
-            "almost none\nof the variance in Waitlist Position. This lines up with the EDA "
-            "observation that\nWaitlist Position looks close to uniformly distributed across "
-            "1-200 (see roadmap\nStep 5 / Limitations note) rather than driven by booking/"
-            "journey features the way\na real waitlist queue would be. Treat this as a "
-            "DATASET finding, not a modeling\nfailure — document it in the report's "
-            "Limitations section rather than sinking more\ntime into re-tuning Stage 2.\n"
-            + "!" * 78
-        )
+    
 
     return test_rmse, test_mae, test_r2
 
-
+#saving the models into artifacts/
 def save_artifacts(best_pipe, cfg: dict):
     prep_path = Path(cfg["artifacts"]["preprocessor_stage2"])
     model_path = Path(cfg["artifacts"]["model_stage2"])
@@ -231,7 +218,7 @@ def save_artifacts(best_pipe, cfg: dict):
 
 
 
-
+#main function
 def main():
     cfg = load_config()
 

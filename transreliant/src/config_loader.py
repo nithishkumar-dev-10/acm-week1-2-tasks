@@ -1,7 +1,7 @@
 import yaml
 from pathlib import Path
 
-
+#loading the config file , if some error in loading raise filenotfound error
 def load_config(config_path: str = "config.yaml") -> dict:
 
     path = Path(config_path)
@@ -14,19 +14,9 @@ def load_config(config_path: str = "config.yaml") -> dict:
     return config
 
 
+#checking with mode in the config and returing the file path
 def get_path(cfg: dict, *keys: str) -> str:
-    """
-    Resolve a data path from config, honoring the sample/full `mode` switch.
-
-    Walks cfg through the given keys, e.g. get_path(cfg, "data", "raw").
-    If the node found there is a {"sample": ..., "full": ...} dict, returns
-    whichever one matches cfg["mode"]. If the node is just a plain string
-    (e.g. splits_dir, which isn't mode-dependent), returns it unchanged.
-
-    This is what lets every script stay agnostic about whether we're
-    pointing at the small sample CSV (safe to push to GitHub) or the
-    full dataset (kept local / gitignored, used for real training).
-    """
+  
     node = cfg
     for k in keys:
         node = node[k]
@@ -41,7 +31,7 @@ def get_path(cfg: dict, *keys: str) -> str:
 
     return node
 
-
+# main function 
 if __name__ == "__main__":
     # quick sanity check when run directly
     cfg = load_config()

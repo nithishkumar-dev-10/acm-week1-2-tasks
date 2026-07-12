@@ -9,12 +9,8 @@ from evaluate import load_stage1_artifacts, load_stage2_artifacts
 NOT_CONFIRMED = 0
 CONFIRMED = 1
 
-
-def predict_cascade(raw_input_df: pd.DataFrame,
-                     stage1_model, stage1_preprocessor,
-                     stage2_model, stage2_preprocessor,
-                     threshold: float,
-                     cfg: dict) -> pd.DataFrame:
+#setting up the cascaded pipeline 
+def predict_cascade(raw_input_df: pd.DataFrame,stage1_model, stage1_preprocessor,stage2_model, stage2_preprocessor,threshold: float,cfg: dict) -> pd.DataFrame:
 
     numeric_cols = cfg["features"]["numerical"]
     categorical_cols = cfg["features"]["categorical"]
@@ -26,7 +22,7 @@ def predict_cascade(raw_input_df: pd.DataFrame,
 
     X = raw_input_df[feature_cols]
 
-    # ---- Stage 1: classify Confirmation Status ----
+    #Stage 1 classification Confirmation Status
     X1_t = stage1_preprocessor.transform(X)
     proba_confirmed = stage1_model.predict_proba(X1_t)[:, 1]   # P(Confirmed)
     is_confirmed = proba_confirmed >= threshold
@@ -36,7 +32,7 @@ def predict_cascade(raw_input_df: pd.DataFrame,
     results["confirmation_prediction"] = np.where(is_confirmed, "Confirmed", "Not Confirmed")
     results["confirmation_confidence"] = np.where(is_confirmed, proba_confirmed, 1 - proba_confirmed)
 
-    # ---- Stage 2: regress Waitlist Position, routed subset only ----
+    #Stage 2 regression Waitlist Position
     results["estimated_waitlist_position"] = np.nan
     flagged = X[is_not_confirmed]
 
@@ -47,7 +43,7 @@ def predict_cascade(raw_input_df: pd.DataFrame,
 
     return results
 
-
+#loading the models 
 def load_cascade_artifacts(cfg: dict):
 
     stage1_model, stage1_preprocessor = load_stage1_artifacts(cfg)
@@ -55,7 +51,7 @@ def load_cascade_artifacts(cfg: dict):
     threshold = cfg.get("threshold", 0.5)
     return stage1_model, stage1_preprocessor, stage2_model, stage2_preprocessor, threshold
 
-
+#main function 
 def main():
     
     cfg = load_config()

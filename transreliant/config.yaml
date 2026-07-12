@@ -50,3 +50,6 @@ artifacts:
   model_stage2: artifacts/models/stage2_regressor.pkl
 random_seed: 42
 threshold: 0.6
+
+
+
