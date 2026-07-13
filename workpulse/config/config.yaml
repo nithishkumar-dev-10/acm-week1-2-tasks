@@ -2,7 +2,6 @@ mode: full
 sample_size: 500
 
 
-
 paths:
 
   raw:
