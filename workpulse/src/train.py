@@ -1,22 +1,16 @@
 import logging
 from pathlib import Path
-
 import joblib
 import numpy as np
 import pandas as pd
-
 from imblearn.over_sampling import SMOTE
-
 from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV,RandomizedSearchCV,train_test_split
-
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder,OneHotEncoder,StandardScaler
-
 from xgboost import XGBClassifier
-
 from src.config_loader import PROJECT_ROOT, load_config, load_features, load_hyperparameters
 from src.feature_engineering import engineer_features
 from src.metrics import evaluate_model, save_metrics, save_summary
@@ -26,7 +20,7 @@ from src.preprocessing import preprocess_data
 logger = logging.getLogger(__name__)
 
 
-# preprocessing pipeline 
+# preprocessing pipeline,applying ordinal_encoder for ordinal_categories,standard_scalar for numerical coloumns,one_hot for categorical_coloumns 
 def build_preprocessor() -> ColumnTransformer:
     feat = load_features()
 
@@ -86,7 +80,7 @@ def load_and_prepare() -> tuple:
     return X_train, X_test, y_train, y_test
 
 
-# ── 3. APPLY PREPROCESSOR + SMOTE ────────────────────────────────────────────
+# applying SMOTE to reduce class imbalance
 
 def transform_and_resample(preprocessor: ColumnTransformer,X_train: pd.DataFrame,X_test: pd.DataFrame,y_train: pd.Series,) -> tuple:
     cfg = load_config()
@@ -111,8 +105,7 @@ def transform_and_resample(preprocessor: ColumnTransformer,X_train: pd.DataFrame
     return X_train_enc, X_test_enc, y_train
 
 
-# ── 4. TRAIN ONE MODEL WITH HYPERPARAMETER SEARCH ────────────────────────────
-
+#hyperparameter tunning acc to the value in the config files either fixed,grid_search_cv,random_search_cv
 def search_model(
     name: str,
     estimator,
@@ -156,7 +149,7 @@ def search_model(
     return search.best_estimator_
 
 
-# ── 5. TRAIN ALL MODELS ───────────────────────────────────────────────────────
+#training all three models xgboost,logistic_regression,random_forest
 
 def train_all(
     X_train: np.ndarray,
@@ -232,8 +225,8 @@ def train_all(
     logger.info("\nAll models trained and evaluated.")
 
 
-# ── 6. ENTRY POINT ───────────────────────────────────────────────────────────
 
+#main function
 def run_training() -> None:
     X_train, X_test, y_train, y_test = load_and_prepare()
     preprocessor = build_preprocessor()

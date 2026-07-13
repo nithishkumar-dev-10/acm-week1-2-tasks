@@ -18,7 +18,7 @@ from src.config_loader import PROJECT_ROOT, load_config
 
 logger = logging.getLogger(__name__)
 
-
+#finding the threshold values 
 def find_optimal_threshold(y_true, y_prob) -> float:
     """Find the probability threshold that maximises F1-macro."""
     thresholds = np.arange(0.1, 0.9, 0.01)
@@ -30,7 +30,7 @@ def find_optimal_threshold(y_true, y_prob) -> float:
             best_f1, best_thresh = score, t
     return round(float(best_thresh), 2)
 
-
+#evaluting the models
 def evaluate_model(
     model_name: str,
     y_true,
@@ -92,7 +92,7 @@ def evaluate_model(
 
     return metrics, report
 
-
+#saving the metric 
 def save_metrics(all_metrics: list[dict]) -> pd.DataFrame:
 
     cfg = load_config()
@@ -107,7 +107,7 @@ def save_metrics(all_metrics: list[dict]) -> pd.DataFrame:
 
     return metrics_df
 
-
+#saving the summary 
 def save_summary(metrics_df: pd.DataFrame) -> None:
 
     cfg = load_config()

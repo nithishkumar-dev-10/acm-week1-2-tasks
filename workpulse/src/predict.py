@@ -10,9 +10,9 @@ from src.feature_engineering import engineer_features
 
 logger = logging.getLogger(__name__)
 
-
+#loading the model 
 def load_artifacts(model_name: str = "random_forest"):
-    """Load the trained model, preprocessor, and feature columns."""
+    
     cfg = load_config()
 
     preprocessor = joblib.load(PROJECT_ROOT / cfg["paths"]["artifacts"]["preprocessor"])
@@ -25,9 +25,9 @@ def load_artifacts(model_name: str = "random_forest"):
 
     return model, preprocessor, feature_columns
 
-
+#loading the shap which we have defined in the tarin.py
 def load_shap_explainer(model_name: str = "random_forest"):
-    """Load the SHAP explainer saved during training for this model, if it exists."""
+    
     cfg = load_config()
     model_path = PROJECT_ROOT / cfg["paths"]["models"][model_name]
     explainer_path = model_path.parent / f"{model_name}_shap_explainer.pkl"
@@ -40,13 +40,9 @@ def load_shap_explainer(model_name: str = "random_forest"):
 
     return joblib.load(explainer_path)
 
-
+#building the shap pipeline , taking the input ,allowing for prediction ,compute shap values ,return the contribution of every features
 def explain_prediction(df: pd.DataFrame, model_name: str = "random_forest") -> pd.DataFrame:
-    """
-    Compute SHAP values for the given raw input row(s), showing how much each
-    feature pushed the prediction toward/away from attrition.
-    Returns a DataFrame of SHAP values, one row per input row, one column per feature.
-    """
+   
     _, preprocessor, feature_columns = load_artifacts(model_name)
     explainer = load_shap_explainer(model_name)
 
@@ -81,12 +77,9 @@ def explain_prediction(df: pd.DataFrame, model_name: str = "random_forest") -> p
 
     return pd.DataFrame(shap_values, columns=feature_names, index=df.index)
 
-
+#selecting the top feature which contribute more for prediction and aplllying shap values 
 def top_contributing_features(df: pd.DataFrame, model_name: str = "random_forest", top_n: int = 5) -> list:
-    """
-    For a single-row input, return the top_n features that pushed the prediction
-    the most, as (feature_name, shap_value) tuples sorted by absolute impact.
-    """
+   
     shap_df = explain_prediction(df, model_name)
     row = shap_df.iloc[0]
     ranked = row.reindex(row.abs().sort_values(ascending=False).index)
@@ -94,10 +87,7 @@ def top_contributing_features(df: pd.DataFrame, model_name: str = "random_forest
 
 
 def clean_raw_input(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Apply the exact same raw-data cleaning steps used in preprocessing.load_data(),
-    so prediction input matches the format the preprocessor was fit on.
-    """
+    
     df = df.copy()
 
     drop_cols = ['EmployeeNumber', 'EmployeeCount', 'Over18', 'StandardHours']
@@ -164,17 +154,6 @@ def predict_from_dataframe(df: pd.DataFrame, model_name: str = "random_forest") 
     return result
 
 
-# ---------------------------------------------------------------------------
-# Interactive single-employee input (CLI)
-# ---------------------------------------------------------------------------
-
-# ---------------------------------------------------------------------------
-# Interactive single-employee input (CLI) — minimal-input mode
-# ---------------------------------------------------------------------------
-# Only the fields below are asked of the user. Everything else the model
-# needs is auto-filled using the median (numeric) / mode (categorical or
-# ordinal) computed from the raw training CSV, so a non-HR user isn't
-# expected to know internal fields like DailyRate or EnvironmentSatisfaction.
 
 ASK_NUMERICAL_FIELDS = ["Age", "MonthlyIncome", "YearsAtCompany"]
 
@@ -199,9 +178,7 @@ ALL_CATEGORICAL_FIELDS = [
     "BusinessTravel", "Department", "EducationField", "Gender", "JobRole",
     "MaritalStatus", "OverTime",
 ]
-# Ordinal fields stored as raw ints in the CSV (clean_raw_input() maps
-# Education/EnvironmentSatisfaction/etc. ints -> labels; JobLevel/
-# StockOptionLevel stay as the int, cast to str later).
+
 ALL_ORDINAL_FIELDS = [
     "Education", "EnvironmentSatisfaction", "JobInvolvement", "JobLevel",
     "JobSatisfaction", "PerformanceRating", "RelationshipSatisfaction",

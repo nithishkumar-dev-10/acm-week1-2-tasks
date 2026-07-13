@@ -9,11 +9,11 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 #from the project_root dir , we are moving into config 
 CONFIG_DIR = PROJECT_ROOT / "config"
 
+
 # from the root/config dir , we are specifically storing the path of the respective file's
 CONFIG_FILE = CONFIG_DIR / "config.yaml"
 FEATURES_FILE = CONFIG_DIR / "features.yaml"
 HYPERPARAMETERS_FILE = CONFIG_DIR / "hyperparameters.yaml"
-
 
 #load the file and return it , raise error if the file is missing
 def _load_yaml(path: Path) -> dict:

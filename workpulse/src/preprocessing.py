@@ -86,7 +86,6 @@ def validate_data(df: pd.DataFrame) -> None:
 
 #Handling the missing values , filling the missing values with median for numercial and with mode for categorical coloumns
 def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
-    
 
     features = load_features()
 
@@ -112,9 +111,7 @@ def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
     before = len(df)
 
     df = df.drop_duplicates()
-
     removed = before - len(df)
-
     logger.info(f"Removed {removed} duplicate rows.")
 
     return df

@@ -8,11 +8,11 @@ logger = logging.getLogger(__name__)
 def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
 
-    # 1. IncomePerYear
+    # 1. IncomePerYear -> formula=monthly_income/years_at_company
     df["IncomePerYear"] = df["MonthlyIncome"] / (df["YearsAtCompany"] + 1)
     logger.info("IncomePerYear created.")
 
-    # 2. SatisfactionScore — map strings back to numbers then average
+    # 2. SatisfactionScore —>formual = average of 4 satisfaction score
     sat_map = {"Low": 1, "Medium": 2, "High": 3, "Very High": 4,
                "Bad": 1, "Good": 2, "Better": 3, "Best": 4}
     satisfaction_cols = [c for c in ["JobSatisfaction", "EnvironmentSatisfaction",
@@ -25,11 +25,11 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
         df["SatisfactionScore"] = 2.5
     logger.info("SatisfactionScore created.")
 
-    # 3. LoyaltyIndex
+    # 3. LoyaltyIndex -> formula=years_with_current_manager/no of working years
     df["LoyaltyIndex"] = df["YearsWithCurrManager"] / (df["TotalWorkingYears"] + 1)
     logger.info("LoyaltyIndex created.")
 
-    # 4. WorkloadScore
+    # 4. WorkloadScore -> formula = job_involvement*training_time_last_year 
     inv_map = {"Low": 1, "Medium": 2, "High": 3, "Very High": 4}
     if "JobInvolvement" in df.columns:
         job_inv = df["JobInvolvement"].map(inv_map).fillna(2)
@@ -38,21 +38,21 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     df["WorkloadScore"] = df["TrainingTimesLastYear"] * job_inv
     logger.info("WorkloadScore created.")
 
-    # 5. CareerGrowthRate
+    # 5. CareerGrowthRate -> formula (years_at_company - last_promotion)/no of working years 
     df["CareerGrowthRate"] = (
         (df["YearsAtCompany"] - df["YearsSinceLastPromotion"]) /
         (df["YearsAtCompany"] + 1)
     )
     logger.info("CareerGrowthRate created.")
 
-    # 6. OverTimeRisk
+    # 6. OverTimeRisk -> 1 if yes , else 0
     if "OverTime" in df.columns:
         df["OverTimeRisk"] = (df["OverTime"] == "Yes").astype(int)
     else:
         df["OverTimeRisk"] = 0
     logger.info("OverTimeRisk created.")
 
-    # 7. TenureStabilityIndex
+    # 7. TenureStabilityIndex -> formula = total_working_years/no_of_companies_worked
     df["TenureStabilityIndex"] = df["TotalWorkingYears"] / (df["NumCompaniesWorked"] + 1)
     logger.info("TenureStabilityIndex created.")
 

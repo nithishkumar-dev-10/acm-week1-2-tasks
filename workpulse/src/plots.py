@@ -93,6 +93,7 @@ def plot_roc_curve(
 
     logger.info(f"{model_name} ROC curve saved.")
 
+
 #plotting feature_importance
 def plot_feature_importance(
     model,
