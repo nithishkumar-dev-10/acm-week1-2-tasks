@@ -130,7 +130,7 @@ def save_summary(metrics_df: pd.DataFrame) -> None:
         "Random Forest":       "Compare",
         "XGBoost":             "Compare",
     }
-    verdicts[best_model] = "✅ Winner"
+    verdicts[best_model] = "Winner"
 
     for _, row in metrics_df.iterrows():
         lines.append(

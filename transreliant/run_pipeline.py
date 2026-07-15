@@ -1,11 +1,10 @@
-
 import sys
 from pathlib import Path
 
 
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from config_loader import load_config
+from config_loader import load_config, get_path
 import train_stage1
 import train_stage2
 import evaluate
@@ -16,7 +15,7 @@ def main():
 
 
 
-    featured_path = Path(cfg["data"]["featured"])
+    featured_path = Path(get_path(cfg, "data", "featured"))
     if not featured_path.exists():
         raise FileNotFoundError(
             f"{featured_path} not found. Run your data_cleaning.py / "
